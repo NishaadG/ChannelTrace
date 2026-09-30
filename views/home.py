@@ -35,11 +35,13 @@ st.markdown(
 st.markdown("##### Data sources")
 st.dataframe(
     {
-        "Dataset": ["UCI Online Shoppers Purchasing Intention", "Criteo Attribution Modeling for Bidding",
-                    "Google Merchandise Store GA4 sample (BigQuery)"],
-        "Used for": ["RQ2, RQ4: session behaviour vs conversion", "RQ3: attribution model comparison",
-                     "RQ1: customer journeys by traffic source"],
-        "Status": ["✅ Analysed", "⏳ In progress", "⏳ In progress"],
+        "Dataset": ["UCI Online Shoppers Purchasing Intention", "Google Analytics 360 sample, Merchandise Store (BigQuery)",
+                    "Criteo Attribution Modeling for Bidding", "Facebook Ad Campaign (Kaggle)"],
+        "Used for": ["RQ2, RQ4: session behaviour vs conversion",
+                     "RQ1, RQ3: multi-channel journeys and attribution model comparison",
+                     "RQ3 (secondary): credit across repeated display impressions, last-click gap",
+                     "RQ5: validating the plug-and-play tool on real ad data"],
+        "Status": ["✅ Analysed", "⏳ In progress", "⏳ In progress", "⏳ In progress"],
     },
     hide_index=True, use_container_width=True,
 )

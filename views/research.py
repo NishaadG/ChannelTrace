@@ -23,7 +23,7 @@ def bar(df, x, y, highlight, title, horizontal=False, text_fmt=".1%"):
 
 st.title("Research Findings")
 st.caption("Dataset: UCI Online Shoppers Purchasing Intention (Sakar & Kastro, 2018), one year of "
-           "sessions on an online store. Criteo (attribution) and GA4 (journeys) results will be added here.")
+           "sessions on an online store. Channel journey and attribution results (Google Analytics 360 sample, Criteo) will be added here.")
 
 k1, k2, k3, k4 = st.columns(4)
 k1.metric("Sessions analysed", f"{f['sessions']:,}")

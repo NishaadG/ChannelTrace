@@ -3,67 +3,75 @@ Multi-Channel Digital Marketing Attribution and Conversion Analysis
 Synopsis
 
 1. Abstract
-Customers rarely buy after seeing a single ad. A typical buyer may see a social media post, later search on Google, open an email and only then make a purchase. This project studies such multi-channel customer journeys using public digital marketing and e-commerce data, compares how different attribution models divide the credit for a conversion among channels, and identifies which visitor and session behaviours are associated with a purchase. The research methods are then packaged into ChannelTrace, a free web application with three parts: a dashboard presenting our research findings, a plug-and-play module where a business uploads its own Google Ads, Meta (Facebook) Ads or customer-journey CSV and receives an insight dashboard, and an AI assistant that explains the results in plain language and suggests actions. The entire project is built with free and open-source tools at zero cost.
+Customers rarely buy after seeing a single ad. A typical buyer may arrive through a social media post, later return through a Google search, come back directly and only then make a purchase. This project studies such multi-channel customer journeys using public web analytics and advertising data, compares how different attribution models divide the credit for a conversion among channels, and identifies which visitor and session behaviours are associated with a purchase. The research methods are then packaged into ChannelTrace, a free web application with three parts: a dashboard presenting our research findings, a plug-and-play module where a business uploads its own Google Ads, Meta (Facebook) Ads or customer-journey CSV and receives an insight dashboard, and an AI assistant that explains the results in plain language and suggests actions. The tool and the assistant are themselves evaluated for correctness and usability. The entire project is built with free and open-source tools at zero cost.
 
 2. Problem Statement
 Businesses can see that a sale happened but usually cannot tell which marketing interactions led to it. Each ad platform reports its own view, typically last-click, so several platforms may claim credit for the same sale. We identify three gaps. First, a measurement gap: the credit given to a channel changes considerably depending on the attribution rule used, and most small teams never compare rules. Second, a tooling gap: attribution tools are either tied to one platform or require paid subscriptions. Third, an interpretation gap: even when numbers are available, small business owners often do not know what action to take from them.
 
 3. Aim
-To study how multiple digital marketing touchpoints relate to customer conversion, to show how different attribution models change the credit assigned to each channel, and to deliver these methods as a free, easy-to-use tool that businesses can apply to their own data.
+To study how multiple digital marketing touchpoints relate to customer conversion, to show how different attribution models change the credit assigned to each channel, and to deliver and evaluate these methods as a free, easy-to-use tool that businesses can apply to their own data.
 
 4. Objectives
-a) Collect, clean and document three complementary public datasets.
-b) Reconstruct customer journeys and identify common paths to purchase.
-c) Compare six attribution models: first touch, last touch, linear, time decay, position based and a data-driven Markov chain model.
+a) Collect, clean and document four complementary public datasets.
+b) Reconstruct multi-session customer journeys and identify common channel paths to purchase.
+c) Compare seven attribution models: first touch, last touch, linear, time decay, position based, and two data-driven models (Markov chain removal effect and Shapley value).
 d) Identify session and visitor behaviours associated with conversion using statistical tests and machine learning.
 e) Build an interactive dashboard that presents the research findings.
-f) Build a plug-and-play module that accepts business CSV exports from Google Ads, Meta Ads or journey logs and generates an insight dashboard automatically.
+f) Build a plug-and-play module that accepts CSV exports from Google Ads, Meta Ads or journey logs and generates an insight dashboard automatically.
 g) Build an AI assistant that answers questions and suggests actions, grounded only in the computed results.
-h) Write a research paper covering methodology, results, limitations and practical implications.
+h) Evaluate the tool for correctness, usability and assistant accuracy.
+i) Write a research paper covering methodology, results, evaluation, limitations and practical implications.
 
 5. Research Questions
-RQ1. What are the common digital touchpoint journeys before a customer converts?
-RQ2. How do converting and non-converting journeys or sessions differ?
+RQ1. What are the common channel journeys before a customer converts?
+RQ2. How do converting and non-converting sessions and journeys differ?
 RQ3. Does the estimated importance of a channel change when a different attribution model is used?
 RQ4. Which customer or session characteristics are associated with a higher likelihood of conversion?
-RQ5. Can these methods be packaged so that a small business obtains useful, plain-language insights from its own marketing data?
+RQ5. Can these methods be packaged into a tool that gives small businesses correct and usable plain-language insights from their own marketing data?
 
 6. Proposed Solution
 The project has three connected components.
-Research study: journey, attribution and conversion analysis on public datasets, reported in a research paper.
+Research study: journey, attribution and conversion analysis on public datasets, reported in a research paper with original results.
 ChannelTrace dashboard: a web application with a Research Findings section and a Your Data section. In Your Data, a business uploads a CSV; the tool detects the file type and column names, cleans the data and generates the dashboard with no login, API setup or cost.
-AI marketing assistant: a chatbot that reads the dashboard's computed metrics (never the raw uploaded data) and answers questions such as "Which campaign should I cut?" or "When should I run my biggest campaign?" in plain language.
+AI marketing assistant: a chatbot that reads the dashboard's computed metrics (never the raw uploaded data) and answers questions such as "Which campaign should I cut?" or "Which channel is undervalued by last-click?" in plain language.
 
 This differs from a conventional reporting dashboard in three ways: it is driven by research questions, it works on any business's own data rather than one fixed dataset, and it compares several attribution models instead of showing a single number.
 
 7. Data
-Research datasets:
-a) UCI Online Shoppers Purchasing Intention (Sakar and Kastro, 2018): 12,330 website sessions with 17 features and a purchase outcome. Used for RQ2 and RQ4.
-b) Criteo Attribution Modeling for Bidding dataset (Diemert et al., 2017): 30 days of anonymised display advertising traffic with about 16.5 million impressions, about 45,000 conversions and 700 campaigns. Used for RQ3.
-c) Google Merchandise Store GA4 sample on BigQuery (Google): three months of obfuscated event-level e-commerce data with traffic sources. Used for RQ1.
-The datasets come from different populations and will not be merged; each answers a different research question.
+Each dataset is matched to the research question it can genuinely answer. The datasets come from different populations and will not be merged.
+
+a) Google Analytics 360 sample, Google Merchandise Store (BigQuery public dataset google_analytics_sample): 12 months (August 2016 to August 2017) of session-level web analytics with a persistent visitor ID, visit number, visit start time, the default channel grouping (Organic Search, Paid Search, Social, Referral, Display, Affiliates, Direct), traffic source and medium, and transactions with revenue. It is the only dataset with several named marketing channels per customer journey, so it is the primary source for RQ1 and RQ3. Visitor IDs are obfuscated and some fields are removed by Google.
+
+b) UCI Online Shoppers Purchasing Intention (Sakar and Kastro, 2018): 12,330 website sessions from a one-year period, with 17 behavioural features and a purchase outcome. Used for RQ2 and RQ4. Traffic sources are anonymised numeric codes, so this dataset is not used for channel comparison.
+
+c) Criteo Attribution Modeling for Bidding (Diemert et al., 2017): 30 days of live display advertising traffic with 16.5 million impressions, about 45,000 conversions and 700 campaigns, including click flags, click position and Criteo's own last-click attribution label. All impressions belong to a single channel (Criteo display ads), so it is used as a secondary source for RQ3: how credit is distributed across repeated impressions within a journey, the value of clicked versus viewed impressions, and the gap between conversions Criteo's ads touched and conversions Criteo was credited with under last-click.
+
+d) Facebook Ad Campaign dataset (Kaggle, anonymised company): 1,143 real Facebook ads across three campaigns, with spend, impressions, clicks, total and approved conversions, and audience age, gender and interest. Used to validate the plug-and-play module and the AI assistant on real ad-platform data (RQ5).
 
 Business inputs supported by the plug-and-play module:
 a) Ad performance CSV exported from Google Ads or Meta Ads Manager (campaign, spend, impressions, clicks, conversions, conversion value). Produces CTR, CPC, CPA, conversion rate and ROAS per campaign, flags wasted spend and identifies campaigns worth scaling.
-b) Customer journey CSV (user ID, timestamp, channel, converted), exportable from GA4, a CRM or UTM logs. Produces journey paths and a side-by-side comparison of all six attribution models.
-Two formats are needed because ad platform exports contain only campaign totals; true multi-touch attribution requires journey-level data.
+b) Customer journey CSV (user ID, timestamp, channel, converted), exportable from GA4, a CRM or UTM logs. Produces journey paths and a side-by-side comparison of all seven attribution models.
+Two formats are needed because ad-platform exports contain only campaign-level totals; true multi-touch attribution requires journey-level data.
+
+Datasets considered and not selected: the GA4 obfuscated e-commerce sample (only three months, heavier obfuscation; kept as a backup for RQ1 and RQ3); Kaggle synthetic multi-touch attribution datasets (generated data, unsuitable for findings; used only as format test files); and the MAC benchmark from Taobao (single-platform, designed for conversion-rate prediction rather than channel attribution).
 
 8. Methodology
-Step 1. Data preparation: remove duplicates, fix formats, document every cleaning decision.
-Step 2. Exploratory analysis: conversion rates by visitor type, month, traffic source and weekday.
-Step 3. Journey reconstruction: order each user's touchpoints by time and cut the path at the first conversion.
-Step 4. Attribution: apply the five rule-based models and the Markov chain removal-effect model; compare the share of credit and the rank of each channel across models, with sanity checks that credits sum to total conversions.
-Step 5. Conversion analysis: Mann-Whitney U and chi-square tests for group differences; logistic regression and random forest classifiers evaluated by ROC-AUC on a held-out test set, with permutation feature importance. Models are run both with and without the PageValues feature, because it is partly derived from the outcome.
-Step 6. Productisation: convert the analysis into reusable modules that run on uploaded CSV files.
-Step 7. AI assistant: generate a fact sheet of computed results and pass only that to a large language model with instructions to answer strictly from those facts.
-Step 8. Interpretation and paper: separate evidence from interpretation, state limitations and present findings as associations rather than causal claims.
+Step 1. Data preparation: remove duplicates, fix formats, map channels, and document every cleaning decision.
+Step 2. Exploratory analysis: conversion rates by channel, visitor type, month and weekday.
+Step 3. Journey reconstruction (GA360): order each visitor's sessions by visit start time, record the channel of each session, and cut the path at the first transaction. Non-converting paths are kept for comparison.
+Step 4. Attribution: apply the five rule-based models and two data-driven models (Markov chain removal effect and Shapley value). Compare each channel's share of credit and its rank across models.
+Step 5. Validation of attribution: (i) test the implementation on synthetic journeys with a known correct answer; (ii) check that credits sum to total conversions under every model; (iii) report 95 percent bootstrap confidence intervals for each channel's credit share; (iv) check the Markov model's predictive fit on held-out journeys; (v) for Criteo, compare our last-touch results with the dataset's own attribution label.
+Step 6. Conversion analysis: Mann-Whitney U and chi-square tests for group differences; logistic regression, random forest and gradient boosting classifiers evaluated by ROC-AUC on a stratified held-out test set, with permutation feature importance. Models are run with and without the PageValues feature, because it is partly derived from the outcome.
+Step 7. Productisation: convert the analysis into reusable modules that run on uploaded CSV files.
+Step 8. Evaluation of the tool: (i) correctness, by comparing the tool's outputs on the real Facebook dataset and on synthetic Google Ads files against manually computed values; (ii) usability, through a System Usability Scale (SUS) questionnaire with 8 to 10 users such as marketing students or small business owners; (iii) assistant accuracy, by asking a fixed set of about 30 questions and scoring each answer as correct, partially correct or unsupported against the computed facts.
+Step 9. Interpretation and paper: separate evidence from interpretation, state limitations and present findings as associations rather than causal claims.
 
 9. Tools and Technology (zero cost)
 Language and analysis: Python, Pandas, NumPy, SciPy, scikit-learn.
 Visualisation and web app: Plotly and Streamlit.
 Hosting: Streamlit Community Cloud (free) with source code on GitHub.
 AI assistant: free-tier large language model APIs (Google Gemini or Groq), with a built-in offline mode that works without any API key or internet connection.
-Data access: Google BigQuery sandbox (free tier) for the GA4 sample; direct download for UCI and Criteo.
+Data access: Google BigQuery sandbox (free tier) for the Google Analytics sample; direct download for UCI, Criteo and the Kaggle Facebook dataset.
 
 10. Work Completed So Far
 A working prototype of ChannelTrace has been built with an overview page, a Research Findings dashboard and the AI assistant. Preliminary results on the UCI dataset (12,205 sessions after removing 125 duplicates):
@@ -72,32 +80,35 @@ b) New visitors convert at 24.9 percent compared with 14.1 percent for returning
 c) Conversion peaks in November at 25.5 percent and is lowest in February at 1.7 percent.
 d) Converting sessions view a median of 29 product pages against 16 for non-converting sessions and spend a median of 18.5 minutes on product pages against 8.8 minutes; all ten behavioural measures differ significantly (Mann-Whitney U, p < 0.05).
 e) A random forest predicts conversion with ROC-AUC 0.93 including PageValues and 0.78 without it. Without PageValues, the strongest signals are time on product pages, exit rate and the November season.
-The AI assistant currently answers questions about these findings and runs in offline mode when no API key is configured.
+The AI assistant currently answers questions about these findings and runs in offline mode when no API key is configured. The suitability of each dataset has been checked against its official documentation, which led to the dataset roles described in Section 7.
 
 11. Expected Deliverables
-a) Research paper: introduction, literature review, research questions, methodology, results, discussion, limitations and conclusion.
+a) Research paper with original results: introduction, literature review, data and method, results for each research question, tool evaluation, discussion, limitations and conclusion.
 b) Reproducible analysis code and notebooks.
 c) ChannelTrace web application: Research Findings dashboard, plug-and-play business dashboard and AI assistant, deployed free online.
 d) Presentation material for review and viva.
 
 12. Timeline
 Review 1 (1 October 2026): finalised synopsis and prototype of the Research Findings dashboard and AI assistant.
-By 10 October 2026: complete dashboard including the plug-and-play module for Google Ads, Meta Ads and journey CSVs, and attribution results from the Criteo dataset.
-By late October 2026: GA4 journey analysis, final integration and draft research paper.
+By 10 October 2026: complete dashboard including the plug-and-play module for Google Ads, Meta Ads and journey CSVs; GA360 journey and attribution results; Criteo analysis.
+By late October 2026: tool evaluation (correctness, SUS, assistant accuracy), final integration and draft research paper.
 The team aims to complete each milestone ahead of these dates.
 
 13. Scope and Limitations
-a) Public datasets do not contain every marketing channel; Criteo covers display advertising only and UCI traffic sources are anonymised codes.
-b) The GA4 sample is obfuscated and covers only three months.
-c) Attribution assigns credit; it does not prove that a channel caused a purchase. All findings are presented as associations.
-d) The AI assistant can make mistakes. It is restricted to the computed facts and every recommendation is labelled as a suggestion.
-e) Business data uploaded to the tool is processed in the session only and is not stored.
+a) The Google Analytics sample is obfuscated, has some fields removed and comes from a single online store; journeys are limited to what one website can observe (for example, ad views that did not lead to a visit are not recorded).
+b) Criteo covers one channel (display advertising) and UCI traffic sources are anonymised codes; neither is used for cross-channel comparison.
+c) Attribution assigns credit; it does not prove that a channel caused a purchase. There is no ground-truth attribution in observational data, so the study compares models and tests their stability rather than claiming one model is correct. All findings are presented as associations.
+d) The datasets come from different contexts and time periods, so findings are compared across studies, not pooled.
+e) The AI assistant can make mistakes. It is restricted to the computed facts, every recommendation is labelled as a suggestion, and its accuracy is measured and reported.
+f) Business data uploaded to the tool is processed in the session only and is not stored.
 
 14. References
 [1] Li, H. and Kannan, P. K. (2014). Attributing Conversions in a Multichannel Online Marketing Environment: An Empirical Model and a Field Experiment. Journal of Marketing Research, 51(1), 40-56. https://doi.org/10.1509/jmr.13.0050
-[2] Google for Developers. BigQuery sample dataset for Google Analytics ecommerce web implementation. https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset
-[3] Criteo AI Lab. Criteo Attribution Modeling for Bidding Dataset. https://ailab.criteo.com/criteo-attribution-modeling-bidding-dataset/
-[4] Sakar, C. O. and Kastro, Y. (2018). Online Shoppers Purchasing Intention Dataset. UCI Machine Learning Repository. https://doi.org/10.24432/C5F88Q
-[5] Shao, X. and Li, L. (2011). Data-driven multi-touch attribution models. Proceedings of the 17th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 258-264. https://doi.org/10.1145/2020408.2020453
-[6] Diemert, E., Meynet, J., Galland, P. and Lefortier, D. (2017). Attribution Modeling Increases Efficiency of Bidding in Display Advertising. AdKDD and TargetAd Workshop, KDD 2017. https://arxiv.org/abs/1707.06409
-[7] Anderl, E., Becker, I., von Wangenheim, F. and Schumann, J. H. (2016). Mapping the customer journey: Lessons learned from graph-based online attribution modeling. International Journal of Research in Marketing, 33(3), 457-474. https://doi.org/10.1016/j.ijresmar.2016.03.001
+[2] Shao, X. and Li, L. (2011). Data-driven multi-touch attribution models. Proceedings of the 17th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 258-264. https://doi.org/10.1145/2020408.2020453
+[3] Anderl, E., Becker, I., von Wangenheim, F. and Schumann, J. H. (2016). Mapping the customer journey: Lessons learned from graph-based online attribution modeling. International Journal of Research in Marketing, 33(3), 457-474. https://doi.org/10.1016/j.ijresmar.2016.03.001
+[4] Diemert, E., Meynet, J., Galland, P. and Lefortier, D. (2017). Attribution Modeling Increases Efficiency of Bidding in Display Advertising. AdKDD and TargetAd Workshop, KDD 2017. https://arxiv.org/abs/1707.06409
+[5] Sakar, C. O. and Kastro, Y. (2018). Online Shoppers Purchasing Intention Dataset. UCI Machine Learning Repository. https://doi.org/10.24432/C5F88Q
+[6] Google. BigQuery sample dataset for Google Analytics 360 (google_analytics_sample). https://support.google.com/analytics/answer/7586738
+[7] Criteo AI Lab. Criteo Attribution Modeling for Bidding Dataset. https://ailab.criteo.com/criteo-attribution-modeling-bidding-dataset/
+[8] Kaggle. Sales Conversion Optimization (Facebook ad campaign data, KAG_conversion_data). https://www.kaggle.com/datasets/loveall/clicks-conversion-tracking
+[9] Brooke, J. (1996). SUS: A quick and dirty usability scale. In Usability Evaluation in Industry, 189-194. Taylor and Francis.
