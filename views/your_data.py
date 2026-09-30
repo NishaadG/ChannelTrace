@@ -1,26 +1,31 @@
 import streamlit as st
 
-st.title("Your Data")
-st.info("Plug-and-play upload is the next milestone. This page shows what it will do.", icon=":material/construction:")
+from src import ui
 
-c1, c2 = st.columns(2)
-with c1, st.container(border=True):
-    st.markdown("**A. Ad performance CSV**")
-    st.caption("Exported from Google Ads or Meta Ads Manager")
-    st.markdown(
-        "- Auto-detects Google / Meta column names\n"
-        "- Spend, CTR, CPC, CPA, conversion rate, ROAS per campaign\n"
-        "- Flags wasted spend and campaigns worth scaling\n"
-        "- Assistant suggests budget moves"
-    )
-with c2, st.container(border=True):
-    st.markdown("**B. Customer-journey CSV**")
-    st.caption("From GA4 export, CRM or UTM logs: `user_id, timestamp, channel, converted`")
-    st.markdown(
-        "- Rebuilds each customer's path to purchase\n"
-        "- Six attribution models side by side: first touch, last touch, linear, "
-        "time decay, position based, Markov chain\n"
-        "- Shows which channels are over- or under-credited by last-click"
-    )
-st.caption("Why two formats: ad-platform exports only hold campaign totals, so true multi-touch "
-           "attribution needs journey-level data.")
+ui.header(
+    "Tools · Your data",
+    "Run the analysis on your own numbers",
+    "Export a report from your ad platform or analytics tool, upload it here, and ChannelTrace builds the dashboard. "
+    "No account, no API setup, and nothing is stored.",
+)
+st.markdown(ui.badge("In development", "pending"), unsafe_allow_html=True)
+st.write("")
+
+c1, c2 = st.columns(2, gap="medium")
+c1.markdown(ui.card(
+    "A", "Ad performance export", "From Google Ads or Meta Ads Manager: one row per campaign, ad set or ad.",
+    "<ul><li>Recognises Google and Meta column names automatically</li>"
+    "<li>Spend, CTR, CPC, CPA, conversion rate and ROAS per campaign</li>"
+    "<li>Flags spend with no return and campaigns worth scaling</li>"
+    "<li>Assistant suggests where to move budget</li></ul>"), unsafe_allow_html=True)
+c2.markdown(ui.card(
+    "B", "Customer journey export", "From GA4, a CRM or UTM logs: <span class='ct-code'>user_id, timestamp, channel, converted</span>.",
+    "<ul><li>Rebuilds each customer's path to purchase</li>"
+    "<li>Seven attribution models side by side, including Markov chain and Shapley value</li>"
+    "<li>Shows which channels last-click over- or under-credits</li>"
+    "<li>Confidence ranges on every channel's share</li></ul>"), unsafe_allow_html=True)
+
+st.write("")
+ui.finding("Ad-platform exports hold totals per campaign, not individual paths, so they can show cost efficiency "
+           "but not multi-touch attribution. Journey-level data is needed for that, which is why both formats are supported.",
+           label="Why two formats")

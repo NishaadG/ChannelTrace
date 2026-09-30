@@ -1,48 +1,54 @@
 import streamlit as st
 
-st.title("ChannelTrace")
-st.markdown("#### Multi-channel digital marketing attribution & conversion analysis")
-st.write(
-    "Customers rarely buy after one ad. They see a social post, search on Google, open an email, "
-    "and only then purchase. ChannelTrace studies those journeys, compares how different attribution "
-    "models share the credit, and turns the findings into plain-language advice."
+from src import ui
+
+ui.header(
+    "Capstone research project · 2026–27",
+    "Which channels really lead to a sale?",
+    "Customers rarely buy after a single ad. They find a brand through search, come back through social, "
+    "return directly and only then purchase. ChannelTrace reconstructs those journeys from public data, "
+    "compares how attribution models divide the credit, and turns the results into advice a small business can act on.",
 )
 
-c1, c2, c3 = st.columns(3)
-with c1, st.container(border=True):
-    st.markdown("**1 · Research Findings**")
-    st.caption("What public e-commerce and advertising data says about journeys, attribution and conversion.")
-    st.page_link("views/research.py", label="Open findings", icon=":material/insights:")
-with c2, st.container(border=True):
-    st.markdown("**2 · AI Assistant**")
-    st.caption("Ask questions in plain English. Answers are grounded only in the computed results.")
-    st.page_link("views/assistant.py", label="Ask the assistant", icon=":material/smart_toy:")
-with c3, st.container(border=True):
-    st.markdown("**3 · Your Data** · _coming next_")
-    st.caption("Upload a Google Ads / Meta Ads export or a customer-journey CSV and get your own dashboard.")
-    st.page_link("views/your_data.py", label="See what's planned", icon=":material/upload_file:")
+c1, c2, c3 = st.columns(3, gap="medium")
+c1.markdown(ui.card("01", "Research findings",
+                    "What public e-commerce and advertising data shows about journeys, attribution and conversion.",
+                    f'<div style="margin-top:.9rem">{ui.badge("First results in", "good")}</div>'),
+            unsafe_allow_html=True)
+c2.markdown(ui.card("02", "Marketing assistant",
+                    "Plain-language answers grounded only in the computed results, never in guesswork.",
+                    f'<div style="margin-top:.9rem">{ui.badge("Prototype", "good")}</div>'),
+            unsafe_allow_html=True)
+c3.markdown(ui.card("03", "Your data",
+                    "Upload a Google Ads, Meta Ads or customer-journey export and get the same analysis on your own numbers.",
+                    f'<div style="margin-top:.9rem">{ui.badge("In development", "pending")}</div>'),
+            unsafe_allow_html=True)
+b1, b2, _ = st.columns([1, 1, 1], gap="medium")
+b1.page_link("views/research.py", label="Read the findings", icon=":material/arrow_forward:")
+b2.page_link("views/assistant.py", label="Open the assistant", icon=":material/arrow_forward:")
 
-st.divider()
-st.markdown("##### Research questions")
-st.markdown(
-    "- **RQ1** What touchpoint journeys commonly come before a conversion?\n"
-    "- **RQ2** How do converting and non-converting journeys differ?\n"
-    "- **RQ3** Does a channel's importance change under different attribution models?\n"
-    "- **RQ4** Which session and visitor characteristics are associated with conversion?\n"
-    "- **RQ5** Can these methods give small businesses useful insight from their own ad data?"
-)
+ui.section("Scope", "Research questions")
+rqs = [
+    ("RQ1", "What channel journeys commonly come before a conversion?", "GA360 sample", ("In progress", "pending")),
+    ("RQ2", "How do converting and non-converting sessions differ?", "UCI Online Shoppers", ("Answered", "good")),
+    ("RQ3", "Does a channel's importance change under different attribution models?", "GA360 sample, Criteo", ("In progress", "pending")),
+    ("RQ4", "Which session and visitor characteristics are associated with conversion?", "UCI Online Shoppers", ("Answered", "good")),
+    ("RQ5", "Can these methods give small businesses correct, usable insight from their own data?", "Facebook Ads (Kaggle), user study", ("Planned", "neutral")),
+]
+rows = "".join(f'<tr><td class="code">{c}</td><td>{q}</td><td>{d}</td><td>{ui.badge(*s)}</td></tr>' for c, q, d, s in rqs)
+st.markdown(f'<table class="ct-table"><thead><tr><th></th><th>Question</th><th>Evidence</th><th>Status</th></tr></thead>'
+            f'<tbody>{rows}</tbody></table>', unsafe_allow_html=True)
 
-st.markdown("##### Data sources")
-st.dataframe(
-    {
-        "Dataset": ["UCI Online Shoppers Purchasing Intention", "Google Analytics 360 sample, Merchandise Store (BigQuery)",
-                    "Criteo Attribution Modeling for Bidding", "Facebook Ad Campaign (Kaggle)"],
-        "Used for": ["RQ2, RQ4: session behaviour vs conversion",
-                     "RQ1, RQ3: multi-channel journeys and attribution model comparison",
-                     "RQ3 (secondary): credit across repeated display impressions, last-click gap",
-                     "RQ5: validating the plug-and-play tool on real ad data"],
-        "Status": ["✅ Analysed", "⏳ In progress", "⏳ In progress", "⏳ In progress"],
-    },
-    hide_index=True, use_container_width=True,
-)
-st.caption("Built entirely with free, open-source tools. Findings show associations, not proof of cause.")
+ui.section("Evidence", "Data sources")
+src = [
+    ("Google Analytics 360 sample", "Google Merchandise Store, Aug 2016 – Aug 2017", "Multi-session journeys with named channels"),
+    ("UCI Online Shoppers Purchasing Intention", "12,330 sessions, one year", "Session behaviour and purchase outcome"),
+    ("Criteo Attribution Modeling for Bidding", "16.5M display impressions, 30 days", "Credit across repeated impressions; last-click gap"),
+    ("Facebook Ad Campaign (Kaggle)", "1,143 ads, three campaigns", "Validating the upload tool on real ad data"),
+]
+rows = "".join(f"<tr><td><strong>{a}</strong><br><span class='ct-note'>{b}</span></td><td>{c}</td></tr>" for a, b, c in src)
+st.markdown(f'<table class="ct-table"><thead><tr><th>Dataset</th><th>Used for</th></tr></thead><tbody>{rows}</tbody></table>',
+            unsafe_allow_html=True)
+
+st.write("")
+ui.note("Built with free and open-source tools. Results describe associations in the data, not proof that a channel caused a sale.")
