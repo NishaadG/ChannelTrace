@@ -1,0 +1,363 @@
+Campaign report (SYNTHETIC SAMPLE, not real data)
+1 August 2026 - 29 September 2026
+Day,Campaign,Campaign status,Impr.,Clicks,Cost,Conversions,Conv. value
+2026-08-01,Search - Brand,Enabled,838,109,1099.74,9,17389.26
+2026-08-02,Search - Brand,Enabled,1216,160,1228.31,21,43534.37
+2026-08-03,Search - Brand,Enabled,863,96,811.36,10,21038.21
+2026-08-04,Search - Brand,Enabled,681,89,924.07,11,27617.99
+2026-08-05,Search - Brand,Enabled,765,95,771.89,6,10259.83
+2026-08-06,Search - Brand,Enabled,748,101,906.7,12,25342.31
+2026-08-07,Search - Brand,Enabled,1054,108,898.59,9,20351.76
+2026-08-08,Search - Brand,Enabled,988,101,880.06,14,25336.46
+2026-08-09,Search - Brand,Enabled,756,91,914.73,13,28825.71
+2026-08-10,Search - Brand,Enabled,1045,127,1008.8,14,33766.95
+2026-08-11,Search - Brand,Enabled,864,90,837.57,9,17562.15
+2026-08-12,Search - Brand,Enabled,648,75,742.59,14,30458.3
+2026-08-13,Search - Brand,Enabled,799,101,947.28,8,16398.91
+2026-08-14,Search - Brand,Enabled,843,89,782.8,16,29769.65
+2026-08-15,Search - Brand,Enabled,989,132,1123.89,16,28648.92
+2026-08-16,Search - Brand,Enabled,877,118,1213.58,13,23428.42
+2026-08-17,Search - Brand,Enabled,607,74,761.61,6,14535.65
+2026-08-18,Search - Brand,Enabled,900,104,963.71,11,20692.88
+2026-08-19,Search - Brand,Enabled,580,69,692.13,8,15604.94
+2026-08-20,Search - Brand,Enabled,1135,131,1013.1,8,14265.83
+2026-08-21,Search - Brand,Enabled,996,117,1110.22,13,31371.08
+2026-08-22,Search - Brand,Enabled,813,103,954.38,10,21160.43
+2026-08-23,Search - Brand,Enabled,1079,116,1172.27,18,30318.3
+2026-08-24,Search - Brand,Enabled,963,103,1013.84,11,26012.97
+2026-08-25,Search - Brand,Enabled,551,72,681.42,8,18317.71
+2026-08-26,Search - Brand,Enabled,816,94,776.89,8,15765.53
+2026-08-27,Search - Brand,Enabled,1041,119,1101.66,11,27276.84
+2026-08-28,Search - Brand,Enabled,696,84,875.02,9,21897.85
+2026-08-29,Search - Brand,Enabled,1065,125,1160.63,18,36464.09
+2026-08-30,Search - Brand,Enabled,1361,160,1253.78,18,44618.19
+2026-08-31,Search - Brand,Enabled,633,80,787.95,10,22088.83
+2026-09-01,Search - Brand,Enabled,1117,130,1112.2,11,18948.51
+2026-09-02,Search - Brand,Enabled,574,76,770.81,5,10935.87
+2026-09-03,Search - Brand,Enabled,763,96,890.64,9,22387.81
+2026-09-04,Search - Brand,Enabled,752,94,884.63,8,13855.74
+2026-09-05,Search - Brand,Enabled,768,101,989.21,13,23076.2
+2026-09-06,Search - Brand,Enabled,950,127,1248.91,14,34287.87
+2026-09-07,Search - Brand,Enabled,876,90,695.99,8,15110.39
+2026-09-08,Search - Brand,Enabled,793,82,759.38,10,18194.49
+2026-09-09,Search - Brand,Enabled,1122,127,980.04,20,42645.06
+2026-09-10,Search - Brand,Enabled,887,110,1040.21,9,19462.42
+2026-09-11,Search - Brand,Enabled,512,70,692.86,10,17225.96
+2026-09-12,Search - Brand,Enabled,1046,111,951.51,13,30548.24
+2026-09-13,Search - Brand,Enabled,719,94,938.6,7,16269.13
+2026-09-14,Search - Brand,Enabled,1068,131,1072.18,16,35069.45
+2026-09-15,Search - Brand,Enabled,609,76,718.31,11,25904.46
+2026-09-16,Search - Brand,Enabled,638,85,822.23,13,23603.71
+2026-09-17,Search - Brand,Enabled,665,73,687.02,8,19789.09
+2026-09-18,Search - Brand,Enabled,852,101,845.69,12,21179.08
+2026-09-19,Search - Brand,Enabled,961,121,973.2,17,33941.47
+2026-09-20,Search - Brand,Enabled,965,106,968.62,9,17613.68
+2026-09-21,Search - Brand,Enabled,859,111,880.84,13,25112.66
+2026-09-22,Search - Brand,Enabled,684,73,709.9,5,8948.87
+2026-09-23,Search - Brand,Enabled,626,70,711.57,6,14277.28
+2026-09-24,Search - Brand,Enabled,985,116,953.97,17,33920.34
+2026-09-25,Search - Brand,Enabled,975,125,994.9,16,37978.31
+2026-09-26,Search - Brand,Enabled,1246,130,1125.15,14,32427.73
+2026-09-27,Search - Brand,Enabled,857,104,875.01,13,31630.73
+2026-09-28,Search - Brand,Enabled,680,89,731.58,11,25141.79
+2026-09-29,Search - Brand,Enabled,831,110,1123.55,15,30177.24
+2026-08-01,Search - Generic,Enabled,2597,126,3201.14,6,12409.11
+2026-08-02,Search - Generic,Enabled,2436,107,2907.47,1,2161.68
+2026-08-03,Search - Generic,Enabled,2146,98,2655.08,4,7239.64
+2026-08-04,Search - Generic,Enabled,2207,96,3029.83,1,2097.88
+2026-08-05,Search - Generic,Enabled,2694,129,3240.83,6,13317.81
+2026-08-06,Search - Generic,Enabled,1647,85,2110.4,1,1654.37
+2026-08-07,Search - Generic,Enabled,2004,97,2697.44,2,4429.93
+2026-08-08,Search - Generic,Enabled,2144,84,2567.21,3,4634.23
+2026-08-09,Search - Generic,Enabled,2126,102,2711.65,3,4689.45
+2026-08-10,Search - Generic,Enabled,2034,103,3243.97,2,3639.05
+2026-08-11,Search - Generic,Enabled,2325,90,2245.33,3,4840.74
+2026-08-12,Search - Generic,Enabled,1562,70,2179.2,1,2029.1
+2026-08-13,Search - Generic,Enabled,1925,81,2295.62,3,5993.06
+2026-08-14,Search - Generic,Enabled,1982,97,2647.07,5,8281.61
+2026-08-15,Search - Generic,Enabled,1903,98,2446.28,6,10171.84
+2026-08-16,Search - Generic,Enabled,3193,144,3692.51,5,11076.83
+2026-08-17,Search - Generic,Enabled,1618,75,2002.69,0,0.0
+2026-08-18,Search - Generic,Enabled,1669,81,2554.58,4,8393.65
+2026-08-19,Search - Generic,Enabled,1938,92,2870.04,4,6997.0
+2026-08-20,Search - Generic,Enabled,1753,71,2167.93,5,9867.24
+2026-08-21,Search - Generic,Enabled,1859,75,2378.26,3,4768.74
+2026-08-22,Search - Generic,Enabled,2606,128,3685.81,3,6388.1
+2026-08-23,Search - Generic,Enabled,2192,112,3293.25,3,5506.4
+2026-08-24,Search - Generic,Enabled,2150,92,2849.76,4,6715.47
+2026-08-25,Search - Generic,Enabled,2248,88,2667.21,4,6126.91
+2026-08-26,Search - Generic,Enabled,2627,115,3195.86,5,9588.54
+2026-08-27,Search - Generic,Enabled,2573,118,2900.1,4,8913.63
+2026-08-28,Search - Generic,Enabled,1539,72,2001.49,3,4729.09
+2026-08-29,Search - Generic,Enabled,2959,121,3129.38,7,11692.52
+2026-08-30,Search - Generic,Enabled,2029,97,2921.66,3,6400.06
+2026-08-31,Search - Generic,Enabled,1784,88,2555.56,4,8031.16
+2026-09-01,Search - Generic,Enabled,1972,86,2477.97,4,7236.51
+2026-09-02,Search - Generic,Enabled,1864,84,2556.61,2,4296.76
+2026-09-03,Search - Generic,Enabled,1617,79,2445.25,2,4123.59
+2026-09-04,Search - Generic,Enabled,1463,73,1994.71,3,5831.84
+2026-09-05,Search - Generic,Enabled,2362,109,3236.28,3,4978.34
+2026-09-06,Search - Generic,Enabled,2314,102,2680.0,10,17879.39
+2026-09-07,Search - Generic,Enabled,2039,94,2531.59,6,13174.17
+2026-09-08,Search - Generic,Enabled,1852,93,2440.28,3,6123.03
+2026-09-09,Search - Generic,Enabled,1530,65,2045.28,2,3340.99
+2026-09-10,Search - Generic,Enabled,1638,81,2496.32,3,6310.84
+2026-09-11,Search - Generic,Enabled,2060,94,2545.49,2,3521.17
+2026-09-12,Search - Generic,Enabled,2768,108,3298.76,5,10706.23
+2026-09-13,Search - Generic,Enabled,2506,119,2908.06,3,6026.85
+2026-09-14,Search - Generic,Enabled,1988,83,2439.61,3,5756.26
+2026-09-15,Search - Generic,Enabled,2107,108,2770.32,3,5257.73
+2026-09-16,Search - Generic,Enabled,2115,93,2283.21,4,8237.08
+2026-09-17,Search - Generic,Enabled,2066,88,2204.24,4,7563.76
+2026-09-18,Search - Generic,Enabled,2294,107,3150.14,5,10450.98
+2026-09-19,Search - Generic,Enabled,2400,106,2756.54,3,4883.13
+2026-09-20,Search - Generic,Enabled,2469,99,2902.29,2,3304.06
+2026-09-21,Search - Generic,Enabled,1865,72,2318.33,1,1645.44
+2026-09-22,Search - Generic,Enabled,2407,107,2566.65,2,3449.85
+2026-09-23,Search - Generic,Enabled,2511,117,2980.17,3,5512.12
+2026-09-24,Search - Generic,Enabled,2346,119,3011.9,7,14195.47
+2026-09-25,Search - Generic,Enabled,1466,68,2014.28,3,5047.54
+2026-09-26,Search - Generic,Enabled,2940,117,3667.77,3,4633.97
+2026-09-27,Search - Generic,Enabled,2131,110,3484.77,4,8104.6
+2026-09-28,Search - Generic,Enabled,1937,99,2831.93,4,7100.61
+2026-09-29,Search - Generic,Enabled,2269,109,2616.74,5,9199.99
+2026-08-01,Shopping - All products,Enabled,10982,188,2839.41,2,2899.82
+2026-08-02,Shopping - All products,Enabled,8692,154,2033.76,7,10845.27
+2026-08-03,Shopping - All products,Enabled,8538,170,2518.51,4,5448.91
+2026-08-04,Shopping - All products,Enabled,11512,185,2401.32,7,12786.92
+2026-08-05,Shopping - All products,Enabled,6774,138,1798.04,3,5512.91
+2026-08-06,Shopping - All products,Enabled,6965,111,1711.03,3,4151.84
+2026-08-07,Shopping - All products,Enabled,8822,139,2152.58,3,5639.97
+2026-08-08,Shopping - All products,Enabled,10269,192,2545.53,5,9732.01
+2026-08-09,Shopping - All products,Enabled,7633,143,2164.97,5,8086.09
+2026-08-10,Shopping - All products,Enabled,9026,157,2336.17,1,2014.78
+2026-08-11,Shopping - All products,Enabled,9456,182,2324.28,4,6716.46
+2026-08-12,Shopping - All products,Enabled,10619,179,2477.88,4,5649.49
+2026-08-13,Shopping - All products,Enabled,8500,138,1805.48,1,1676.74
+2026-08-14,Shopping - All products,Enabled,5867,119,1800.12,2,3498.26
+2026-08-15,Shopping - All products,Enabled,12394,198,2423.12,8,13459.39
+2026-08-16,Shopping - All products,Enabled,12316,228,2782.82,9,17546.44
+2026-08-17,Shopping - All products,Enabled,6476,112,1581.01,4,5639.16
+2026-08-18,Shopping - All products,Enabled,6784,121,1853.17,3,6055.86
+2026-08-19,Shopping - All products,Enabled,9071,158,1910.89,2,2831.37
+2026-08-20,Shopping - All products,Enabled,7379,136,2171.25,4,6320.27
+2026-08-21,Shopping - All products,Enabled,7791,144,2174.68,6,10405.92
+2026-08-22,Shopping - All products,Enabled,7910,142,2050.51,2,3562.07
+2026-08-23,Shopping - All products,Enabled,12278,224,2797.73,8,13072.42
+2026-08-24,Shopping - All products,Enabled,7571,138,1858.55,5,8701.2
+2026-08-25,Shopping - All products,Enabled,5421,110,1687.38,1,1529.67
+2026-08-26,Shopping - All products,Enabled,5589,113,1757.37,1,1586.05
+2026-08-27,Shopping - All products,Enabled,6312,128,1777.12,1,1476.47
+2026-08-28,Shopping - All products,Enabled,7606,147,2086.38,4,5823.89
+2026-08-29,Shopping - All products,Enabled,7182,139,2238.24,2,3819.16
+2026-08-30,Shopping - All products,Enabled,9369,144,2186.69,6,8822.23
+2026-08-31,Shopping - All products,Enabled,7704,139,2053.54,2,2909.2
+2026-09-01,Shopping - All products,Enabled,9350,154,1873.76,2,3352.12
+2026-09-02,Shopping - All products,Enabled,8027,135,1949.34,1,1585.15
+2026-09-03,Shopping - All products,Enabled,10409,182,2367.94,7,11455.8
+2026-09-04,Shopping - All products,Enabled,9365,159,2506.48,6,9192.72
+2026-09-05,Shopping - All products,Enabled,7761,144,1979.72,7,10214.49
+2026-09-06,Shopping - All products,Enabled,11991,192,2671.43,10,18331.23
+2026-09-07,Shopping - All products,Enabled,6810,108,1710.3,1,1585.45
+2026-09-08,Shopping - All products,Enabled,10464,212,2559.86,6,8433.57
+2026-09-09,Shopping - All products,Enabled,8557,157,2172.02,6,10928.77
+2026-09-10,Shopping - All products,Enabled,10564,208,2622.09,5,9463.25
+2026-09-11,Shopping - All products,Enabled,9320,156,2511.37,4,8004.36
+2026-09-12,Shopping - All products,Enabled,10747,219,2953.23,5,8074.2
+2026-09-13,Shopping - All products,Enabled,11060,196,2724.87,5,8271.53
+2026-09-14,Shopping - All products,Enabled,7278,141,1721.81,4,7267.54
+2026-09-15,Shopping - All products,Enabled,11290,187,2417.45,4,6266.68
+2026-09-16,Shopping - All products,Enabled,10325,176,2373.73,6,8921.21
+2026-09-17,Shopping - All products,Enabled,5829,113,1686.74,2,3585.02
+2026-09-18,Shopping - All products,Enabled,6405,118,1610.78,2,3193.57
+2026-09-19,Shopping - All products,Enabled,10971,177,2547.28,6,8486.52
+2026-09-20,Shopping - All products,Enabled,13977,233,2982.19,4,8136.88
+2026-09-21,Shopping - All products,Enabled,6247,129,1875.92,7,9721.59
+2026-09-22,Shopping - All products,Enabled,7699,147,2122.24,3,4748.93
+2026-09-23,Shopping - All products,Enabled,7170,131,1579.5,1,1497.69
+2026-09-24,Shopping - All products,Enabled,10150,157,1924.94,8,13247.53
+2026-09-25,Shopping - All products,Enabled,7817,120,1790.13,2,4026.62
+2026-09-26,Shopping - All products,Enabled,12529,198,2895.21,4,5515.98
+2026-09-27,Shopping - All products,Enabled,10762,172,2075.92,5,7141.51
+2026-09-28,Shopping - All products,Enabled,6428,110,1738.55,2,2837.69
+2026-09-29,Shopping - All products,Enabled,8929,163,2410.73,5,7141.29
+2026-08-01,Display - Remarketing,Enabled,16876,115,708.52,2,3380.13
+2026-08-02,Display - Remarketing,Enabled,23570,158,812.57,0,0.0
+2026-08-03,Display - Remarketing,Enabled,17802,116,767.58,1,1393.32
+2026-08-04,Display - Remarketing,Enabled,11807,81,537.36,0,0.0
+2026-08-05,Display - Remarketing,Enabled,19469,117,665.89,0,0.0
+2026-08-06,Display - Remarketing,Enabled,15488,93,594.84,2,3707.71
+2026-08-07,Display - Remarketing,Enabled,16641,113,635.87,1,1341.77
+2026-08-08,Display - Remarketing,Enabled,14652,90,622.22,0,0.0
+2026-08-09,Display - Remarketing,Enabled,20110,137,806.65,4,5439.92
+2026-08-10,Display - Remarketing,Enabled,14997,99,578.1,1,1747.09
+2026-08-11,Display - Remarketing,Enabled,20085,132,726.62,0,0.0
+2026-08-12,Display - Remarketing,Enabled,14441,99,593.02,1,1316.45
+2026-08-13,Display - Remarketing,Enabled,20568,107,675.07,0,0.0
+2026-08-14,Display - Remarketing,Enabled,20477,123,714.02,1,1700.36
+2026-08-15,Display - Remarketing,Enabled,14645,100,673.42,1,1577.85
+2026-08-16,Display - Remarketing,Enabled,25666,168,949.75,1,1740.78
+2026-08-17,Display - Remarketing,Enabled,15221,103,641.9,0,0.0
+2026-08-18,Display - Remarketing,Enabled,21464,123,714.65,0,0.0
+2026-08-19,Display - Remarketing,Enabled,22204,140,743.1,4,7630.79
+2026-08-20,Display - Remarketing,Enabled,23430,127,836.23,4,5638.97
+2026-08-21,Display - Remarketing,Enabled,19937,124,829.17,1,1408.27
+2026-08-22,Display - Remarketing,Enabled,27034,144,812.84,0,0.0
+2026-08-23,Display - Remarketing,Enabled,35520,182,975.02,1,1366.04
+2026-08-24,Display - Remarketing,Enabled,16381,96,591.02,1,1411.59
+2026-08-25,Display - Remarketing,Enabled,23030,134,757.61,1,1858.83
+2026-08-26,Display - Remarketing,Enabled,16793,95,611.22,3,4596.63
+2026-08-27,Display - Remarketing,Enabled,16637,105,701.81,0,0.0
+2026-08-28,Display - Remarketing,Enabled,29956,169,871.76,5,6448.34
+2026-08-29,Display - Remarketing,Enabled,23023,121,668.71,1,1659.16
+2026-08-30,Display - Remarketing,Enabled,21037,138,731.87,3,4919.23
+2026-08-31,Display - Remarketing,Enabled,15080,94,573.21,1,1832.87
+2026-09-01,Display - Remarketing,Enabled,20544,109,661.52,1,1770.53
+2026-09-02,Display - Remarketing,Enabled,20332,140,780.94,2,3102.4
+2026-09-03,Display - Remarketing,Enabled,19016,103,670.22,1,1740.06
+2026-09-04,Display - Remarketing,Enabled,17666,105,705.72,1,1462.19
+2026-09-05,Display - Remarketing,Enabled,26922,171,973.8,2,3757.34
+2026-09-06,Display - Remarketing,Enabled,27720,191,985.3,3,3981.8
+2026-09-07,Display - Remarketing,Enabled,22010,134,698.96,0,0.0
+2026-09-08,Display - Remarketing,Enabled,15500,102,631.65,3,4471.41
+2026-09-09,Display - Remarketing,Enabled,24437,141,724.39,4,5424.23
+2026-09-10,Display - Remarketing,Enabled,23449,132,829.44,2,2930.28
+2026-09-11,Display - Remarketing,Enabled,29919,159,838.19,3,4702.42
+2026-09-12,Display - Remarketing,Enabled,19522,110,663.1,1,1755.98
+2026-09-13,Display - Remarketing,Enabled,29515,182,948.63,6,9445.62
+2026-09-14,Display - Remarketing,Enabled,22480,150,794.35,2,3696.98
+2026-09-15,Display - Remarketing,Enabled,23063,120,800.49,2,2812.14
+2026-09-16,Display - Remarketing,Enabled,17520,108,618.03,2,3752.25
+2026-09-17,Display - Remarketing,Enabled,16864,97,529.45,2,3263.88
+2026-09-18,Display - Remarketing,Enabled,17199,108,704.2,1,1335.75
+2026-09-19,Display - Remarketing,Enabled,19104,118,789.83,0,0.0
+2026-09-20,Display - Remarketing,Enabled,19977,123,758.56,4,5985.52
+2026-09-21,Display - Remarketing,Enabled,15980,107,667.83,2,3162.73
+2026-09-22,Display - Remarketing,Enabled,19753,135,810.1,1,1361.53
+2026-09-23,Display - Remarketing,Enabled,21734,144,815.64,2,3211.47
+2026-09-24,Display - Remarketing,Enabled,16287,85,555.46,3,5523.79
+2026-09-25,Display - Remarketing,Enabled,17627,118,631.04,1,1359.92
+2026-09-26,Display - Remarketing,Enabled,24853,145,804.41,2,3731.67
+2026-09-27,Display - Remarketing,Enabled,28695,171,926.12,2,3826.54
+2026-09-28,Display - Remarketing,Enabled,13638,92,555.41,1,1447.5
+2026-09-29,Display - Remarketing,Enabled,18614,126,719.58,0,0.0
+2026-08-01,YouTube - Awareness,Enabled,24788,93,1092.87,1,1736.18
+2026-08-02,YouTube - Awareness,Enabled,48224,164,1681.11,0,0.0
+2026-08-03,YouTube - Awareness,Enabled,33466,142,1358.25,1,1780.63
+2026-08-04,YouTube - Awareness,Enabled,24716,109,1329.59,0,0.0
+2026-08-05,YouTube - Awareness,Enabled,35223,136,1336.48,2,3071.74
+2026-08-06,YouTube - Awareness,Enabled,25929,97,1213.04,3,5241.56
+2026-08-07,YouTube - Awareness,Enabled,30124,107,1118.34,1,1311.49
+2026-08-08,YouTube - Awareness,Enabled,20399,84,1041.2,0,0.0
+2026-08-09,YouTube - Awareness,Enabled,27501,110,1064.44,0,0.0
+2026-08-10,YouTube - Awareness,Enabled,28019,116,1341.8,0,0.0
+2026-08-11,YouTube - Awareness,Enabled,36387,147,1438.5,0,0.0
+2026-08-12,YouTube - Awareness,Enabled,22928,93,1002.94,0,0.0
+2026-08-13,YouTube - Awareness,Enabled,36385,127,1341.82,0,0.0
+2026-08-14,YouTube - Awareness,Enabled,21044,76,910.21,0,0.0
+2026-08-15,YouTube - Awareness,Enabled,27219,115,1458.95,0,0.0
+2026-08-16,YouTube - Awareness,Enabled,32822,126,1357.04,0,0.0
+2026-08-17,YouTube - Awareness,Enabled,26983,106,1045.26,0,0.0
+2026-08-18,YouTube - Awareness,Enabled,32343,134,1408.74,1,1415.5
+2026-08-19,YouTube - Awareness,Enabled,27270,114,1232.83,1,1283.17
+2026-08-20,YouTube - Awareness,Enabled,29391,128,1479.23,0,0.0
+2026-08-21,YouTube - Awareness,Enabled,25020,93,1095.74,0,0.0
+2026-08-22,YouTube - Awareness,Enabled,28051,122,1173.78,1,1599.4
+2026-08-23,YouTube - Awareness,Enabled,31137,109,1256.79,0,0.0
+2026-08-24,YouTube - Awareness,Enabled,31878,117,1270.32,0,0.0
+2026-08-25,YouTube - Awareness,Enabled,36230,127,1347.23,0,0.0
+2026-08-26,YouTube - Awareness,Enabled,34019,118,1453.07,0,0.0
+2026-08-27,YouTube - Awareness,Enabled,32747,124,1318.32,0,0.0
+2026-08-28,YouTube - Awareness,Enabled,27053,114,1316.69,0,0.0
+2026-08-29,YouTube - Awareness,Enabled,28344,112,1273.32,0,0.0
+2026-08-30,YouTube - Awareness,Enabled,35206,136,1379.16,0,0.0
+2026-08-31,YouTube - Awareness,Enabled,38569,136,1436.11,0,0.0
+2026-09-01,YouTube - Awareness,Enabled,38338,147,1434.97,0,0.0
+2026-09-02,YouTube - Awareness,Enabled,24906,106,1091.25,2,2835.4
+2026-09-03,YouTube - Awareness,Enabled,34180,140,1374.43,0,0.0
+2026-09-04,YouTube - Awareness,Enabled,32857,117,1393.03,0,0.0
+2026-09-05,YouTube - Awareness,Enabled,33962,151,1719.78,2,3288.65
+2026-09-06,YouTube - Awareness,Enabled,37976,146,1479.87,0,0.0
+2026-09-07,YouTube - Awareness,Enabled,29474,101,1081.11,0,0.0
+2026-09-08,YouTube - Awareness,Enabled,32446,136,1378.64,0,0.0
+2026-09-09,YouTube - Awareness,Enabled,21890,94,1013.16,0,0.0
+2026-09-10,YouTube - Awareness,Enabled,26601,116,1177.67,1,1767.17
+2026-09-11,YouTube - Awareness,Enabled,33660,122,1403.86,1,1636.86
+2026-09-12,YouTube - Awareness,Enabled,30254,133,1550.34,0,0.0
+2026-09-13,YouTube - Awareness,Enabled,35071,133,1391.94,0,0.0
+2026-09-14,YouTube - Awareness,Enabled,23518,104,1121.23,0,0.0
+2026-09-15,YouTube - Awareness,Enabled,36912,148,1490.43,0,0.0
+2026-09-16,YouTube - Awareness,Enabled,35272,152,1470.21,1,1505.37
+2026-09-17,YouTube - Awareness,Enabled,33211,127,1378.57,0,0.0
+2026-09-18,YouTube - Awareness,Enabled,22677,104,1084.49,0,0.0
+2026-09-19,YouTube - Awareness,Enabled,37508,171,1683.44,1,1588.24
+2026-09-20,YouTube - Awareness,Enabled,37704,133,1330.19,0,0.0
+2026-09-21,YouTube - Awareness,Enabled,22752,92,1144.29,2,3265.07
+2026-09-22,YouTube - Awareness,Enabled,24504,88,987.78,0,0.0
+2026-09-23,YouTube - Awareness,Enabled,31230,110,1102.71,0,0.0
+2026-09-24,YouTube - Awareness,Enabled,20765,77,907.01,0,0.0
+2026-09-25,YouTube - Awareness,Enabled,26595,112,1221.35,2,3357.45
+2026-09-26,YouTube - Awareness,Enabled,26622,98,1082.68,0,0.0
+2026-09-27,YouTube - Awareness,Enabled,22357,96,1206.2,1,1619.29
+2026-09-28,YouTube - Awareness,Enabled,25962,102,1089.39,0,0.0
+2026-09-29,YouTube - Awareness,Enabled,37782,141,1362.71,0,0.0
+2026-08-01,Performance Max,Enabled,9811,173,2221.04,3,4987.4
+2026-08-02,Performance Max,Enabled,6184,142,1844.05,5,7318.97
+2026-08-03,Performance Max,Enabled,5455,123,1617.83,4,6764.61
+2026-08-04,Performance Max,Enabled,5995,133,1669.61,3,4731.91
+2026-08-05,Performance Max,Enabled,5699,126,1352.51,4,8613.04
+2026-08-06,Performance Max,Enabled,5602,122,1412.52,4,5952.01
+2026-08-07,Performance Max,Enabled,6437,136,1711.3,4,6301.92
+2026-08-08,Performance Max,Enabled,10045,214,2552.23,6,8988.59
+2026-08-09,Performance Max,Enabled,9479,172,1797.48,3,5216.1
+2026-08-10,Performance Max,Enabled,6483,142,1639.53,1,1514.44
+2026-08-11,Performance Max,Enabled,8709,171,2077.02,4,7321.88
+2026-08-12,Performance Max,Enabled,5286,116,1549.41,3,4372.92
+2026-08-13,Performance Max,Enabled,9073,190,2148.9,8,16118.56
+2026-08-14,Performance Max,Enabled,8025,177,2126.25,5,8149.74
+2026-08-15,Performance Max,Enabled,8285,179,2050.3,8,12333.12
+2026-08-16,Performance Max,Enabled,7482,148,1722.68,8,16944.15
+2026-08-17,Performance Max,Enabled,8213,173,2220.34,4,6833.25
+2026-08-18,Performance Max,Enabled,5467,102,1352.41,1,1667.23
+2026-08-19,Performance Max,Enabled,7514,128,1640.85,2,4170.92
+2026-08-20,Performance Max,Enabled,8352,170,2119.39,3,6210.21
+2026-08-21,Performance Max,Enabled,9350,168,2034.65,3,5139.27
+2026-08-22,Performance Max,Enabled,9311,181,1895.21,5,8233.49
+2026-08-23,Performance Max,Enabled,8878,171,1950.25,6,10788.47
+2026-08-24,Performance Max,Enabled,5777,116,1527.83,3,5860.82
+2026-08-25,Performance Max,Enabled,6950,152,2026.92,5,9796.07
+2026-08-26,Performance Max,Enabled,6315,117,1491.41,2,3052.99
+2026-08-27,Performance Max,Enabled,7926,166,1707.22,6,11990.37
+2026-08-28,Performance Max,Enabled,5310,117,1465.98,1,1579.23
+2026-08-29,Performance Max,Enabled,8539,154,1829.65,5,8438.23
+2026-08-30,Performance Max,Enabled,8713,184,2230.54,4,7796.36
+2026-08-31,Performance Max,Enabled,9017,157,2011.17,8,14842.74
+2026-09-01,Performance Max,Enabled,6714,135,1595.09,4,6474.12
+2026-09-02,Performance Max,Enabled,6363,138,1588.47,4,5871.26
+2026-09-03,Performance Max,Enabled,9370,160,1756.99,10,16514.79
+2026-09-04,Performance Max,Enabled,9179,159,1833.75,8,16909.39
+2026-09-05,Performance Max,Enabled,7743,149,1745.46,2,3832.79
+2026-09-06,Performance Max,Enabled,8645,182,2361.87,1,1605.31
+2026-09-07,Performance Max,Enabled,7350,142,1813.14,4,8181.27
+2026-09-08,Performance Max,Enabled,6510,122,1371.19,9,14434.43
+2026-09-09,Performance Max,Enabled,5694,119,1392.4,2,4089.16
+2026-09-10,Performance Max,Enabled,6621,119,1526.81,6,9509.7
+2026-09-11,Performance Max,Enabled,8149,151,2008.22,2,3724.04
+2026-09-12,Performance Max,Enabled,7976,173,2068.99,5,8989.31
+2026-09-13,Performance Max,Enabled,8901,173,2056.82,3,4957.87
+2026-09-14,Performance Max,Enabled,6590,143,1588.4,2,3175.81
+2026-09-15,Performance Max,Enabled,8730,161,1823.77,4,7205.82
+2026-09-16,Performance Max,Enabled,6420,142,1956.9,4,7060.71
+2026-09-17,Performance Max,Enabled,6825,155,1724.14,2,3175.12
+2026-09-18,Performance Max,Enabled,8408,157,1945.78,8,13878.46
+2026-09-19,Performance Max,Enabled,9218,206,2169.62,3,5171.14
+2026-09-20,Performance Max,Enabled,8071,181,2469.07,8,12863.81
+2026-09-21,Performance Max,Enabled,6674,116,1378.67,7,10121.26
+2026-09-22,Performance Max,Enabled,8781,150,1642.93,4,5979.02
+2026-09-23,Performance Max,Enabled,8844,170,2159.95,7,14096.16
+2026-09-24,Performance Max,Enabled,5492,124,1643.8,4,6773.14
+2026-09-25,Performance Max,Enabled,8279,158,2160.53,2,4129.65
+2026-09-26,Performance Max,Enabled,9950,203,2240.56,5,10509.08
+2026-09-27,Performance Max,Enabled,10081,174,1906.59,4,8609.61
+2026-09-28,Performance Max,Enabled,5693,130,1546.51,0,0.0
+2026-09-29,Performance Max,Enabled,8772,198,2089.07,8,12343.98

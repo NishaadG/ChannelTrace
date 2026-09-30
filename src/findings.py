@@ -58,6 +58,10 @@ def fact_sheet(f: dict) -> str:
         "(it is computed from pages seen before a transaction), so the 'without' model is the honest view of early-session signals.",
         "TOP DRIVERS WITHOUT PAGEVALUES (random-forest permutation importance): "
         + ", ".join(mo["importance"].head(5)["feature"]) + ".",
+        "ACTION (suggestions from the research): re-engage returning visitors, who are most of the traffic but convert "
+        "least, for example with remarketing or personalised offers; concentrate campaign budget in the run-up to November; "
+        "send paid traffic straight to product pages and work on reducing exits there, since time on product pages is the "
+        "strongest early signal of a purchase.",
         "CAVEATS: associations, not causation. Traffic sources are numeric codes with no channel names. "
         "This dataset is session-level, not multi-touch; channel attribution results will come from the Google Analytics 360 sample and Criteo datasets (in progress).",
     ]

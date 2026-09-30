@@ -55,28 +55,74 @@ def _groq(key: str, system: str, history: list[dict]) -> str:
     return r.json()["choices"][0]["message"]["content"]
 
 
+SYNONYMS = {
+    "waste": "zero conversions spent", "wasted": "zero conversions spent", "budget": "spend shift budget",
+    "best": "lowest cpa scale candidate", "worst": "highest cpa expensive", "cut": "expensive zero conversions pause",
+    "improve": "action suggestion", "should": "action suggestion", "recommend": "action suggestion",
+    "suggest": "action suggestion", "channel": "channel attribution", "credit": "attribution",
+    "undervalued": "under-credits", "overvalued": "over-credits", "roi": "roas", "return": "roas",
+    "audience": "age gender segment targeting", "target": "age gender segment targeting",
+    "segment": "age gender", "who": "visitor age gender", "when": "month season", "summary": "dataset overall total",
+    "summarise": "dataset overall total", "summarize": "dataset overall total", "limitation": "caveats",
+}
+
+
+def _chunks(facts: str) -> list[tuple[int, str]]:
+    """(parent line number, text): one chunk per fact line, plus one per item of list-style lines."""
+    out = []
+    for n, line in enumerate(l for l in facts.splitlines() if l.strip()):
+        out.append((n, line))
+        head, _, body = line.partition(":")
+        if body.count(";") >= 2:
+            out += [(n, f"{head}: {item.strip()}") for item in body.split(";") if item.strip()]
+    return out
+
+
+def _label(head: str) -> str:
+    if head.startswith("ACTION"):
+        return "Suggested action · " + ("your data" if "your" in head.lower() else "research")
+    if head.startswith("UPLOADED"):
+        return "Your data · " + head.replace("UPLOADED", "").split("(")[0].strip().lower()
+    return head.split("(")[0].strip().capitalize()
+
+
 def _offline(facts: str, question: str) -> str:
-    """Keyword match over the fact sheet: no AI, but always available."""
-    topics = {
-        "VISITOR": ["new", "returning", "visitor", "loyal", "retarget"],
-        "MONTH": ["month", "season", "november", "nov", "when", "time of year", "festive", "holiday"],
-        "TRAFFIC": ["traffic", "source", "channel", "where"],
-        "WEEKEND": ["weekend", "weekday", "day"],
-        "CONVERTED": ["behaviour", "behavior", "page", "bounce", "exit", "differ", "time spent"],
-        "PREDICTIVE": ["model", "predict", "accuracy", "auc"],
-        "TOP DRIVERS": ["driver", "factor", "important", "matter", "improve", "increase", "boost", "suggest"],
-        "CAVEATS": ["limit", "caveat", "cause", "reliable"],
-        "DATASET": ["data", "dataset", "overall", "summary", "rate"],
-    }
+    """Built-in retrieval model: TF-IDF similarity between the question and the fact sheet.
+    No internet or API key needed; it only ever quotes computed facts."""
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics.pairwise import cosine_similarity
+
+    chunks = _chunks(facts)
     q = question.lower()
-    lines = facts.splitlines()
-    line_for = lambda key: next((ln for ln in lines if ln.startswith(key)), "")
-    hits = [line_for(k) for k, words in topics.items() if any(w in q for w in words)]
-    if not any(hits):
-        hits = [line_for("DATASET"), line_for("TOP DRIVERS")]
-    hits = [h for h in hits if h][:3]
-    return ("**Offline mode** (no AI key set). Here is what the analysis says:\n\n"
-            + "\n\n".join(f"- {h}" for h in hits))
+    q += " " + " ".join(v for k, v in SYNONYMS.items() if k in q)
+    vec = TfidfVectorizer(ngram_range=(1, 2), sublinear_tf=True, stop_words="english")
+    m = vec.fit_transform([c for _, c in chunks] + [q])
+    sims = cosine_similarity(m[-1], m[:-1]).ravel()
+    if any(c.startswith(("UPLOADED", "ACTION (suggestions for your")) for _, c in chunks):
+        # When the user has loaded their own data, prefer it over general research facts.
+        sims *= [1.35 if c.startswith(("UPLOADED", "ACTION (suggestions for your")) else 1.0 for _, c in chunks]
+    picked, used = [], set()
+    for i in sims.argsort()[::-1]:
+        if sims[i] < 0.06 or len(picked) == 3:
+            break
+        parent, text = chunks[i]
+        if text.startswith("CAVEATS") and not any(w in question.lower() for w in
+                                                  ("limit", "caveat", "cause", "reliab", "trust", "accura", "weak")):
+            continue
+        if parent in used:  # one answer per fact line, whichever part matched best
+            continue
+        used.add(parent)
+        picked.append(text)
+    if not picked:
+        return ("I couldn't match that to anything in the current results. Try asking about conversion rates, "
+                "visitor types, timing, campaigns, wasted spend, audiences, attribution or limitations.")
+
+    def pretty(c):
+        head, _, body = c.partition(":")
+        body = body.strip()
+        return f"**{_label(head)}.** {body[:1].upper()}{body[1:]}"
+
+    return "\n\n".join(pretty(c) for c in picked)
 
 
 def backend_name() -> str:
@@ -84,7 +130,7 @@ def backend_name() -> str:
         return "Gemini (free tier)"
     if _secret("GROQ_API_KEY"):
         return "Groq (free tier)"
-    return "Offline (no API key)"
+    return "Built-in model (offline)"
 
 
 def answer(facts: str, history: list[dict]) -> str:

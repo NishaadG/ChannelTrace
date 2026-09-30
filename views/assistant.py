@@ -4,30 +4,39 @@ from src import assistant, ui
 from src.state import research
 
 f = research()
+data_facts = st.session_state.get("data_facts", {})
+facts = "\n".join([f["facts"], *data_facts.values()])
 backend = assistant.backend_name()
-live = not backend.startswith("Offline")
+generative = not backend.startswith("Built-in")
 
 ui.header(
     "Tools · Marketing assistant",
     "Ask the data",
-    "Questions are answered from ChannelTrace's computed results only. Raw data never leaves the app, "
-    "and every recommendation is a suggestion, not a guarantee.",
+    "Answers come only from ChannelTrace's computed results: the research findings and any file you analyse on the "
+    "Your data page. Raw rows never leave the app, and every recommendation is a suggestion, not a guarantee.",
 )
-st.markdown(f"{ui.badge(backend, 'good' if live else 'neutral')}", unsafe_allow_html=True)
-if not live:
-    ui.note("No API key configured, so answers quote the relevant findings directly. "
-            "Add a free Gemini or Groq key in <span class='ct-code'>.streamlit/secrets.toml</span> for full answers.")
+tags = [ui.badge(backend, "good" if generative else "info"), ui.badge("Research findings loaded", "neutral")]
+if "ads" in data_facts:
+    tags.append(ui.badge("Your ad data loaded", "good"))
+if "journeys" in data_facts:
+    tags.append(ui.badge("Your journey data loaded", "good"))
+st.markdown(" &nbsp; ".join(tags), unsafe_allow_html=True)
+if not generative:
+    ui.note("The built-in model finds the most relevant computed facts for each question using TF-IDF text similarity, "
+            "so it works offline with no key. Add a free Gemini or Groq key in "
+            "<span class='ct-code'>.streamlit/secrets.toml</span> for full conversational answers.")
 
-if "chat" not in st.session_state:
-    st.session_state.chat = []
+st.session_state.setdefault("chat", [])
 
-SUGGESTIONS = [
-    "Summarise the key findings in three points",
-    "How can a store convert more returning visitors?",
-    "When should we run our biggest campaigns?",
-    "What are the limitations of this analysis?",
-]
-if not st.session_state.chat:
+SUGGESTIONS = ["Summarise the key research findings", "How can a store convert more returning visitors?",
+               "When should we run our biggest campaigns?", "What are the limitations of this analysis?"]
+if "ads" in data_facts:
+    SUGGESTIONS = ["Which campaigns should I cut or scale?", "Where is money being wasted?",
+                   "Which audience converts most cheaply?"] + SUGGESTIONS[:1]
+if "journeys" in data_facts:
+    SUGGESTIONS = ["Which channel does last-click undervalue?", "What are the most common paths to purchase?"] + SUGGESTIONS[:2]
+
+if not st.session_state.chat and "pending" not in st.session_state:
     ui.section("Start with", "Suggested questions")
     cols = st.columns(2, gap="small")
     for i, s in enumerate(SUGGESTIONS):
@@ -40,13 +49,13 @@ for m in st.session_state.chat:
     with st.chat_message(m["role"], avatar=AVATAR[m["role"]]):
         st.markdown(m["content"])
 
-prompt = st.chat_input("Ask about conversion, visitors, timing or methods") or st.session_state.pop("pending", None)
+prompt = st.chat_input("Ask about campaigns, channels, audiences, timing or methods") or st.session_state.pop("pending", None)
 if prompt:
     st.session_state.chat.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar=AVATAR["user"]):
         st.markdown(prompt)
-    with st.chat_message("assistant", avatar=AVATAR["assistant"]), st.spinner("Reading the findings"):
-        reply = assistant.answer(f["facts"], st.session_state.chat[-10:])
+    with st.chat_message("assistant", avatar=AVATAR["assistant"]), st.spinner("Reading the results"):
+        reply = assistant.answer(facts, st.session_state.chat[-10:])
         st.markdown(reply)
     st.session_state.chat.append({"role": "assistant", "content": reply})
 
@@ -56,4 +65,4 @@ if st.session_state.chat and st.button("Clear conversation", icon=":material/res
 
 st.write("")
 with st.expander("What the assistant knows"):
-    st.text(f["facts"])
+    st.text(facts)

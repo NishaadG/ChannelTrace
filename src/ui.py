@@ -8,10 +8,13 @@ import streamlit as st
 INK = "#16213A"        # headings, primary text
 TEXT = "#2B3345"
 MUTED = "#6A7285"
-RULE = "#E3E1DA"
-PAPER = "#FBFAF7"      # page
+RULE = "#DCE1E8"
+PAPER = "#E9EDF3"      # page (cool grey-blue tint)
 PANEL = "#FFFFFF"      # cards
-SIDEBAR = "#F2F0EA"
+SIDEBAR = "#14213D"    # navy
+NAVY_2 = "#1B2B4F"
+GOLD = "#C9A227"       # sparing highlight on navy
+HEAD_BG = "#F4F6F9"
 ACCENT = "#1F4E8C"     # the one data accent
 ACCENT_SOFT = "#E7EDF6"
 BAR_MUTED = "#C8CDD6"
@@ -34,24 +37,31 @@ h1, h2, h3, h4 {{ font-family: 'Source Serif 4', Georgia, serif !important; colo
 p, li {{ color: {TEXT}; }}
 
 /* Sidebar */
-[data-testid="stSidebar"] {{ background: {SIDEBAR}; border-right: 1px solid {RULE}; }}
+[data-testid="stSidebar"] {{ background: {SIDEBAR}; border-right: none; }}
+[data-testid="stSidebar"] span, [data-testid="stSidebar"] p, [data-testid="stSidebar"] [data-testid="stIconMaterial"] {{ color: #C3CDE0; }}
+[data-testid="stSidebar"] [data-testid="stNavSectionHeader"], [data-testid="stSidebar"] [data-testid="stNavSectionHeader"] span {{ color: #7F93B8 !important; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }}
+[data-testid="stSidebarNav"] a:hover {{ background: {NAVY_2}; }}
+[data-testid="stSidebarCollapseButton"] span, [data-testid="stSidebarCollapseButton"] svg {{ color: #C3CDE0; fill: #C3CDE0; }}
 [data-testid="stSidebarContent"] {{ display: flex; flex-direction: column; }}
 [data-testid="stSidebarHeader"] {{ order: 0; height: 1.2rem; min-height: 0; padding: 0; }}
 [data-testid="stSidebarUserContent"] {{ order: 1; padding-top: 0.4rem; padding-bottom: 0; }}
 [data-testid="stSidebarNav"] {{ order: 2; }}
 [data-testid="stSidebarNavSeparator"] {{ display: none; }}
 [data-testid="stSidebarNav"] a span {{ font-size: 0.92rem; }}
-[data-testid="stSidebarNav"] a[aria-current="page"] {{ background: {PANEL}; box-shadow: inset 2px 0 0 {ACCENT}; }}
-.ct-brand {{ padding: 0.2rem 0 1.1rem 0; border-bottom: 1px solid {RULE}; margin-bottom: 0.6rem; }}
-.ct-brand .name {{ font-family: 'Source Serif 4', Georgia, serif; font-size: 1.35rem; font-weight: 600; color: {INK}; }}
-.ct-brand .tag {{ font-size: 0.78rem; color: {MUTED}; margin-top: 0.15rem; line-height: 1.35; }}
-.ct-sidefoot {{ position: fixed; bottom: 1.2rem; font-size: 0.74rem; color: {MUTED}; line-height: 1.5; }}
+[data-testid="stSidebarNav"] a[aria-current="page"] {{ background: {NAVY_2}; box-shadow: inset 3px 0 0 {GOLD}; }}
+[data-testid="stSidebarNav"] a[aria-current="page"] span {{ color: #FFFFFF !important; }}
+.ct-brand {{ padding: 0.2rem 0 1.1rem 0; border-bottom: 1px solid #2A3A5E; margin-bottom: 0.6rem; }}
+.ct-brand .name {{ font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; font-weight: 600; color: #FFFFFF; }}
+.ct-brand .name b {{ color: {GOLD}; font-weight: 600; }}
+.ct-brand .tag {{ font-size: 0.78rem; color: #8FA0C0 !important; margin-top: 0.15rem; line-height: 1.35; }}
+.ct-sidefoot {{ position: fixed; bottom: 1.2rem; font-size: 0.74rem; color: #7F93B8 !important; line-height: 1.5; }}
 
 /* Page header */
-.ct-eyebrow {{ font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: {ACCENT}; margin-bottom: 0.35rem; }}
-.ct-title {{ font-family: 'Source Serif 4', Georgia, serif; font-size: 2.35rem; font-weight: 600; color: {INK}; line-height: 1.15; margin: 0; }}
-.ct-lead {{ font-size: 1.02rem; color: {MUTED}; max-width: 760px; line-height: 1.6; margin: 0.7rem 0 0 0; }}
-.ct-header {{ padding-bottom: 1.4rem; border-bottom: 1px solid {RULE}; margin-bottom: 1.6rem; }}
+.ct-header {{ background: {SIDEBAR}; border-radius: 8px; padding: 2rem 2.2rem 2.1rem 2.2rem; margin-bottom: 1.6rem;
+  background-image: linear-gradient(90deg, {SIDEBAR} 0%, {SIDEBAR} 62%, {NAVY_2} 100%); border-bottom: 3px solid {GOLD}; }}
+.ct-eyebrow {{ font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: {GOLD}; margin-bottom: 0.45rem; }}
+.ct-title {{ font-family: 'Source Serif 4', Georgia, serif; font-size: 2.25rem; font-weight: 600; color: #FFFFFF !important; line-height: 1.15; margin: 0; }}
+.ct-lead {{ font-size: 1rem; color: #C3CDE0 !important; max-width: 780px; line-height: 1.6; margin: 0.75rem 0 0 0; }}
 
 /* Section label */
 .ct-section {{ display: flex; align-items: baseline; gap: 0.75rem; margin: 2rem 0 0.9rem 0; }}
@@ -78,11 +88,13 @@ p, li {{ color: {TEXT}; }}
 .ct-badge {{ display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; padding: 0.12rem 0.5rem; border-radius: 3px; border: 1px solid; white-space: nowrap; }}
 .ct-badge.good {{ color: {GOOD}; border-color: #BFD5C8; background: #EFF5F1; }}
 .ct-badge.pending {{ color: {PENDING}; border-color: #E3D2A8; background: #FAF5E8; }}
-.ct-badge.neutral {{ color: {MUTED}; border-color: {RULE}; background: {PAPER}; }}
+.ct-badge.neutral {{ color: {MUTED}; border-color: {RULE}; background: {HEAD_BG}; }}
+.ct-badge.bad {{ color: #9A3B26; border-color: #E7C3B8; background: #FBF0EC; }}
+.ct-badge.info {{ color: {ACCENT}; border-color: #C3D2E8; background: {ACCENT_SOFT}; }}
 
 /* Tables */
 .ct-table {{ width: 100%; border-collapse: collapse; background: {PANEL}; border: 1px solid {RULE}; border-radius: 6px; overflow: hidden; font-size: 0.88rem; }}
-.ct-table th {{ text-align: left; font-weight: 600; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: {MUTED}; padding: 0.7rem 1rem; border-bottom: 1px solid {RULE}; background: {PAPER}; }}
+.ct-table th {{ text-align: left; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #E4E9F2; padding: 0.7rem 1rem; border-bottom: 1px solid {RULE}; background: {NAVY_2}; }}
 .ct-table td {{ padding: 0.75rem 1rem; border-bottom: 1px solid {RULE}; color: {TEXT}; vertical-align: top; }}
 .ct-table tr:last-child td {{ border-bottom: none; }}
 .ct-table td.code {{ font-weight: 600; color: {ACCENT}; white-space: nowrap; width: 3.5rem; }}
@@ -93,7 +105,7 @@ p, li {{ color: {TEXT}; }}
 .ct-finding {{ border-left: 3px solid {ACCENT}; background: {PANEL}; padding: 0.95rem 1.2rem; margin: 0.6rem 0 1rem 0; border-radius: 0 6px 6px 0; border-top: 1px solid {RULE}; border-right: 1px solid {RULE}; border-bottom: 1px solid {RULE}; }}
 .ct-finding .k {{ font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: {ACCENT}; }}
 .ct-finding .t {{ font-size: 0.95rem; color: {TEXT}; line-height: 1.6; margin-top: 0.25rem; }}
-.ct-code {{ font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.82em; background: {SIDEBAR}; padding: 0.08rem 0.35rem; border-radius: 3px; color: {INK}; }}
+.ct-code {{ font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.82em; background: {HEAD_BG}; padding: 0.08rem 0.35rem; border-radius: 3px; color: {INK}; }}
 .ct-note {{ font-size: 0.8rem; color: {MUTED}; line-height: 1.55; }}
 
 /* Tabs */
@@ -137,7 +149,7 @@ def apply() -> None:
     pio.templates["channeltrace"] = _template()
     pio.templates.default = "channeltrace"
     with st.sidebar:
-        st.markdown('<div class="ct-brand"><div class="name">ChannelTrace</div>'
+        st.markdown('<div class="ct-brand"><div class="name">Channel<b>Trace</b></div>'
                     '<div class="tag">Multi-channel attribution &amp;<br>conversion research</div></div>',
                     unsafe_allow_html=True)
 

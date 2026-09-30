@@ -21,11 +21,12 @@ c2.markdown(ui.card("02", "Marketing assistant",
             unsafe_allow_html=True)
 c3.markdown(ui.card("03", "Your data",
                     "Upload a Google Ads, Meta Ads or customer-journey export and get the same analysis on your own numbers.",
-                    f'<div style="margin-top:.9rem">{ui.badge("In development", "pending")}</div>'),
+                    f'<div style="margin-top:.9rem">{ui.badge("Working prototype", "good")}</div>'),
             unsafe_allow_html=True)
-b1, b2, _ = st.columns([1, 1, 1], gap="medium")
+b1, b2, b3 = st.columns([1, 1, 1], gap="medium")
 b1.page_link("views/research.py", label="Read the findings", icon=":material/arrow_forward:")
 b2.page_link("views/assistant.py", label="Open the assistant", icon=":material/arrow_forward:")
+b3.page_link("views/your_data.py", label="Analyse your data", icon=":material/arrow_forward:")
 
 ui.section("Scope", "Research questions")
 rqs = [
@@ -33,7 +34,7 @@ rqs = [
     ("RQ2", "How do converting and non-converting sessions differ?", "UCI Online Shoppers", ("Answered", "good")),
     ("RQ3", "Does a channel's importance change under different attribution models?", "GA360 sample, Criteo", ("In progress", "pending")),
     ("RQ4", "Which session and visitor characteristics are associated with conversion?", "UCI Online Shoppers", ("Answered", "good")),
-    ("RQ5", "Can these methods give small businesses correct, usable insight from their own data?", "Facebook Ads (Kaggle), user study", ("Planned", "neutral")),
+    ("RQ5", "Can these methods give small businesses correct, usable insight from their own data?", "Facebook Ads (Kaggle), user study", ("Tool built", "pending")),
 ]
 rows = "".join(f'<tr><td class="code">{c}</td><td>{q}</td><td>{d}</td><td>{ui.badge(*s)}</td></tr>' for c, q, d, s in rqs)
 st.markdown(f'<table class="ct-table"><thead><tr><th></th><th>Question</th><th>Evidence</th><th>Status</th></tr></thead>'
