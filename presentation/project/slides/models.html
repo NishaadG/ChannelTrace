@@ -1,0 +1,19 @@
+<section id="models" data-transition="fade" style="background:#F3F5F8;color:#3A4458;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:44px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#8A6414;font-weight:600">Attribution models</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:64px;font-weight:600;color:#14213D;line-height:1.1">Seven ways to split the credit for one sale</h2>
+</div>
+<table style="font-size:26px;color:#3A4458;padding:12px 20px">
+<tr style="background:#14213D"><th style="width:24%;color:#FBFAF7">Model</th><th style="width:16%;color:#FBFAF7">Type</th><th style="width:60%;color:#FBFAF7">How credit is assigned</th></tr>
+<tr style="background:#FFFFFF"><td>First touch</td><td>Rule</td><td>All credit to the first interaction</td></tr>
+<tr style="background:#F8F9FB"><td>Last touch</td><td>Rule</td><td>All credit to the final interaction (what most platforms report)</td></tr>
+<tr style="background:#FFFFFF"><td>Linear</td><td>Rule</td><td>Split equally across every interaction</td></tr>
+<tr style="background:#F8F9FB"><td>Time decay</td><td>Rule</td><td>More credit closer to the purchase (7-day half-life)</td></tr>
+<tr style="background:#FFFFFF"><td>Position based</td><td>Rule</td><td>40% first, 40% last, 20% shared in the middle</td></tr>
+<tr style="background:#EAF0F8"><td><b>Markov chain</b></td><td>Data-driven</td><td>How far conversions fall if the channel is removed (Anderl et al., 2016)</td></tr>
+<tr style="background:#EAF0F8"><td><b>Shapley value</b></td><td>Data-driven</td><td>Average marginal contribution across channel combinations (Shao and Li, 2011)</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6A7285">ChannelTrace · Review 1</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6A7285;text-align:right">7</p>
+<aside>No model is objectively correct, because no dataset records which ad truly caused a sale. That is why we compare all seven and measure how much a channel's apparent value depends on the rule. The two data-driven models learn from both converting and non-converting journeys.</aside>
+</section>
