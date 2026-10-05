@@ -20,7 +20,10 @@ def build_cache() -> dict:
 def research() -> dict:
     """Load precomputed results; rebuild with `python -m src.state` after changing the analysis."""
     if CACHE.exists():
-        return pickle.loads(CACHE.read_bytes())
+        try:
+            return pickle.loads(CACHE.read_bytes())
+        except Exception:  # cache written by different library versions (e.g. on a cloud host): rebuild
+            pass
     return build_cache()
 
 
