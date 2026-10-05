@@ -3,3 +3,5 @@ __pycache__/
 data/raw/*.zip
 .venv/
 data/raw/criteo/
+synopsis_doc/preview/
+~$*.docx
