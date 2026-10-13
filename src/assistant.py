@@ -18,12 +18,6 @@ SYSTEM = (
 
 
 def _secret(name: str) -> str | None:
-    try:
-        import streamlit as st
-        if name in st.secrets:
-            return st.secrets[name]
-    except Exception:
-        pass
     return os.environ.get(name)
 
 

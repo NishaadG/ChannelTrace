@@ -1,8 +1,6 @@
 import pickle
 from pathlib import Path
 
-import streamlit as st
-
 from src import findings
 
 CACHE = Path(__file__).resolve().parent.parent / "data" / "processed" / "research_findings.pkl"
@@ -16,7 +14,6 @@ def build_cache() -> dict:
     return f
 
 
-@st.cache_resource(show_spinner="Running the research analysis (first load only)...")
 def research() -> dict:
     """Load precomputed results; rebuild with `python -m src.state` after changing the analysis."""
     if CACHE.exists():

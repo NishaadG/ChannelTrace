@@ -1,24 +1,27 @@
 # ChannelTrace
 
-Multi-channel digital marketing attribution & conversion analysis: research findings dashboard,
-AI assistant, and (next) plug-and-play upload for Google Ads / Meta Ads / journey CSVs. Zero cost.
+Multi-channel digital marketing attribution & conversion analysis (MDM Digital Marketing Capstone, PCCoE).
+Research study, plug-and-play analysis of Google Ads / Meta Ads / journey CSVs, and an assistant. Zero cost.
 
-## Run locally
-```
-pip install -r requirements.txt
-python -m src.state        # precompute research results (only after changing the analysis)
-streamlit run app.py
-```
-
-## AI assistant (free)
-Works with no key (offline mode). For real AI answers, copy `.streamlit/secrets.toml.example`
-to `.streamlit/secrets.toml` and add ONE free key:
-- Gemini: https://aistudio.google.com/apikey
-- Groq: https://console.groq.com/keys
+Live site: https://channeltrace.vercel.app
 
 ## Structure
-- `app.py` navigation · `views/` pages · `src/uci_analysis.py` research analysis (RQ2, RQ4)
-- `src/findings.py` dashboard numbers + assistant fact sheet · `src/assistant.py` LLM backends + offline fallback
+- `web/` React site (Vite + TypeScript + Tailwind + Recharts), deployed on Vercel. Uploaded files are analysed in the browser.
+- `src/` Python research analysis: `uci_analysis.py` (shopper behaviour), `criteo_analysis.py` (display ads),
+  `attribution.py` (7 models), `simulation.py` (known-answer validation), `findings.py` / `state.py` (results cache).
+- `scripts/export_web_data.py` exports the results to `web/public/data/research.json`.
+- `paper/build_paper.py` builds the draft paper from the saved results. `synopsis_doc/`, `presentation/` Review 1 material.
+- `ROADMAP.md` future work.
 
-## Deploy free
-Push to GitHub → share.streamlit.io → New app → `app.py`; add the key under App settings → Secrets.
+## Rebuild
+```
+pip install -r requirements.txt
+python -m src.state                # research cache (after changing the analysis)
+python scripts/export_web_data.py  # data for the site
+python paper/build_paper.py        # paper
+cd web && npm install && npm run dev
+```
+
+## AI assistant (optional, free)
+Works offline by default. For generative answers, add `GEMINI_API_KEY` (https://aistudio.google.com/apikey)
+under Vercel → Project → Settings → Environment Variables.
