@@ -1,0 +1,4 @@
+{
+  "framework": "vite",
+  "rewrites": [{ "source": "/((?!api/|data/|samples/|assets/|paper/).*)", "destination": "/index.html" }]
+}

@@ -95,5 +95,41 @@
   }
  },
  "note": "All impressions in converting journeys are clicks: the public sample keeps clicked impressions for converting users, so click-vs-view effects cannot be measured.",
- "top_campaign_share_of_imps": 0.026559647977259206
+ "top_campaign_share_of_imps": 0.026559647977259206,
+ "recency_tests": {
+  "chi2": 126214.24536238413,
+  "dof": 5,
+  "p": 0.0,
+  "n": 433745,
+  "logit": {
+   "const": {
+    "coef": 1.5397175335701299,
+    "or": 4.663272866897447,
+    "p": 0.0,
+    "ci_or": [
+     4.600408303289459,
+     4.72699647455046
+    ]
+   },
+   "log_hours": {
+    "coef": -0.49852384748811646,
+    "or": 0.6074266526178922,
+    "p": 0.0,
+    "ci_or": [
+     0.6055741188595476,
+     0.6092848535294701
+    ]
+   },
+   "clicks": {
+    "coef": 0.036347723392955195,
+    "or": 1.037016378658294,
+    "p": 2.8615182946325255e-63,
+    "ci_or": [
+     1.032625768859917,
+     1.0414256568406903
+    ]
+   }
+  },
+  "pseudo_r2": 0.21519901955898324
+ }
 }

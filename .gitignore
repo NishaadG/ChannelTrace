@@ -5,3 +5,9 @@ data/raw/*.zip
 data/raw/criteo/
 synopsis_doc/preview/
 ~$*.docx
+web/node_modules/
+web/dist/
+web/.vercel/
+web/.env*.local
+paper/preview/
+data/processed/criteo_conversion_journeys.csv.gz

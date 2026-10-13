@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #14213d;
+  --color-ink-2: #1b2b4f;
+  --color-ink-3: #2a3a5e;
+  --color-gold: #c9a227;
+  --color-gold-deep: #8a6414;
+  --color-paper: #f4f6f9;
+  --color-panel: #ffffff;
+  --color-rule: #dde2ea;
+  --color-accent: #1f4e8c;
+  --color-accent-soft: #e7edf6;
+  --color-text: #2b3345;
+  --color-muted: #5b6478;
+  --color-quiet: #c8cdd6;
+  --color-good: #2f6b4f;
+  --color-bad: #b4533c;
+  --color-mist: #c3cde0;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "tnum" 1;
+}
+h1, h2, h3 { font-family: var(--font-serif); color: var(--color-ink); letter-spacing: -0.01em; }
+
+.eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.card { background: var(--color-panel); border: 1px solid var(--color-rule); border-radius: 10px; }
+.recharts-cartesian-axis-tick-value { fill: var(--color-muted); font-size: 12px; }
+.recharts-legend-item-text { color: var(--color-muted) !important; font-size: 12px; }
+.prose-answer strong { color: var(--color-ink); }
+.fade-in { animation: fade 0.35s ease both; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
