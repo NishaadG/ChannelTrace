@@ -1,0 +1,700 @@
+{
+ "immediate": {
+  "per_world": [
+   {
+    "world": 0,
+    "model": "First touch",
+    "mae_pp": 11.04875846959062,
+    "max_err_pp": 19.294944618006248,
+    "spearman": 0.12613124477737828
+   },
+   {
+    "world": 0,
+    "model": "Last touch",
+    "mae_pp": 7.4089476744972345,
+    "max_err_pp": 13.790175612988737,
+    "spearman": 0.6272727272727273
+   },
+   {
+    "world": 0,
+    "model": "Linear",
+    "mae_pp": 7.060409449683501,
+    "max_err_pp": 10.543598880075555,
+    "spearman": 0.702731220902536
+   },
+   {
+    "world": 0,
+    "model": "Time decay",
+    "mae_pp": 7.182038794602533,
+    "max_err_pp": 10.30539799975508,
+    "spearman": 0.702731220902536
+   },
+   {
+    "world": 0,
+    "model": "Position based",
+    "mae_pp": 6.946149914571522,
+    "max_err_pp": 10.865877157688795,
+    "spearman": 0.8288624656799143
+   },
+   {
+    "world": 0,
+    "model": "Markov chain",
+    "mae_pp": 8.444509469966501,
+    "max_err_pp": 12.176803635452229,
+    "spearman": 0.6486749731408026
+   },
+   {
+    "world": 0,
+    "model": "Shapley value",
+    "mae_pp": 6.977693484380403,
+    "max_err_pp": 10.4583877122751,
+    "spearman": 0.7567874686642696
+   },
+   {
+    "world": 1,
+    "model": "First touch",
+    "mae_pp": 10.750032566391635,
+    "max_err_pp": 29.880445157815593,
+    "spearman": -0.07142857142857144
+   },
+   {
+    "world": 1,
+    "model": "Last touch",
+    "mae_pp": 2.871479687332169,
+    "max_err_pp": 9.053266428125784,
+    "spearman": 1.0
+   },
+   {
+    "world": 1,
+    "model": "Linear",
+    "mae_pp": 4.882158090160971,
+    "max_err_pp": 16.37267277264295,
+    "spearman": 0.8928571428571429
+   },
+   {
+    "world": 1,
+    "model": "Time decay",
+    "mae_pp": 4.270877100661397,
+    "max_err_pp": 14.742997001232,
+    "spearman": 0.9642857142857145
+   },
+   {
+    "world": 1,
+    "model": "Position based",
+    "mae_pp": 5.877837307194898,
+    "max_err_pp": 18.10151852069101,
+    "spearman": 0.7142857142857144
+   },
+   {
+    "world": 1,
+    "model": "Markov chain",
+    "mae_pp": 5.77180376643507,
+    "max_err_pp": 19.59678954426882,
+    "spearman": 0.8571428571428573
+   },
+   {
+    "world": 1,
+    "model": "Shapley value",
+    "mae_pp": 5.137737426770058,
+    "max_err_pp": 17.197037969238536,
+    "spearman": 0.8928571428571429
+   },
+   {
+    "world": 2,
+    "model": "First touch",
+    "mae_pp": 12.14654454846905,
+    "max_err_pp": 18.58642221336522,
+    "spearman": -0.03571428571428572
+   },
+   {
+    "world": 2,
+    "model": "Last touch",
+    "mae_pp": 4.021780095059147,
+    "max_err_pp": 11.783531666951355,
+    "spearman": 0.9642857142857145
+   },
+   {
+    "world": 2,
+    "model": "Linear",
+    "mae_pp": 5.577153055608169,
+    "max_err_pp": 11.249616177678751,
+    "spearman": 0.7500000000000002
+   },
+   {
+    "world": 2,
+    "model": "Time decay",
+    "mae_pp": 4.853979295132332,
+    "max_err_pp": 11.40308373203166,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 2,
+    "model": "Position based",
+    "mae_pp": 6.5998412517657545,
+    "max_err_pp": 11.40028990870957,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 2,
+    "model": "Markov chain",
+    "mae_pp": 6.56496038971059,
+    "max_err_pp": 15.3060933638941,
+    "spearman": 0.7500000000000002
+   },
+   {
+    "world": 2,
+    "model": "Shapley value",
+    "mae_pp": 5.808646695027154,
+    "max_err_pp": 12.012469395889077,
+    "spearman": 0.7500000000000002
+   },
+   {
+    "world": 3,
+    "model": "First touch",
+    "mae_pp": 15.311008296294556,
+    "max_err_pp": 29.07025331196142,
+    "spearman": 0.10714285714285716
+   },
+   {
+    "world": 3,
+    "model": "Last touch",
+    "mae_pp": 3.538548706236018,
+    "max_err_pp": 8.691073116600222,
+    "spearman": 0.6071428571428572
+   },
+   {
+    "world": 3,
+    "model": "Linear",
+    "mae_pp": 5.165548443700367,
+    "max_err_pp": 10.130614285910006,
+    "spearman": 0.9285714285714288
+   },
+   {
+    "world": 3,
+    "model": "Time decay",
+    "mae_pp": 4.021914489014627,
+    "max_err_pp": 8.017807752905071,
+    "spearman": 0.8214285714285715
+   },
+   {
+    "world": 3,
+    "model": "Position based",
+    "mae_pp": 6.5321899751639725,
+    "max_err_pp": 12.69798473826261,
+    "spearman": 0.9285714285714288
+   },
+   {
+    "world": 3,
+    "model": "Markov chain",
+    "mae_pp": 6.346916167204938,
+    "max_err_pp": 12.448176541528724,
+    "spearman": 0.7500000000000002
+   },
+   {
+    "world": 3,
+    "model": "Shapley value",
+    "mae_pp": 6.120361835087906,
+    "max_err_pp": 12.191032016768737,
+    "spearman": 0.9285714285714288
+   },
+   {
+    "world": 4,
+    "model": "First touch",
+    "mae_pp": 4.07817758620568,
+    "max_err_pp": 9.706763540160217,
+    "spearman": 0.21428571428571433
+   },
+   {
+    "world": 4,
+    "model": "Last touch",
+    "mae_pp": 5.2407723273118805,
+    "max_err_pp": 11.92590362337797,
+    "spearman": -0.07142857142857144
+   },
+   {
+    "world": 4,
+    "model": "Linear",
+    "mae_pp": 4.9020387815641255,
+    "max_err_pp": 11.486203471472543,
+    "spearman": 0.03571428571428572
+   },
+   {
+    "world": 4,
+    "model": "Time decay",
+    "mae_pp": 5.061397731607125,
+    "max_err_pp": 11.752438168450686,
+    "spearman": -0.07142857142857144
+   },
+   {
+    "world": 4,
+    "model": "Position based",
+    "mae_pp": 4.692994276105906,
+    "max_err_pp": 11.150591556803766,
+    "spearman": 0.03571428571428572
+   },
+   {
+    "world": 4,
+    "model": "Markov chain",
+    "mae_pp": 5.995079679358407,
+    "max_err_pp": 12.864178064204845,
+    "spearman": -0.14285714285714288
+   },
+   {
+    "world": 4,
+    "model": "Shapley value",
+    "mae_pp": 4.532370803415862,
+    "max_err_pp": 10.129787118523602,
+    "spearman": 0.03571428571428572
+   },
+   {
+    "world": 5,
+    "model": "First touch",
+    "mae_pp": 9.740283088718204,
+    "max_err_pp": 31.47437576728872,
+    "spearman": 0.6785714285714287
+   },
+   {
+    "world": 5,
+    "model": "Last touch",
+    "mae_pp": 2.376512838350016,
+    "max_err_pp": 4.52848021615069,
+    "spearman": 0.8214285714285715
+   },
+   {
+    "world": 5,
+    "model": "Linear",
+    "mae_pp": 3.3731967918023735,
+    "max_err_pp": 10.806045434009942,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 5,
+    "model": "Time decay",
+    "mae_pp": 2.923410858399169,
+    "max_err_pp": 8.667486785779266,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 5,
+    "model": "Position based",
+    "mae_pp": 3.981942924848937,
+    "max_err_pp": 13.283081380118073,
+    "spearman": 0.7500000000000002
+   },
+   {
+    "world": 5,
+    "model": "Markov chain",
+    "mae_pp": 5.213087988059769,
+    "max_err_pp": 15.011716696962324,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 5,
+    "model": "Shapley value",
+    "mae_pp": 4.1926013004557685,
+    "max_err_pp": 13.238407840599137,
+    "spearman": 0.7857142857142859
+   }
+  ],
+  "summary": [
+   {
+    "model": "First touch",
+    "mae_pp": 10.512467425944957,
+    "mae_sd": 3.6888101658570758,
+    "max_err_pp": 23.00220076809957,
+    "spearman": 0.1698313979390869
+   },
+   {
+    "model": "Last touch",
+    "mae_pp": 4.243006888131077,
+    "mae_sd": 1.840043828761239,
+    "max_err_pp": 9.962071777365793,
+    "spearman": 0.6581168831168832
+   },
+   {
+    "model": "Linear",
+    "mae_pp": 5.160084102086585,
+    "mae_sd": 1.1934830801434395,
+    "max_err_pp": 11.764791836964958,
+    "spearman": 0.6825980606266132
+   },
+   {
+    "model": "Time decay",
+    "mae_pp": 4.718936378236197,
+    "mae_sd": 1.4221742793432197,
+    "max_err_pp": 10.81486857335896,
+    "spearman": 0.6647409177694704
+   },
+   {
+    "model": "Position based",
+    "mae_pp": 5.7718259416084985,
+    "mae_sd": 1.1850398302727314,
+    "max_err_pp": 12.91655721037897,
+    "spearman": 0.6738580299942716
+   },
+   {
+    "model": "Markov chain",
+    "mae_pp": 6.389392910122546,
+    "mae_sd": 1.111460735442151,
+    "max_err_pp": 14.567292974385174,
+    "spearman": 0.6081124955234672
+   },
+   {
+    "model": "Shapley value",
+    "mae_pp": 5.461568590856192,
+    "mae_sd": 1.0422724765556877,
+    "max_err_pp": 12.53785367554903,
+    "spearman": 0.6916074352535689
+   }
+  ]
+ },
+ "carryover": {
+  "per_world": [
+   {
+    "world": 0,
+    "model": "First touch",
+    "mae_pp": 9.898432192093019,
+    "max_err_pp": 15.138763469989765,
+    "spearman": -0.09009374626955591
+   },
+   {
+    "world": 0,
+    "model": "Last touch",
+    "mae_pp": 11.364070280450992,
+    "max_err_pp": 19.518993438083196,
+    "spearman": -0.6727272727272727
+   },
+   {
+    "world": 0,
+    "model": "Linear",
+    "mae_pp": 8.348729450241354,
+    "max_err_pp": 10.790687324234376,
+    "spearman": 0.09009374626955591
+   },
+   {
+    "world": 0,
+    "model": "Time decay",
+    "mae_pp": 8.77956714797912,
+    "max_err_pp": 12.840261599338282,
+    "spearman": -0.2702812388086677
+   },
+   {
+    "world": 0,
+    "model": "Position based",
+    "mae_pp": 8.284381261986457,
+    "max_err_pp": 12.224652338811635,
+    "spearman": 0.01801874925391118
+   },
+   {
+    "world": 0,
+    "model": "Markov chain",
+    "mae_pp": 9.452310389339942,
+    "max_err_pp": 12.69780564170544,
+    "spearman": -0.36037498507822363
+   },
+   {
+    "world": 0,
+    "model": "Shapley value",
+    "mae_pp": 8.06530587673032,
+    "max_err_pp": 10.598996362135246,
+    "spearman": 0.14414999403128945
+   },
+   {
+    "world": 1,
+    "model": "First touch",
+    "mae_pp": 10.092810626260288,
+    "max_err_pp": 29.620166391424924,
+    "spearman": -0.16216874328520064
+   },
+   {
+    "world": 1,
+    "model": "Last touch",
+    "mae_pp": 5.838389323884603,
+    "max_err_pp": 20.434362633596113,
+    "spearman": 0.9369749612033814
+   },
+   {
+    "world": 1,
+    "model": "Linear",
+    "mae_pp": 5.084480244595265,
+    "max_err_pp": 17.795680856083436,
+    "spearman": 0.9549937104572925
+   },
+   {
+    "world": 1,
+    "model": "Time decay",
+    "mae_pp": 4.9413837188163265,
+    "max_err_pp": 17.294843015857147,
+    "spearman": 0.9910312089651149
+   },
+   {
+    "world": 1,
+    "model": "Position based",
+    "mae_pp": 6.328298857635472,
+    "max_err_pp": 22.149046001724145,
+    "spearman": 0.7567874686642696
+   },
+   {
+    "world": 1,
+    "model": "Markov chain",
+    "mae_pp": 6.722260149417214,
+    "max_err_pp": 23.527910522960248,
+    "spearman": 0.8288624656799143
+   },
+   {
+    "world": 1,
+    "model": "Shapley value",
+    "mae_pp": 5.429800000890271,
+    "max_err_pp": 19.004300003115944,
+    "spearman": 0.8648999641877367
+   },
+   {
+    "world": 2,
+    "model": "First touch",
+    "mae_pp": 11.590697798853613,
+    "max_err_pp": 17.8594503487991,
+    "spearman": 0.07142857142857144
+   },
+   {
+    "world": 2,
+    "model": "Last touch",
+    "mae_pp": 7.21141305438323,
+    "max_err_pp": 19.831452783370008,
+    "spearman": 0.642857142857143
+   },
+   {
+    "world": 2,
+    "model": "Linear",
+    "mae_pp": 6.172972218055241,
+    "max_err_pp": 15.335945146352916,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 2,
+    "model": "Time decay",
+    "mae_pp": 5.830961843381662,
+    "max_err_pp": 16.247285018019785,
+    "spearman": 0.7500000000000002
+   },
+   {
+    "world": 2,
+    "model": "Position based",
+    "mae_pp": 7.764642093552622,
+    "max_err_pp": 16.051578569533504,
+    "spearman": 0.8571428571428573
+   },
+   {
+    "world": 2,
+    "model": "Markov chain",
+    "mae_pp": 8.054067082677088,
+    "max_err_pp": 20.236224772528136,
+    "spearman": 0.6785714285714287
+   },
+   {
+    "world": 2,
+    "model": "Shapley value",
+    "mae_pp": 6.698514510443906,
+    "max_err_pp": 16.576735802237934,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 3,
+    "model": "First touch",
+    "mae_pp": 13.952323926912822,
+    "max_err_pp": 26.971916347810847,
+    "spearman": 0.10714285714285716
+   },
+   {
+    "world": 3,
+    "model": "Last touch",
+    "mae_pp": 6.132776152783748,
+    "max_err_pp": 14.012252825890121,
+    "spearman": 0.504524979109513
+   },
+   {
+    "world": 3,
+    "model": "Linear",
+    "mae_pp": 3.996097058737623,
+    "max_err_pp": 7.771833713039503,
+    "spearman": 0.8214285714285715
+   },
+   {
+    "world": 3,
+    "model": "Time decay",
+    "mae_pp": 3.7137769729502903,
+    "max_err_pp": 8.898626032228663,
+    "spearman": 0.5357142857142858
+   },
+   {
+    "world": 3,
+    "model": "Position based",
+    "mae_pp": 5.880392557759154,
+    "max_err_pp": 12.144861553290303,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 3,
+    "model": "Markov chain",
+    "mae_pp": 6.053215678713704,
+    "max_err_pp": 12.254552522081749,
+    "spearman": 0.7500000000000002
+   },
+   {
+    "world": 3,
+    "model": "Shapley value",
+    "mae_pp": 5.089133588417987,
+    "max_err_pp": 10.25673369940902,
+    "spearman": 0.8214285714285715
+   },
+   {
+    "world": 4,
+    "model": "First touch",
+    "mae_pp": 4.891536585978935,
+    "max_err_pp": 9.700123168187416,
+    "spearman": 0.4504687313477795
+   },
+   {
+    "world": 4,
+    "model": "Last touch",
+    "mae_pp": 8.708314032196093,
+    "max_err_pp": 18.688887213131235,
+    "spearman": 0.03571428571428572
+   },
+   {
+    "world": 4,
+    "model": "Linear",
+    "mae_pp": 6.153917741844746,
+    "max_err_pp": 13.079381238456728,
+    "spearman": 0.1785714285714286
+   },
+   {
+    "world": 4,
+    "model": "Time decay",
+    "mae_pp": 6.531524140373092,
+    "max_err_pp": 13.888825430748355,
+    "spearman": 0.1785714285714286
+   },
+   {
+    "world": 4,
+    "model": "Position based",
+    "mae_pp": 6.204479539597563,
+    "max_err_pp": 13.829960871058871,
+    "spearman": 0.1785714285714286
+   },
+   {
+    "world": 4,
+    "model": "Markov chain",
+    "mae_pp": 7.5221204681878735,
+    "max_err_pp": 15.088591466975418,
+    "spearman": 0.03571428571428572
+   },
+   {
+    "world": 4,
+    "model": "Shapley value",
+    "mae_pp": 5.654096090337701,
+    "max_err_pp": 11.39487972249453,
+    "spearman": 0.1785714285714286
+   },
+   {
+    "world": 5,
+    "model": "First touch",
+    "mae_pp": 10.147363114056738,
+    "max_err_pp": 33.67521995931671,
+    "spearman": 0.6785714285714287
+   },
+   {
+    "world": 5,
+    "model": "Last touch",
+    "mae_pp": 4.609605036044268,
+    "max_err_pp": 10.957527632772102,
+    "spearman": 0.7500000000000002
+   },
+   {
+    "world": 5,
+    "model": "Linear",
+    "mae_pp": 4.5872168929822426,
+    "max_err_pp": 10.424770354187379,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 5,
+    "model": "Time decay",
+    "mae_pp": 4.245816791063529,
+    "max_err_pp": 8.153507899869389,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 5,
+    "model": "Position based",
+    "mae_pp": 5.740093807294739,
+    "max_err_pp": 14.899084217663733,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 5,
+    "model": "Markov chain",
+    "mae_pp": 7.242649630969263,
+    "max_err_pp": 17.476386779797554,
+    "spearman": 0.7857142857142859
+   },
+   {
+    "world": 5,
+    "model": "Shapley value",
+    "mae_pp": 5.849406497888228,
+    "max_err_pp": 14.241722422370906,
+    "spearman": 0.7857142857142859
+   }
+  ],
+  "summary": [
+   {
+    "model": "First touch",
+    "mae_pp": 10.095527374025902,
+    "mae_sd": 2.9743394294236736,
+    "max_err_pp": 22.16093994758813,
+    "spearman": 0.17589151648931337
+   },
+   {
+    "model": "Last touch",
+    "mae_pp": 7.310761313290489,
+    "mae_sd": 2.418433824176295,
+    "max_err_pp": 17.240579421140463,
+    "spearman": 0.3662240160261751
+   },
+   {
+    "model": "Linear",
+    "mae_pp": 5.723902267742745,
+    "mae_sd": 1.5467721145256077,
+    "max_err_pp": 12.533049772059057,
+    "spearman": 0.6027526713592367
+   },
+   {
+    "model": "Time decay",
+    "mae_pp": 5.673838435760669,
+    "mae_sd": 1.8343085910014665,
+    "max_err_pp": 12.887224832676937,
+    "spearman": 0.4951249950260746
+   },
+   {
+    "model": "Position based",
+    "mae_pp": 6.700381352971001,
+    "mae_sd": 1.0602456717384332,
+    "max_err_pp": 15.216530592013699,
+    "spearman": 0.5636581791768398
+   },
+   {
+    "model": "Markov chain",
+    "mae_pp": 7.507770566550847,
+    "mae_sd": 1.1732797256631806,
+    "max_err_pp": 16.880245284341424,
+    "spearman": 0.45308124676694855
+   },
+   {
+    "model": "Shapley value",
+    "mae_pp": 6.131042760784735,
+    "mae_sd": 1.090643042536279,
+    "max_err_pp": 13.678894668627263,
+    "spearman": 0.596746421607933
+   }
+  ]
+ }
+}

@@ -1,0 +1,99 @@
+{
+ "impressions": 16468027,
+ "users": 6142256,
+ "campaigns": 675,
+ "clicks": 5947563,
+ "ctr": 0.3611582006757701,
+ "conversions": 435810,
+ "conv_impressions": 806196,
+ "share_imps_in_conv_journeys": 0.04895522699835263,
+ "single_campaign_share": 0.9934398017484684,
+ "touches_mean": 1.8498795346595993,
+ "touches_median": 1.0,
+ "touches_p90": 3.0,
+ "single_touch_share": 0.6768821275326403,
+ "touches_hist": {
+  "1": 294992,
+  "2": 70816,
+  "3": 28813,
+  "4": 14292,
+  "5": 8154,
+  "6": 5137,
+  "7": 3338,
+  "8": 2320,
+  "9": 1763,
+  "10": 1242,
+  "11": 957,
+  "12": 709,
+  "13": 548,
+  "14": 393,
+  "15": 362,
+  "16": 320,
+  "17": 248,
+  "18": 175,
+  "19": 169,
+  "20": 1062
+ },
+ "with_click_share": 1.0,
+ "last_clicked_share": 1.0,
+ "first_clicked_share": 1.0,
+ "attributed_share": 0.5422798926137536,
+ "attributed_given_click": 0.5422798926137536,
+ "attributed_given_no_click": NaN,
+ "hours_last_to_conv_median": 20.279444444444444,
+ "span_days_median_multi": 3.8282118055555556,
+ "attributed_by_touches": {
+  "1": {
+   "share": 0.5423130118782882,
+   "n": 294992
+  },
+  "2": {
+   "share": 0.5330575011296882,
+   "n": 70816
+  },
+  "3": {
+   "share": 0.5365286502620344,
+   "n": 28813
+  },
+  "4": {
+   "share": 0.5459697732997482,
+   "n": 14292
+  },
+  "5": {
+   "share": 0.5528574932548442,
+   "n": 8154
+  },
+  "6": {
+   "share": 0.5780291308755269,
+   "n": 18743
+  }
+ },
+ "attributed_by_hours_since_last_click": {
+  "<1h": {
+   "share": 0.8654459637346869,
+   "n": 168646
+  },
+  "1-6h": {
+   "share": 0.5663716814159292,
+   "n": 25764
+  },
+  "6-24h": {
+   "share": 0.4123637778930981,
+   "n": 30832
+  },
+  "1-3d": {
+   "share": 0.357536784276984,
+   "n": 46963
+  },
+  "3-7d": {
+   "share": 0.3186488416375754,
+   "n": 50416
+  },
+  "7-31d": {
+   "share": 0.25657823692451676,
+   "n": 111124
+  }
+ },
+ "note": "All impressions in converting journeys are clicks: the public sample keeps clicked impressions for converting users, so click-vs-view effects cannot be measured.",
+ "top_campaign_share_of_imps": 0.026559647977259206
+}

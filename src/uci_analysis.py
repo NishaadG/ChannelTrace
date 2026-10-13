@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.stats import chi2_contingency, mannwhitneyu
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.inspection import permutation_importance
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
@@ -99,6 +99,8 @@ def model_results(df: pd.DataFrame, seed: int = 42) -> dict:
         rf = RandomForestClassifier(n_estimators=300, min_samples_leaf=5, class_weight="balanced",
                                     random_state=seed, n_jobs=-1)
         rf.fit(Xtr, ytr)
+        hgb = HistGradientBoostingClassifier(max_iter=300, learning_rate=0.05, class_weight="balanced", random_state=seed)
+        hgb.fit(Xtr, ytr)
         imp = permutation_importance(rf, Xte, yte, scoring="roc_auc", n_repeats=5, random_state=seed, n_jobs=-1)
         importance = (pd.DataFrame({"feature": X.columns, "importance": imp.importances_mean})
                       .sort_values("importance", ascending=False))
@@ -109,6 +111,8 @@ def model_results(df: pd.DataFrame, seed: int = 42) -> dict:
         results["with_page_values" if with_pv else "without_page_values"] = {
             "logit_auc": roc_auc_score(yte, logit.predict_proba(Xte)[:, 1]),
             "rf_auc": roc_auc_score(yte, rf.predict_proba(Xte)[:, 1]),
+            "hgb_auc": roc_auc_score(yte, hgb.predict_proba(Xte)[:, 1]),
+            "base_rate": float(yte.mean()),
             "importance": importance,
             "odds": odds,
         }
