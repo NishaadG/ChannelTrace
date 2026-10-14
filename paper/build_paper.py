@@ -204,15 +204,19 @@ ret_share = v.loc["Returning_Visitor", "sessions"] / uci["sessions"]
 # ------------------------------------------------------------------ title (single column)
 P("Who Gets Credit for the Sale? Recency Bias in Last-Click Attribution and the Case for Comparing "
   "Attribution Models", size=24, align=WD_ALIGN_PARAGRAPH.CENTER, after=12)
-AUTHORS = ["[Author 1]", "[Author 2]", "[Author 3]", "[Author 4]"]  # replace with the team's names and emails
-blk = doc.add_table(rows=1, cols=len(AUTHORS))
-blk.alignment = WD_TABLE_ALIGNMENT.CENTER
-for cell, name in zip(blk.rows[0].cells, AUTHORS):
-    cell.text = ""
-    for i, line in enumerate([name, "Dept. of [Department]", "Pimpri Chinchwad College of Engineering", "Pune, India", "[email]"]):
-        p = cell.paragraphs[0] if i == 0 else cell.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        r = p.add_run(line); r.font.size = Pt(11 if i == 0 else 9); r.italic = 0 < i < 4; r.font.name = "Times New Roman"
+AUTHORS = [("Nishaad Gangal", "nishaad.gangal23"), ("Om Katole", "om.katole23"), ("Satyam Kumar", "satyam.kumar23"),
+           ("Akshat Jhanwar", "akshat.jhanwar23"), ("Minal Shahakar", "minal.shahakar")]
+for group in (AUTHORS[:3], AUTHORS[3:]):  # IEEE author blocks, three per row
+    blk = doc.add_table(rows=1, cols=len(group))
+    blk.alignment = WD_TABLE_ALIGNMENT.CENTER
+    for cell, (name, mail) in zip(blk.rows[0].cells, group):
+        cell.width = Inches(2.3)
+        cell.text = ""
+        for i, line in enumerate([name, "Pimpri Chinchwad College of Engineering", "Pune, India", f"{mail}@pccoepune.org"]):
+            p = cell.paragraphs[0] if i == 0 else cell.add_paragraph()
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            r = p.add_run(line); r.font.size = Pt(11 if i == 0 else 9); r.italic = 0 < i < 3; r.font.name = "Times New Roman"
+    P(after=6)
 P(after=10)
 body = doc.add_section(WD_SECTION.CONTINUOUS)
 columns(body, 2)
@@ -490,8 +494,8 @@ P("Using public data at scale and a simulation with known answers, we found that
 
 # ------------------------------------------------------------------ acknowledgment
 H("", "Acknowledgment")
-P("The authors thank [Guide name] for guidance. This work was carried out for the MDM Digital Marketing Capstone "
-  "(BCE27MD06) at Pimpri Chinchwad College of Engineering, Pune.")
+P("This work was carried out for the MDM Digital Marketing Capstone (BCE27MD06) at Pimpri Chinchwad College of "
+  "Engineering, Pune, under the guidance of Minal Shahakar.")
 
 # ------------------------------------------------------------------ references
 H("", "References")
