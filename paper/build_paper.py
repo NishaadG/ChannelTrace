@@ -1,6 +1,6 @@
 """Builds the ChannelTrace draft research paper (Word + PDF) from the saved analysis results.
 
-Run: python paper/build_paper.py   (then convert to PDF with Word; see README)
+Run: python paper/build_paper.py   (IEEE conference format; then convert to PDF with Word)
 Every number in the text is read from data/processed, so re-running after new analysis keeps the paper in sync.
 """
 import json
@@ -12,6 +12,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from docx import Document
+from docx.enum.section import WD_SECTION
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
@@ -31,90 +32,110 @@ boot = json.loads((PROC / "synthetic_bootstrap.json").read_text())
 ga = json.loads((PROC / "ga360_results.json").read_text()) if (PROC / "ga360_results.json").exists() else None
 
 NAVY, BLUE, GREY, GOLD, RED = "#14213D", "#1F4E8C", "#C8CDD6", "#C9A227", "#B4533C"
-plt.rcParams.update({"font.family": "Times New Roman", "font.size": 10, "axes.spines.top": False,
+plt.rcParams.update({"font.family": "Times New Roman", "font.size": 8, "xtick.labelsize": 7, "ytick.labelsize": 7, "legend.fontsize": 7, "axes.spines.top": False,
                      "axes.spines.right": False, "axes.edgecolor": "#888", "axes.labelcolor": "#222"})
 pct = lambda x, d=1: f"{100 * x:.{d}f}%"
 nm = lambda m: m if m.startswith(("Shapley", "Markov")) else m.lower()  # model name inside a sentence
 
 # ------------------------------------------------------------------ figures
 hours = cr["attributed_by_hours_since_last_click"]
-fig, ax = plt.subplots(figsize=(6.2, 2.8))
+fig, ax = plt.subplots(figsize=(3.5, 2.3))
 keys = list(hours)
 vals = [hours[k]["share"] for k in keys]
 ax.bar(keys, vals, color=[BLUE] + [GREY] * (len(keys) - 2) + [RED], width=0.62)
 for i, k in enumerate(keys):
-    ax.text(i, vals[i] + 0.02, f"{100 * vals[i]:.0f}%\n(n={hours[k]['n']:,})", ha="center", va="bottom", fontsize=8)
-ax.set_ylim(0, 1.08); ax.set_ylabel("Share credited to Criteo"); ax.set_xlabel("Time from last Criteo click to conversion")
+    ax.text(i, vals[i] + 0.02, f"{100 * vals[i]:.0f}%\n({hours[k]['n'] / 1000:.0f}k)", ha="center", va="bottom", fontsize=6.5)
+ax.set_ylim(0, 1.15); ax.set_ylabel("Share credited to Criteo"); ax.set_xlabel("Time from last Criteo click to conversion")
 ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
-fig.tight_layout(); fig.savefig(FIG / "fig1_recency.png", dpi=220); plt.close(fig)
+fig.tight_layout(); fig.savefig(FIG / "fig1_recency.png", dpi=300); plt.close(fig)
 
 models = [r["model"] for r in sim["immediate"]["summary"]]
 imm = [r["mae_pp"] for r in sim["immediate"]["summary"]]
 car = [r["mae_pp"] for r in sim["carryover"]["summary"]]
 imm_sd = [r["mae_sd"] for r in sim["immediate"]["summary"]]
 car_sd = [r["mae_sd"] for r in sim["carryover"]["summary"]]
-fig, ax = plt.subplots(figsize=(6.2, 2.9))
+fig, ax = plt.subplots(figsize=(3.5, 2.3))
 x = range(len(models))
 ax.bar([i - 0.2 for i in x], imm, 0.38, yerr=imm_sd, capsize=2, color=BLUE, label="Immediate effects", error_kw={"lw": 0.8})
 ax.bar([i + 0.2 for i in x], car, 0.38, yerr=car_sd, capsize=2, color=GOLD, label="Carry-over effects", error_kw={"lw": 0.8})
-ax.set_xticks(list(x)); ax.set_xticklabels([m.replace(" ", "\n") for m in models], fontsize=8.5)
-ax.set_ylabel("Mean absolute error (pp)"); ax.legend(frameon=False, fontsize=8.5)
-fig.tight_layout(); fig.savefig(FIG / "fig2_simulation.png", dpi=220); plt.close(fig)
+ax.set_xticks(list(x)); ax.set_xticklabels([m.replace(" ", "\n") for m in models], fontsize=6.5)
+ax.set_ylabel("Mean absolute error (pp)"); ax.legend(frameon=False)
+fig.tight_layout(); fig.savefig(FIG / "fig2_simulation.png", dpi=300); plt.close(fig)
 
 m = uci["month"].copy(); m["Month"] = m["Month"].astype(str)
-fig, ax = plt.subplots(figsize=(6.2, 2.5))
+fig, ax = plt.subplots(figsize=(3.5, 1.9))
 peak = m["conversion_rate"].idxmax()
 ax.bar(m["Month"], m["conversion_rate"], color=[BLUE if i == peak else GREY for i in m.index], width=0.62)
 ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0)); ax.set_ylabel("Conversion rate")
-fig.tight_layout(); fig.savefig(FIG / "fig3_month.png", dpi=220); plt.close(fig)
+fig.tight_layout(); fig.savefig(FIG / "fig3_month.png", dpi=300); plt.close(fig)
 
 chans = sorted(boot["Markov chain"], key=lambda c: boot["Markov chain"][c][0])
-fig, ax = plt.subplots(figsize=(6.2, 2.8))
+fig, ax = plt.subplots(figsize=(3.5, 2.3))
 for i, c in enumerate(chans):
     for mdl, col, off in [("Last touch", "#8A8F99", -0.15), ("Markov chain", BLUE, 0.15)]:
         v, lo, hi = boot[mdl][c]
-        ax.errorbar(v, i + off, xerr=[[v - lo], [hi - v]], fmt="o", color=col, ms=5, capsize=2, lw=1,
+        ax.errorbar(v, i + off, xerr=[[v - lo], [hi - v]], fmt="o", color=col, ms=3.5, capsize=2, lw=1,
                     label=mdl if i == 0 else None)
 ax.set_yticks(range(len(chans))); ax.set_yticklabels(chans)
 ax.xaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0)); ax.set_xlabel("Share of conversion credit (95% bootstrap CI)")
-ax.legend(frameon=False, fontsize=8.5, loc="lower right")
-fig.tight_layout(); fig.savefig(FIG / "fig4_bootstrap.png", dpi=220); plt.close(fig)
+ax.legend(frameon=False, loc="lower right")
+fig.tight_layout(); fig.savefig(FIG / "fig4_bootstrap.png", dpi=300); plt.close(fig)
 
 # ------------------------------------------------------------------ document helpers
+# IEEE conference layout: US Letter, 10 pt Times, title block in one column, body in two 3.5" columns
 doc = Document()
 sec = doc.sections[0]
 sec.page_width, sec.page_height = Inches(8.5), Inches(11)
-sec.left_margin = sec.right_margin = Inches(1)
-sec.top_margin = sec.bottom_margin = Inches(1)
+sec.left_margin = sec.right_margin = Inches(0.625)
+sec.top_margin, sec.bottom_margin = Inches(0.75), Inches(1)
 st = doc.styles["Normal"]
-st.font.name, st.font.size = "Times New Roman", Pt(11)
+st.font.name, st.font.size = "Times New Roman", Pt(10)
 st.element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
+st.paragraph_format.space_after = Pt(0)
+COL = 3.5  # column width in inches
 
 
-def P(text="", bold=False, italic=False, size=11, align=WD_ALIGN_PARAGRAPH.JUSTIFY, after=6, before=0):
+def columns(section, n):
+    cols = section._sectPr.xpath("./w:cols")
+    el = cols[0] if cols else OxmlElement("w:cols")
+    el.set(qn("w:num"), str(n)); el.set(qn("w:space"), "360")
+    if not cols:
+        section._sectPr.append(el)
+
+
+def P(text="", bold=False, italic=False, size=10, align=WD_ALIGN_PARAGRAPH.JUSTIFY, after=0, before=0, indent=True, caps=False):
     p = doc.add_paragraph()
     p.alignment = align
-    p.paragraph_format.space_after, p.paragraph_format.space_before = Pt(after), Pt(before)
-    p.paragraph_format.line_spacing = 1.1
+    pf = p.paragraph_format
+    pf.space_after, pf.space_before, pf.line_spacing = Pt(after), Pt(before), 1.0
+    if indent and align == WD_ALIGN_PARAGRAPH.JUSTIFY:
+        pf.first_line_indent = Inches(0.14)
     if text:
-        add(p, text, bold, italic, size)
+        add(p, text, bold, italic, size, caps)
     return p
 
 
-def add(p, text, bold=False, italic=False, size=11):
+def add(p, text, bold=False, italic=False, size=10, caps=False):
     """Supports *italic* spans inside text."""
     parts = text.split("*")
     for i, part in enumerate(parts):
         if part:
             r = p.add_run(part)
             r.bold, r.italic = bold, italic or (i % 2 == 1)
-            r.font.size, r.font.name = Pt(size), "Times New Roman"
+            r.font.size, r.font.name, r.font.small_caps = Pt(size), "Times New Roman", caps
     return p
 
 
+ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+
+
 def H(num, text):
-    P(f"{num}  {text}".upper() if "." not in num else f"{num}  {text}", bold=True, size=11 if "." in num else 11.5,
-      align=WD_ALIGN_PARAGRAPH.LEFT, before=10, after=4)
+    """IEEE headings: 'I. Introduction' centred in small caps; subsections 'A. Title' in italics."""
+    if "." in num:
+        p = P(f"{chr(64 + int(num.split('.')[1]))}. {text}", italic=True, align=WD_ALIGN_PARAGRAPH.LEFT, before=4, after=2)
+    else:
+        p = P(f"{ROMAN[int(num)]}. {text}" if num else text, caps=True, align=WD_ALIGN_PARAGRAPH.CENTER, before=8, after=3)
+    p.paragraph_format.keep_with_next = True
 
 
 def borders(table):
@@ -127,28 +148,34 @@ def borders(table):
     tbl.tblPr.append(b)
 
 
-def T(caption, head, rows, widths=None, numeric=()):
-    P(caption, bold=False, size=9.5, align=WD_ALIGN_PARAGRAPH.CENTER, before=6, after=3).paragraph_format.keep_with_next = True
+TABLES = iter(ROMAN[1:])
+
+
+def T(title, head, rows, widths=None, numeric=()):
+    """IEEE table: 'TABLE I' and the title in small caps above the table, 8 pt body."""
+    P(f"Table {next(TABLES)}", caps=True, size=8, align=WD_ALIGN_PARAGRAPH.CENTER, before=6).paragraph_format.keep_with_next = True
+    P(title, caps=True, size=8, align=WD_ALIGN_PARAGRAPH.CENTER, after=3).paragraph_format.keep_with_next = True
     t = doc.add_table(rows=1 + len(rows), cols=len(head))
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    t.autofit = False
     borders(t)
     for r_i, row in enumerate([head] + rows):
         for c_i, val in enumerate(row):
             cell = t.cell(r_i, c_i)
             cell.text = ""
             p = cell.paragraphs[0]
-            p.paragraph_format.space_after = Pt(1)
             p.alignment = WD_ALIGN_PARAGRAPH.RIGHT if c_i in numeric else WD_ALIGN_PARAGRAPH.LEFT
-            r = p.add_run(str(val)); r.font.size = Pt(9); r.bold = r_i == 0; r.font.name = "Times New Roman"
+            r = p.add_run(str(val)); r.font.size = Pt(8); r.bold = r_i == 0; r.font.name = "Times New Roman"
             if widths:
                 cell.width = Inches(widths[c_i])
     P(after=4)
 
 
-def F(path, caption, width=6.0):
+def F(path, caption, width=COL):
     p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(4); p.paragraph_format.keep_with_next = True
     p.add_run().add_picture(str(path), width=Inches(width))
-    P(caption, size=9.5, align=WD_ALIGN_PARAGRAPH.CENTER, after=8)
+    P(caption, size=8, indent=False, after=6)
 
 
 # ------------------------------------------------------------------ numbers used in the text
@@ -163,15 +190,23 @@ sc = {r["model"]: r for r in sim["carryover"]["summary"]}
 best_i = min(si.values(), key=lambda r: r["mae_pp"]); best_c = min(sc.values(), key=lambda r: r["mae_pp"])
 ret_share = v.loc["Returning_Visitor", "sessions"] / uci["sessions"]
 
-# ------------------------------------------------------------------ title
+# ------------------------------------------------------------------ title (single column)
 P("Who Gets Credit for the Sale? Recency Bias in Last-Click Attribution and the Case for Comparing "
-  "Attribution Models", bold=True, size=16, align=WD_ALIGN_PARAGRAPH.CENTER, after=8)
-P("[Author 1], [Author 2], [Author 3], [Author 4]", size=11, align=WD_ALIGN_PARAGRAPH.CENTER, after=0)
-P("MDM Digital Marketing Capstone (BCE27MD06), Pimpri Chinchwad College of Engineering (PCCoE), Pune, India",
-  italic=True, size=10, align=WD_ALIGN_PARAGRAPH.CENTER, after=0)
-P("Guide: [Guide name] · Draft for review, October 2026", italic=True, size=10, align=WD_ALIGN_PARAGRAPH.CENTER, after=12)
+  "Attribution Models", size=24, align=WD_ALIGN_PARAGRAPH.CENTER, after=12)
+AUTHORS = ["[Author 1]", "[Author 2]", "[Author 3]", "[Author 4]"]  # replace with the team's names and emails
+blk = doc.add_table(rows=1, cols=len(AUTHORS))
+blk.alignment = WD_TABLE_ALIGNMENT.CENTER
+for cell, name in zip(blk.rows[0].cells, AUTHORS):
+    cell.text = ""
+    for i, line in enumerate([name, "Dept. of [Department]", "Pimpri Chinchwad College of Engineering", "Pune, India", "[email]"]):
+        p = cell.paragraphs[0] if i == 0 else cell.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        r = p.add_run(line); r.font.size = Pt(11 if i == 0 else 9); r.italic = 0 < i < 4; r.font.name = "Times New Roman"
+P(after=10)
+body = doc.add_section(WD_SECTION.CONTINUOUS)
+columns(body, 2)
 
-p = P(after=8); add(p, "Abstract. ", bold=True, size=10)
+p = P(indent=False, after=6); add(p, "Abstract", bold=True, italic=True, size=9); add(p, "—", bold=True, size=9)
 add(p, (f"Customers usually interact with several digital channels before buying, yet most businesses judge channels by "
         f"last-click reports. We study multi-channel attribution and conversion using three public datasets and a "
         f"known-answer simulation. In {cr['impressions'] / 1e6:.1f} million Criteo display impressions, only "
@@ -187,10 +222,10 @@ add(p, (f"Customers usually interact with several digital channels before buying
         f"immediately ({best_i['mae_pp']:.1f} percentage points mean error) and {nm(best_c['model'])} when it acts with "
         f"carry-over ({best_c['mae_pp']:.1f} points), while first touch was worst in both. We release ChannelTrace, a "
         f"free tool that applies seven attribution models to a business's own Google Ads, Meta Ads or journey data and "
-        f"explains the results through a grounded AI assistant."), size=10)
-p = P(after=10); add(p, "Keywords: ", bold=True, size=10)
+        f"explains the results through a grounded AI assistant."), bold=True, size=9)
+p = P(indent=False, after=8); add(p, "Index Terms", bold=True, italic=True, size=9); add(p, "—", bold=True, size=9)
 add(p, "multi-touch attribution, last-click, customer journey, conversion prediction, Markov chain, Shapley value, "
-       "digital marketing analytics", italic=True, size=10)
+       "digital marketing analytics", bold=True, size=9)
 
 # ------------------------------------------------------------------ 1 introduction
 H("1", "Introduction")
@@ -234,14 +269,14 @@ P("Most prior studies evaluate attribution on proprietary data without ground tr
 H("3", "Data")
 P("Each dataset is used only for the questions it can support; the datasets come from different populations and are "
   "never pooled (Table I).")
-T("TABLE I.  DATASETS AND THEIR ROLE",
+T("Datasets and Their Role",
   ["Dataset", "Content", "Used for"],
   [["UCI Online Shoppers [8]", f"{uci['sessions']:,} sessions (after removing 125 duplicates), 17 features, purchase outcome", "RQ2, RQ4"],
    ["Criteo Attribution [4]", f"{cr['impressions']:,} impressions, {cr['users']:,} users, {cr['campaigns']} campaigns, 30 days", "RQ3 (last-click gap, recency)"],
    ["Google Analytics 360 sample [10]", "12 months of Google Merchandise Store sessions with named channels", "RQ1, RQ3 (in progress)"],
    ["Facebook Ad Campaign [11]", "1,143 real ads, spend, clicks, conversions, age, gender", "RQ5 (tool validation)"],
    ["Simulated journeys", "6 random worlds x 2 scenarios x 3,000 users with known channel effects", "RQ3 (model accuracy)"]],
-  widths=[1.6, 3.4, 1.5])
+  widths=[1.0, 1.65, 0.85])
 P(f"A validity check shaped the design. In the Criteo data, {pct(cr['single_campaign_share'])} of conversions involve a "
   f"single campaign, and all impressions in converting journeys are clicks because the public sample retains clicked "
   f"impressions for converting users. Criteo therefore cannot compare channels or campaigns within a journey, nor "
@@ -250,7 +285,7 @@ P(f"A validity check shaped the design. In the Criteo data, {pct(cr['single_camp
 
 # ------------------------------------------------------------------ 4 methods
 H("4", "Methods")
-H("4.1", "Attribution models")
+H("4.1", "Attribution Models")
 P("For a converting journey of touchpoints c1 ... cn, five rule-based models assign credit: first touch (all to c1), last "
   "touch (all to cn), linear (1/n each), time decay (weights halving every 7 days before the purchase) and position based "
   "(40% first, 40% last, 20% shared). Two data-driven models use converting and non-converting journeys: the Markov "
@@ -258,7 +293,7 @@ P("For a converting journey of touchpoints c1 ... cn, five rule-based models ass
   "when a channel is removed, and the Shapley value [6], [7], each channel's average marginal contribution to "
   "conversions over all channel coalitions. Every model distributes exactly the total number of conversions; we "
   "verified this for all models in the implementation.")
-H("4.2", "Known-answer validation")
+H("4.2", "Known-Answer Validation")
 P("Observational data offers no ground truth for attribution, so we simulated journeys in which channel effects are set "
   "by design. Each user's first channel and subsequent channels are drawn from random distributions; each touch raises "
   "the log-odds of purchase by a channel-specific lift. In the *immediate* scenario a touch raises the chance of buying "
@@ -267,11 +302,11 @@ P("Observational data offers no ground truth for attribution, so we simulated jo
   "computed with common random numbers. Six random worlds per scenario (3,000 users each) were generated. Models are "
   "scored by mean absolute error (MAE) between their credit shares and the true shares, and by Spearman rank "
   "correlation. Stability was assessed with 200 bootstrap resamples of journeys.")
-H("4.3", "Recency of last-click credit")
+H("4.3", "Recency of Last-Click Credit")
 P("For each Criteo conversion we record whether Criteo received last-click credit, the number of Criteo clicks and the "
   "hours from the last click to the conversion. We test association with a chi-square test over six time bands and a "
   "logistic regression of the credit indicator on log(1 + hours) and the number of clicks.")
-H("4.4", "Session behaviour and conversion")
+H("4.4", "Session Behaviour and Conversion")
 P("Converting and non-converting UCI sessions are compared with two-sided Mann-Whitney U tests (numeric measures) and "
   "chi-square tests (visitor type, month). Logistic regression, random forest and gradient boosting classifiers are "
   "trained on a stratified 75/25 split with class-balanced weights and evaluated by ROC-AUC. Because the PageValues "
@@ -280,31 +315,31 @@ P("Converting and non-converting UCI sessions are compared with two-sided Mann-W
 
 # ------------------------------------------------------------------ 5 results
 H("5", "Results")
-H("5.1", "Last-click credit is driven by recency (RQ3)")
+H("5.1", "Last-Click Credit Is Driven by Recency (RQ3)")
 P(f"All {cr['conversions']:,} Criteo conversions followed at least one Criteo click, yet only {pct(cr['attributed_share'])} "
   f"were credited to Criteo by the advertiser's last-click rule; the remainder were claimed by other channels. Converting "
   f"journeys were short (mean {cr['touches_mean']:.2f} clicks; {pct(cr['single_touch_share'], 0)} with one click; median "
-  f"{cr['hours_last_to_conv_median']:.1f} hours from the last click to purchase). Figure 1 shows that credit falls "
+  f"{cr['hours_last_to_conv_median']:.1f} hours from the last click to purchase). Fig. 1 shows that credit falls "
   f"steadily with time since the last click (chi-square = {rt['chi2']:,.0f}, df = {rt['dof']}, p < 0.001).")
 F(FIG / "fig1_recency.png", "Fig. 1.  Share of conversions credited to Criteo under last-click, by time from the last Criteo click to the conversion.")
 by_t = cr["attributed_by_touches"]
-T("TABLE II.  LOGISTIC REGRESSION OF LAST-CLICK CREDIT TO CRITEO (n = %s)" % f"{rt['n']:,}",
+T("Logistic Regression of Last-Click Credit to Criteo (n = %s)" % f"{rt['n']:,}",
   ["Predictor", "Odds ratio", "95% CI", "p"],
-  [["log(1 + hours since last click)", f"{rt['logit']['log_hours']['or']:.3f}", "%.3f to %.3f" % tuple(rt["logit"]["log_hours"]["ci_or"]), "< 0.001"],
-   ["Number of Criteo clicks (capped at 10)", f"{rt['logit']['clicks']['or']:.3f}", "%.3f to %.3f" % tuple(rt["logit"]["clicks"]["ci_or"]), "< 0.001"]],
-  widths=[2.8, 1.0, 1.5, 0.8], numeric=(1, 2, 3))
+  [["log(1 + hours since click)", f"{rt['logit']['log_hours']['or']:.3f}", "%.3f to %.3f" % tuple(rt["logit"]["log_hours"]["ci_or"]), "< 0.001"],
+   ["Criteo clicks (capped at 10)", f"{rt['logit']['clicks']['or']:.3f}", "%.3f to %.3f" % tuple(rt["logit"]["clicks"]["ci_or"]), "< 0.001"]],
+  widths=[1.4, 0.6, 0.95, 0.55], numeric=(1, 2, 3))
 P(f"Holding clicks constant, each unit increase in log(1 + hours) multiplies the odds of Criteo receiving credit by "
   f"{rt['logit']['log_hours']['or']:.2f}, whereas each additional click multiplies them by only "
   f"{rt['logit']['clicks']['or']:.2f} (pseudo R-squared {rt['pseudo_r2']:.2f}). The credit share was "
   f"{pct(by_t['1']['share'])} for single-click journeys and {pct(by_t['6']['share'])} for six or more clicks. Under "
   f"last-click, which platform is paid for a sale depends far more on timing than on how much a channel was used.")
 
-H("5.2", "No attribution model is best everywhere (RQ3)")
+H("5.2", "No Attribution Model Is Best Everywhere (RQ3)")
 F(FIG / "fig2_simulation.png", "Fig. 2.  Mean absolute error between model and true credit shares (percentage points; bars show the standard deviation over six worlds).")
-T("TABLE III.  ACCURACY OF ATTRIBUTION MODELS AGAINST KNOWN CHANNEL EFFECTS",
-  ["Model", "MAE immediate (pp)", "Rank corr.", "MAE carry-over (pp)", "Rank corr."],
+T("Accuracy of Attribution Models Against Known Channel Effects",
+  ["Model", "Immediate MAE", "ρ", "Carry-over MAE", "ρ"],
   [[mm, f"{si[mm]['mae_pp']:.1f}", f"{si[mm]['spearman']:.2f}", f"{sc[mm]['mae_pp']:.1f}", f"{sc[mm]['spearman']:.2f}"] for mm in models],
-  widths=[1.6, 1.3, 1.0, 1.4, 1.0], numeric=(1, 2, 3, 4))
+  widths=[1.0, 0.75, 0.4, 0.85, 0.4], numeric=(1, 2, 3, 4))
 P(f"When advertising acts immediately, {nm(best_i['model'])} came closest to the truth "
   f"({best_i['mae_pp']:.1f} pp), with time decay close behind ({si['Time decay']['mae_pp']:.1f} pp). With carry-over "
   f"effects, last-touch error rose to {sc['Last touch']['mae_pp']:.1f} pp and its rank agreement fell from "
@@ -323,11 +358,11 @@ P("On a separate synthetic dataset in which Social and Display were designed to 
   f"Markov, and Email {pct(boot['Last touch']['Email'][0], 0)} against {pct(boot['Markov chain']['Email'][0], 0)}. The "
   f"bootstrap intervals are narrow (about plus or minus one percentage point), so these differences are not sampling noise.")
 
-H("5.3", "Session behaviour associated with purchase (RQ2, RQ4)")
+H("5.3", "Session Behaviour Associated With Purchase (RQ2, RQ4)")
 P(f"The overall conversion rate was {pct(uci['conversion_rate'])}. New visitors converted at "
   f"{pct(v.loc['New_Visitor', 'conversion_rate'])} against {pct(v.loc['Returning_Visitor', 'conversion_rate'])} for "
   f"returning visitors, who made up {pct(ret_share, 0)} of sessions (chi-square p < 0.001). Conversion peaked in "
-  f"{peak_m['Month']} ({pct(peak_m['conversion_rate'])}) and was lowest in {low_m['Month']} ({pct(low_m['conversion_rate'])}; Figure 4).")
+  f"{peak_m['Month']} ({pct(peak_m['conversion_rate'])}) and was lowest in {low_m['Month']} ({pct(low_m['conversion_rate'])}; Fig. 4).")
 F(FIG / "fig3_month.png", "Fig. 4.  Conversion rate by month in the UCI Online Shoppers data (January and April are absent).")
 rows = []
 for b in ["Product pages viewed", "Time on product pages (s)", "Account/admin pages viewed", "Bounce rate", "Exit rate", "Page value"]:
@@ -335,12 +370,12 @@ for b in ["Product pages viewed", "Time on product pages (s)", "Account/admin pa
     pv = g.loc[b, "p-value"]
     rows.append([b.replace(" (s)", ""), f(g.loc[b, "Mean (converted)"]), f(g.loc[b, "Mean (not converted)"]),
                  "< 1e-300" if pv == 0 else f"{pv:.1e}"])
-T("TABLE IV.  SESSION BEHAVIOUR OF BUYERS AND NON-BUYERS (MEANS; MANN-WHITNEY U)", ["Measure", "Buyers", "Non-buyers", "p"],
-  rows, widths=[2.6, 1.2, 1.2, 1.0], numeric=(1, 2, 3))
-T("TABLE V.  PURCHASE PREDICTION (ROC-AUC ON HELD-OUT 25%)", ["Model", "With PageValues", "Without PageValues"],
+T("Session Behaviour of Buyers and Non-Buyers (Means; Mann-Whitney U)", ["Measure", "Buyers", "Non-buyers", "p"],
+  rows, widths=[1.45, 0.65, 0.7, 0.65], numeric=(1, 2, 3))
+T("Purchase Prediction (ROC-AUC on Held-Out 25%)", ["Model", "With PageValues", "Without PageValues"],
   [["Logistic regression", f"{mw['logit_auc']:.3f}", f"{mo['logit_auc']:.3f}"],
    ["Random forest", f"{mw['rf_auc']:.3f}", f"{mo['rf_auc']:.3f}"],
-   ["Gradient boosting", f"{mw['hgb_auc']:.3f}", f"{mo['hgb_auc']:.3f}"]], widths=[2.4, 1.6, 1.6], numeric=(1, 2))
+   ["Gradient boosting", f"{mw['hgb_auc']:.3f}", f"{mo['hgb_auc']:.3f}"]], widths=[1.4, 1.0, 1.05], numeric=(1, 2))
 top = ", ".join(mo["importance"].head(3)["feature"].str.replace(" (s)", "", regex=False).str.lower()).replace("month: nov", "the November season")
 P(f"All ten behavioural measures differed significantly. Buyers viewed a median of "
   f"{g.loc['Product pages viewed', 'Median (converted)']:.0f} product pages against "
@@ -348,7 +383,7 @@ P(f"All ten behavioural measures differed significantly. Buyers viewed a median 
   f"PageValues the best model reached ROC-AUC {mw['rf_auc']:.3f}; without it, {mo['rf_auc']:.3f}, which is the honest "
   f"estimate of what early-session behaviour reveals. The strongest signals without PageValues were {top} (Table V).")
 
-H("5.4", "Tool validation on real advertising data (RQ5)")
+H("5.4", "Tool Validation on Real Advertising Data (RQ5)")
 P("ChannelTrace was run on the real Facebook Ad Campaign data. It recognised the export format automatically and "
   "reproduced the campaign totals computed independently in Python to the cent (spend 58,705.23; cost per acquisition "
   "54.41). It found that 10.0% of spend went to ad sets with no approved conversions, that the 30-34 age group had the "
@@ -357,10 +392,10 @@ P("ChannelTrace was run on the real Facebook Ad Campaign data. It recognised the
   "exactly on the synthetic journeys. A usability study (System Usability Scale [12]) and an accuracy test of the "
   "assistant on a fixed question set are planned.")
 if ga:
-    H("5.5", "Multi-session channel journeys (RQ1)")
+    H("5.5", "Multi-Session Channel Journeys (RQ1)")
     P(str(ga.get("summary_text", "")))
 else:
-    H("5.5", "Multi-session channel journeys (RQ1): in progress")
+    H("5.5", "Multi-Session Channel Journeys (RQ1): In Progress")
     P("The Google Analytics 360 sample is the only public dataset with several named channels per customer across "
       "sessions. Its extraction through Google BigQuery is in progress; the journey and attribution comparison on real "
       "channels will be reported in the next version of this paper.")
@@ -408,6 +443,11 @@ P("Using public data at scale and a simulation with known answers, we found that
   "therefore compare attribution models rather than trust any single report. ChannelTrace makes that comparison free "
   "and accessible, together with plain-language explanations of the results.")
 
+# ------------------------------------------------------------------ acknowledgment
+H("", "Acknowledgment")
+P("The authors thank [Guide name] for guidance. This work was carried out for the MDM Digital Marketing Capstone "
+  "(BCE27MD06) at Pimpri Chinchwad College of Engineering, Pune.")
+
 # ------------------------------------------------------------------ references
 H("", "References")
 refs = [
@@ -420,14 +460,16 @@ refs = [
     "K. Zhao, S. H. Mahboobi, and S. R. Bagheri, \"Shapley value methods for attribution modeling in online advertising,\" arXiv:1804.05327, 2018.",
     "C. O. Sakar, S. O. Polat, M. Katircioglu, and Y. Kastro, \"Real-time prediction of online shoppers' purchasing intention using multilayer perceptron and LSTM recurrent neural networks,\" *Neural Computing and Applications*, vol. 31, pp. 6893-6908, 2019.",
     "K. N. Lemon and P. C. Verhoef, \"Understanding customer experience throughout the customer journey,\" *Journal of Marketing*, vol. 80, no. 6, pp. 69-96, 2016.",
-    "Google, \"BigQuery sample dataset for Google Analytics 360 (google_analytics_sample),\" Google Analytics Help.",
-    "Kaggle, \"Sales conversion optimization (Facebook ad campaign data),\" Kaggle Datasets.",
+    "Google, \"BigQuery sample dataset for Google Analytics 360,\" Google Analytics Help. [Online]. Available: https://support.google.com/analytics/answer/7586738",
+    "Kaggle, \"Sales conversion optimization (Facebook ad campaign data),\" Kaggle Datasets. [Online]. Available: https://www.kaggle.com/datasets/loveall/clicks-conversion-tracking",
     "J. Brooke, \"SUS: A quick and dirty usability scale,\" in *Usability Evaluation in Industry*. London: Taylor & Francis, 1996, pp. 189-194.",
 ]
 for i, r in enumerate(refs, 1):
-    p = P(size=9.5, after=3)
-    add(p, f"[{i}] ", size=9.5)
-    add(p, r, size=9.5)
+    p = P(indent=False, after=2)
+    p.paragraph_format.left_indent, p.paragraph_format.first_line_indent = Inches(0.3), Inches(-0.3)
+    p.paragraph_format.tab_stops.add_tab_stop(Inches(0.3))
+    add(p, f"[{i}]	", size=8)
+    add(p, r, size=8)
 
 path = OUT / "ChannelTrace_Draft_Paper.docx"
 doc.save(path)
