@@ -67,11 +67,12 @@ def _markov_conv_prob(paths: pd.DataFrame, channels: list, removed: str | None =
     idx = {s: i for i, s in enumerate(states)}
     n = len(states)
     trans = np.zeros((n, n + 2))  # last two columns: conversion, null
-    for p, conv in zip(paths["path"], paths["converted"]):
+    weights = paths["weight"] if "weight" in paths else np.ones(len(paths))  # optional: rows standing for many journeys
+    for p, conv, w in zip(paths["path"], paths["converted"], weights):
         seq = ["start"] + p
         for a, b in zip(seq[:-1], seq[1:]):
-            trans[idx[a], idx[b]] += 1
-        trans[idx[seq[-1]], n if conv else n + 1] += 1
+            trans[idx[a], idx[b]] += w
+        trans[idx[seq[-1]], n if conv else n + 1] += w
     if removed is not None:
         r = idx[removed]
         trans[r, :] = 0

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bars, C, pctFmt } from "../components/charts";
+import { Bars, C, PairBars, pctFmt } from "../components/charts";
 import { Badge, ChartCard, Container, Finding, Hero, Note, Stats, Table, Tabs } from "../components/ui";
 import { Loading, useData } from "../data";
 
@@ -157,20 +157,51 @@ function Journeys({ r }: { r: R }) {
   return <GA360 data={r.ga360} />;
 }
 
+type GA = {
+  visitors: number; sessions: number; conversions: number; conv_rate: number; period: string;
+  multi_session_share: number; multi_channel_share: number; sessions_mean: number; nonconv_sessions_mean: number;
+  shares: Record<string, Record<string, number>>; top_paths: [string, number][];
+  multi_channel: { journeys: number; shares: Record<string, Record<string, number>>; top_paths: [string, number][] };
+  referral_no_source: { converting_share: number; true_direct_sessions: number; sessions: number };
+};
+
 function GA360({ data }: { data: Record<string, unknown> }) {
-  const d = data as { visitors: number; sessions: number; conversions: number; multi_session_share: number;
-    shares: Record<string, Record<string, number>>; top_paths: [string, number][] };
-  const models = Object.keys(Object.values(d.shares)[0] ?? {});
-  const chans = Object.keys(d.shares);
+  const d = data as unknown as GA;
+  const models = ["First touch", "Last touch", "Linear", "Time decay", "Position based", "Markov chain", "Shapley value"];
+  const chans = Object.keys(d.shares).filter((c) => d.shares[c]["Linear"] > 0.0005).sort((a, b) => d.shares[b]["Linear"] - d.shares[a]["Linear"]);
+  const mc = d.multi_channel.shares;
+  const mchans = Object.keys(mc).filter((c) => mc[c]["Linear"] > 0.005).sort((a, b) => mc[b]["Linear"] - mc[a]["Linear"]);
   return (
     <>
       <Stats items={[
-        { label: "Visitors", value: n(d.visitors) }, { label: "Sessions", value: n(d.sessions) },
-        { label: "Converting journeys", value: n(d.conversions) }, { label: "Multi-session conversions", value: p(d.multi_session_share) },
+        { label: "Visitors", value: n(d.visitors), note: "Google Merchandise Store, 12 months" },
+        { label: "Converting journeys", value: n(d.conversions), note: `${p(d.conv_rate)} of journeys` },
+        { label: "Took several sessions", value: p(d.multi_session_share, 0), note: `${d.sessions_mean.toFixed(2)} sessions on average` },
+        { label: "Used several channels", value: p(d.multi_channel_share, 0), accent: true, note: `${n(d.multi_channel.journeys)} journeys` },
       ]} />
-      <div className="mt-6">
-        <Table head={["Channel", ...models]} numeric={models.map((_, i) => i + 1)} rows={chans.map((c) => [c, ...models.map((m) => p(d.shares[c][m], 0))])} />
+      <Finding label="Finding · models disagree where channels mix">
+        Most buyers came back through the channel that first brought them, so on the whole sample the seven models broadly agree. In the {n(d.multi_channel.journeys)} journeys that mixed channels they do not: first touch gives Direct {p(mc.Direct["First touch"], 0)} of the credit and last touch {p(mc.Direct["Last touch"], 0)}, while Referral goes from {p(mc.Referral["First touch"], 0)} to {p(mc.Referral["Last touch"], 0)}.
+      </Finding>
+      <div className="grid gap-5 lg:grid-cols-2">
+        <ChartCard title="Multi-channel journeys: first touch vs last touch" subtitle={`Credit share by channel, ${n(d.multi_channel.journeys)} converting journeys with more than one channel`}>
+          <PairBars data={mchans.map((c) => ({ channel: c, first: mc[c]["First touch"], last: mc[c]["Last touch"] }))} x="channel" a="first" b="last" aLabel="First touch" bLabel="Last touch" height={300} />
+        </ChartCard>
+        <ChartCard title="Most common multi-channel paths" subtitle="Sessions in order, up to the first purchase">
+          <div className="space-y-2.5">
+            {d.multi_channel.top_paths.slice(0, 7).map(([path, k]) => (
+              <div key={path} className="flex items-baseline justify-between gap-4 border-b border-rule pb-2 text-sm last:border-0">
+                <span className="text-ink">{path.split(" > ").join(" → ")}</span>
+                <span className="whitespace-nowrap tabular-nums text-muted">{n(k)}</span>
+              </div>
+            ))}
+          </div>
+        </ChartCard>
       </div>
+      <h3 className="mb-3 mt-8 font-sans text-[0.95rem] font-semibold text-ink">Credit share by channel, all {n(d.conversions)} converting journeys</h3>
+      <Table head={["Channel", ...models]} numeric={models.map((_, i) => i + 1)} rows={chans.map((c) => [c, ...models.map((m) => p(d.shares[c][m]))])} />
+      <Note>
+        Journeys follow a visitor across sessions (cookie-based ID) up to the first purchase. Caveats: Google Analytics labels a returning direct visit with the visitor's previous campaign ({n(d.referral_no_source.true_direct_sessions)} of {n(d.referral_no_source.sessions)} Referral sessions are flagged as direct visits), so Direct rarely appears late in a journey; and {p(d.referral_no_source.converting_share, 0)} of converting Referral sessions record no referring site.
+      </Note>
     </>
   );
 }

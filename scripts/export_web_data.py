@@ -49,7 +49,24 @@ out["facts"] += "\n" + "\n".join([
 ])
 ga = PROC / "ga360_results.json"
 if ga.exists():
-    out["ga360"] = json.loads(ga.read_text())
+    g = out["ga360"] = json.loads(ga.read_text())
+    mc = g["multi_channel"]["shares"]
+    share = lambda d, m: ", ".join(f"{c} {d[c][m]:.0%}" for c in sorted(d, key=lambda c: -d[c][m]) if d[c][m] >= 0.01)
+    out["facts"] += "\n" + "\n".join([
+        f"GA360 CHANNEL JOURNEYS (Google Merchandise Store, 12 months): {g['visitors']:,} visitors, {g['sessions']:,} sessions, "
+        f"{g['conversions']:,} converting journeys ({g['conv_rate']:.1%} of journeys) followed across sessions up to the first "
+        f"purchase. {g['multi_session_share']:.0%} of converting journeys took more than one session (mean {g['sessions_mean']:.2f}) "
+        f"but only {g['multi_channel_share']:.0%} used more than one channel. Most common multi-channel paths: "
+        + "; ".join(f"{q} ({k})" for q, k in g["multi_channel"]["top_paths"][:4]) + ".",
+        f"GA360 ATTRIBUTION, all converting journeys: models broadly agree. Last touch: {share(g['shares'], 'Last touch')}. "
+        f"Markov: {share(g['shares'], 'Markov chain')}.",
+        f"GA360 ATTRIBUTION, the {g['multi_channel']['journeys']:,} multi-channel journeys: first touch: {share(mc, 'First touch')}; "
+        f"last touch: {share(mc, 'Last touch')}; linear: {share(mc, 'Linear')}. Direct starts journeys, Referral ends them.",
+        f"GA360 CAVEATS: Google Analytics labels a returning direct visit with the previous campaign source "
+        f"({g['referral_no_source']['true_direct_sessions']:,} of {g['referral_no_source']['sessions']:,} Referral sessions are "
+        f"flagged as direct), so Direct rarely appears late in a journey; {g['referral_no_source']['converting_share']:.0%} of "
+        f"converting Referral sessions record no referring site.",
+    ])
 def clean(o):  # browsers reject NaN/Infinity in JSON
     if isinstance(o, float):
         return o if math.isfinite(o) else None

@@ -1,0 +1,449 @@
+{
+ "period": "20160801 to 20170801",
+ "sessions": 903653,
+ "visitors": 714167,
+ "converting_sessions": 11552,
+ "conversions": 10022,
+ "nonconverting_journeys": 704145,
+ "conv_rate": 0.014033132306589355,
+ "multi_session_share": 0.5214528038315706,
+ "multi_channel_share": 0.118638994212732,
+ "sessions_mean": 2.2793853522251046,
+ "sessions_max": 138,
+ "days_first_to_purchase_median_multi": 4.7067245370370365,
+ "nonconv_sessions_mean": 1.2319280829942696,
+ "channels": [
+  {
+   "channel": "Organic Search",
+   "sessions": 381561,
+   "converting": 3443,
+   "rate": 0.009023458896480511
+  },
+  {
+   "channel": "Social",
+   "sessions": 226117,
+   "converting": 104,
+   "rate": 0.0004599388811986715
+  },
+  {
+   "channel": "Direct",
+   "sessions": 143026,
+   "converting": 2061,
+   "rate": 0.01440996741851132
+  },
+  {
+   "channel": "Referral",
+   "sessions": 104838,
+   "converting": 5322,
+   "rate": 0.05076403594116637
+  },
+  {
+   "channel": "Paid Search",
+   "sessions": 25326,
+   "converting": 469,
+   "rate": 0.018518518518518517
+  },
+  {
+   "channel": "Affiliates",
+   "sessions": 16403,
+   "converting": 9,
+   "rate": 0.0005486801194903372
+  },
+  {
+   "channel": "Display",
+   "sessions": 6262,
+   "converting": 143,
+   "rate": 0.022836154583200256
+  },
+  {
+   "channel": "(Other)",
+   "sessions": 120,
+   "converting": 1,
+   "rate": 0.008333333333333333
+  }
+ ],
+ "shares": {
+  "(Other)": {
+   "First touch": 9.978048293753742e-05,
+   "Last touch": 9.978048293753742e-05,
+   "Linear": 9.978048293753744e-05,
+   "Time decay": 9.978048293753764e-05,
+   "Position based": 9.978048293753626e-05,
+   "Markov chain": 0.00020443744643224102,
+   "Shapley value": 9.978048293753726e-05
+  },
+  "Affiliates": {
+   "First touch": 0.000997804829375374,
+   "Last touch": 0.0008980243464378367,
+   "Linear": 0.0009850877090009826,
+   "Time decay": 0.0009536067570162479,
+   "Position based": 0.0009636799042107251,
+   "Markov chain": 0.0047865997403922726,
+   "Shapley value": 0.0010343910064524713
+  },
+  "Direct": {
+   "First touch": 0.21951706246258232,
+   "Last touch": 0.17112352823787666,
+   "Linear": 0.19197878110978267,
+   "Time decay": 0.1851510902798081,
+   "Position based": 0.19415606285943285,
+   "Markov chain": 0.1818797931348519,
+   "Shapley value": 0.19507417015898354
+  },
+  "Display": {
+   "First touch": 0.012971462781879864,
+   "Last touch": 0.011275194571941729,
+   "Linear": 0.013141573429381402,
+   "Time decay": 0.012801571762826185,
+   "Position based": 0.012498823051674062,
+   "Markov chain": 0.01250376990020412,
+   "Shapley value": 0.01334065056874876
+  },
+  "Organic Search": {
+   "First touch": 0.3154061065655558,
+   "Last touch": 0.31061664338455397,
+   "Linear": 0.313732380121656,
+   "Time decay": 0.31284621641057025,
+   "Position based": 0.31324772991582583,
+   "Markov chain": 0.3202247168500334,
+   "Shapley value": 0.31334730260094457
+  },
+  "Paid Search": {
+   "First touch": 0.04430253442426661,
+   "Last touch": 0.04170824186789064,
+   "Linear": 0.04320731671016915,
+   "Time decay": 0.04400027952133831,
+   "Position based": 0.043156725838076275,
+   "Markov chain": 0.04283994140395344,
+   "Shapley value": 0.043778686888844544
+  },
+  "Referral": {
+   "First touch": 0.39852324885252444,
+   "Last touch": 0.45450009978048295,
+   "Linear": 0.42785847252851184,
+   "Time decay": 0.4351613565453737,
+   "Position based": 0.42691649978439067,
+   "Markov chain": 0.4252704579907632,
+   "Shapley value": 0.4241618439433247
+  },
+  "Social": {
+   "First touch": 0.008181999600878068,
+   "Last touch": 0.009778487327878668,
+   "Linear": 0.00899660790856044,
+   "Time decay": 0.008986098240129605,
+   "Position based": 0.008960698163452005,
+   "Markov chain": 0.01229028353336942,
+   "Shapley value": 0.009163174349763853
+  }
+ },
+ "gap_vs_last": {
+  "First touch": {
+   "(Other)": 0.0,
+   "Affiliates": 0.0001,
+   "Direct": 0.0484,
+   "Display": 0.0017,
+   "Organic Search": 0.0048,
+   "Paid Search": 0.0026,
+   "Referral": -0.056,
+   "Social": -0.0016
+  },
+  "Linear": {
+   "(Other)": 0.0,
+   "Affiliates": 0.0001,
+   "Direct": 0.0209,
+   "Display": 0.0019,
+   "Organic Search": 0.0031,
+   "Paid Search": 0.0015,
+   "Referral": -0.0266,
+   "Social": -0.0008
+  },
+  "Time decay": {
+   "(Other)": 0.0,
+   "Affiliates": 0.0001,
+   "Direct": 0.014,
+   "Display": 0.0015,
+   "Organic Search": 0.0022,
+   "Paid Search": 0.0023,
+   "Referral": -0.0193,
+   "Social": -0.0008
+  },
+  "Position based": {
+   "(Other)": -0.0,
+   "Affiliates": 0.0001,
+   "Direct": 0.023,
+   "Display": 0.0012,
+   "Organic Search": 0.0026,
+   "Paid Search": 0.0014,
+   "Referral": -0.0276,
+   "Social": -0.0008
+  },
+  "Markov chain": {
+   "(Other)": 0.0001,
+   "Affiliates": 0.0039,
+   "Direct": 0.0108,
+   "Display": 0.0012,
+   "Organic Search": 0.0096,
+   "Paid Search": 0.0011,
+   "Referral": -0.0292,
+   "Social": 0.0025
+  },
+  "Shapley value": {
+   "(Other)": -0.0,
+   "Affiliates": 0.0001,
+   "Direct": 0.024,
+   "Display": 0.0021,
+   "Organic Search": 0.0027,
+   "Paid Search": 0.0021,
+   "Referral": -0.0303,
+   "Social": -0.0006
+  }
+ },
+ "top_paths": [
+  [
+   "Referral",
+   1755
+  ],
+  [
+   "Organic Search",
+   1712
+  ],
+  [
+   "Direct",
+   1006
+  ],
+  [
+   "Referral > Referral",
+   969
+  ],
+  [
+   "Organic Search > Organic Search",
+   593
+  ],
+  [
+   "Referral > Referral > Referral",
+   522
+  ],
+  [
+   "Direct > Direct",
+   374
+  ],
+  [
+   "Referral > Referral > Referral > Referral",
+   278
+  ],
+  [
+   "Organic Search > Organic Search > Organic Search",
+   236
+  ],
+  [
+   "Paid Search",
+   227
+  ]
+ ],
+ "first_last": {
+  "rows": [
+   "(Other)",
+   "Affiliates",
+   "Direct",
+   "Display",
+   "Organic Search",
+   "Paid Search",
+   "Referral",
+   "Social"
+  ],
+  "cols": [
+   "(Other)",
+   "Affiliates",
+   "Direct",
+   "Display",
+   "Organic Search",
+   "Paid Search",
+   "Referral",
+   "Social"
+  ],
+  "values": [
+   [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    8,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1701,
+    7,
+    103,
+    13,
+    369,
+    7
+   ],
+   [
+    0,
+    0,
+    0,
+    79,
+    14,
+    3,
+    34,
+    0
+   ],
+   [
+    0,
+    1,
+    6,
+    13,
+    2853,
+    52,
+    227,
+    9
+   ],
+   [
+    0,
+    0,
+    1,
+    6,
+    79,
+    340,
+    17,
+    1
+   ],
+   [
+    0,
+    0,
+    7,
+    8,
+    57,
+    9,
+    3902,
+    11
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    6,
+    1,
+    5,
+    70
+   ]
+  ]
+ },
+ "referral_no_source": {
+  "sessions_share": 0.6575192201301054,
+  "converting_share": 0.9650507328072153,
+  "true_direct_sessions": 40356,
+  "sessions": 104838
+ },
+ "multi_channel": {
+  "journeys": 1189,
+  "shares": {
+   "(Other)": {
+    "First touch": 0.0,
+    "Last touch": 0.0,
+    "Linear": 0.0,
+    "Time decay": 0.0,
+    "Position based": 0.0
+   },
+   "Affiliates": {
+    "First touch": 0.001682085786375105,
+    "Last touch": 0.0008410428931875525,
+    "Linear": 0.0015748940450865004,
+    "Time decay": 0.001309543245430458,
+    "Position based": 0.0013944491169049643
+   },
+   "Direct": {
+    "First touch": 0.42052144659377627,
+    "Last touch": 0.012615643397813289,
+    "Linear": 0.18840314910198042,
+    "Time decay": 0.13085300822896084,
+    "Position based": 0.20675530864359956
+   },
+   "Display": {
+    "First touch": 0.044575273338940284,
+    "Last touch": 0.030277544154751892,
+    "Linear": 0.04600912439803282,
+    "Time decay": 0.04314327351307295,
+    "Position based": 0.040591425251369675
+   },
+   "Organic Search": {
+    "First touch": 0.2968881412952061,
+    "Last touch": 0.25651808242220353,
+    "Linear": 0.282780415121309,
+    "Time decay": 0.27531100157000443,
+    "Position based": 0.2786953315529012
+   },
+   "Paid Search": {
+    "First touch": 0.09335576114381834,
+    "Last touch": 0.07148864592094197,
+    "Linear": 0.08412424564282309,
+    "Time decay": 0.0908080751579914,
+    "Position based": 0.08369781862843288
+   },
+   "Referral": {
+    "First touch": 0.13204373423044574,
+    "Last touch": 0.6038687973086627,
+    "Linear": 0.3793083361486381,
+    "Time decay": 0.4408638480216477,
+    "Position based": 0.37136851205984717
+   },
+   "Social": {
+    "First touch": 0.010933557611438183,
+    "Last touch": 0.024390243902439025,
+    "Linear": 0.017799835542130153,
+    "Time decay": 0.017711250262892053,
+    "Position based": 0.017497154746944507
+   }
+  },
+  "top_paths": [
+   [
+    "Direct > Referral",
+    134
+   ],
+   [
+    "Organic Search > Referral",
+    94
+   ],
+   [
+    "Direct > Referral > Referral",
+    54
+   ],
+   [
+    "Paid Search > Organic Search",
+    39
+   ],
+   [
+    "Direct > Direct > Referral",
+    37
+   ],
+   [
+    "Direct > Organic Search",
+    37
+   ],
+   [
+    "Organic Search > Referral > Referral",
+    29
+   ],
+   [
+    "Direct > Referral > Referral > Referral",
+    28
+   ]
+  ]
+ },
+ "summary_text": "The Google Analytics 360 sample covers 714,167 visitors and 903,653 sessions of the Google Merchandise Store (20160801 to 20170801). Following each visitor across sessions up to the first purchase gives 10,022 converting journeys (1.4% of journeys). 52% of converting journeys spanned more than one session and 12% involved more than one channel; non-converting journeys averaged 1.23 sessions against 2.28 for converting ones. Across the seven attribution models, Referral showed the largest swing in credit share (from 39.9% to 45.5%). Within the 1,189 multi-channel journeys, first touch gave Direct 42% of the credit against 1% under last touch, and Referral 13% against 60%."
+}
