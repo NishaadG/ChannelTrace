@@ -27,7 +27,7 @@ out = {
     "criteo": json.loads((PROC / "criteo_results.json").read_text()),
     "simulation": json.loads((PROC / "simulation_results.json").read_text()),
     "synthetic_bootstrap": json.loads((PROC / "synthetic_bootstrap.json").read_text()),
-    "facts": f["facts"],
+    "facts": f["facts"].replace("channel attribution results will come from the Google Analytics 360 sample and Criteo datasets (in progress).", "channel attribution results come from the Google Analytics 360 sample and Criteo datasets below."),  # pickle predates the GA360 run
 }
 cr, sim = out["criteo"], out["simulation"]
 hours = cr["attributed_by_hours_since_last_click"]

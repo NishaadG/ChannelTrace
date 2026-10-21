@@ -63,6 +63,6 @@ def fact_sheet(f: dict) -> str:
         "send paid traffic straight to product pages and work on reducing exits there, since time on product pages is the "
         "strongest early signal of a purchase.",
         "CAVEATS: associations, not causation. Traffic sources are numeric codes with no channel names. "
-        "This dataset is session-level, not multi-touch; channel attribution results will come from the Google Analytics 360 sample and Criteo datasets (in progress).",
+        "This dataset is session-level, not multi-touch; channel attribution results come from the Google Analytics 360 sample and Criteo datasets below.",
     ]
     return "\n".join(lines)

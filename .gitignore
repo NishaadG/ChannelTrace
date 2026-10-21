@@ -11,3 +11,4 @@ web/.env*.local
 paper/preview/
 data/processed/criteo_conversion_journeys.csv.gz
 data/processed/ga360_cache/
+data/processed/assistant_eval_cache/

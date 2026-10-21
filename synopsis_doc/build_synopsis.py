@@ -18,19 +18,19 @@ OUT = HERE / "ChannelTrace_Synopsis.docx"
 
 # ----------------------------------------------------------------------------- fill these in
 HEADER = {
-    "department": "[Department]",
+    "department": "Information Technology",
     "academic_year": "2026-2027",
     "semester": "I",
     "year": "B. Tech",
     "group_id": "[Group ID]",
     "date": "[DD/MM/2026]",
-    "guide": "Minal Shahakar",
+    "guide": "Mrs. Minal Shahakar, Dept. of Computer Engineering (Regional Language)",
 }
 TEAM = [  # (PRN, name, department, mail, contact); PRN and contact are written in by hand
-    ("", "Nishaad Gangal", "", "nishaad.gangal23@pccoepune.org", ""),
-    ("", "Om Katole", "", "om.katole23@pccoepune.org", ""),
-    ("", "Satyam Kumar", "", "satyam.kumar23@pccoepune.org", ""),
-    ("", "Akshat Jhanwar", "", "akshat.jhanwar23@pccoepune.org", ""),
+    ("", "Nishaad Gangal", "Information Technology", "nishaad.gangal23@pccoepune.org", ""),
+    ("", "Om Katole", "Information Technology", "om.katole23@pccoepune.org", ""),
+    ("", "Satyam Kumar", "Information Technology", "satyam.kumar23@pccoepune.org", ""),
+    ("", "Akshat Jhanwar", "Information Technology", "akshat.jhanwar23@pccoepune.org", ""),
 ]
 TITLE = "Multi-Channel Digital Marketing Attribution and Conversion Analysis (ChannelTrace)"
 SDGS = [("SDG 8", "Decent Work and Economic Growth"), ("SDG 9", "Industry, Innovation and Infrastructure"), ("", "")]
