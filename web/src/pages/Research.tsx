@@ -3,7 +3,7 @@ import { Bars, C, PairBars, pctFmt } from "../components/charts";
 import { Badge, ChartCard, Container, Finding, Hero, Note, Stats, Table, Tabs } from "../components/ui";
 import { Loading, useData } from "../data";
 
-type Tab = "behaviour" | "display" | "validation" | "journeys";
+type Tab = "behaviour" | "display" | "validation" | "journeys" | "assistant";
 const p = (x: number, d = 1) => `${(x * 100).toFixed(d)}%`;
 const n = (x: number) => x.toLocaleString();
 
@@ -21,12 +21,14 @@ export default function Research() {
           { id: "display", label: "Display ads · last-click gap" },
           { id: "validation", label: "Which model is right? · validation" },
           { id: "journeys", label: "Channel journeys · RQ1" },
+          { id: "assistant", label: "Assistant accuracy · RQ5" },
         ]} />
         <div className="fade-in" key={tab}>
           {tab === "behaviour" && <Behaviour r={r} />}
           {tab === "display" && <Display r={r} />}
           {tab === "validation" && <Validation r={r} />}
           {tab === "journeys" && <Journeys r={r} />}
+          {tab === "assistant" && <AssistantAccuracy r={r} />}
         </div>
       </Container>
     </>
@@ -43,6 +45,7 @@ function Behaviour({ r }: { r: R }) {
   const mo = u.models.without_page_values, mw = u.models.with_page_values;
   const g = Object.fromEntries(u.groups.map((x) => [x.Behaviour as string, x]));
   const show = ["Product pages viewed", "Time on product pages (s)", "Account/admin pages viewed", "Bounce rate", "Exit rate", "Page value"];
+  const weekend = u.weekend.find((x) => x.Weekend), weekday = u.weekend.find((x) => !x.Weekend);
   const fmt = (b: string, x: number) => (b.includes("(s)") ? `${(x / 60).toFixed(1)} min` : b.includes("rate") ? x.toFixed(3) : x.toFixed(1));
   return (
     <>
@@ -66,6 +69,9 @@ function Behaviour({ r }: { r: R }) {
       <ChartCard title="Conversion rate by month" subtitle="January and April are not in the dataset">
         <Bars data={u.month.map((x) => ({ k: x.Month, v: x.conversion_rate }))} x="k" y="v" highlight={(x) => x.k === peak.Month} />
       </ChartCard>
+      {weekend && weekday && (
+        <Note>Weekend sessions convert slightly more often than weekday ones: {p(weekend.conversion_rate)} against {p(weekday.conversion_rate)} (χ² p = 0.002). The gap is real but small next to the month and visitor-type effects.</Note>
+      )}
       <div className="mt-6 grid gap-5 lg:grid-cols-5">
         <div className="lg:col-span-3">
           <Table head={["Behaviour (mean per session)", "Buyers", "Non-buyers", "p-value"]} numeric={[1, 2, 3]}
@@ -163,6 +169,8 @@ type GA = {
   shares: Record<string, Record<string, number>>; top_paths: [string, number][];
   multi_channel: { journeys: number; shares: Record<string, Record<string, number>>; top_paths: [string, number][] };
   referral_no_source: { converting_share: number; true_direct_sessions: number; sessions: number };
+  channels: { channel: string; sessions: number; converting: number; rate: number }[];
+  first_last: { rows: string[]; cols: string[]; values: number[][] };
 };
 
 function GA360({ data }: { data: Record<string, unknown> }) {
@@ -171,6 +179,10 @@ function GA360({ data }: { data: Record<string, unknown> }) {
   const chans = Object.keys(d.shares).filter((c) => d.shares[c]["Linear"] > 0.0005).sort((a, b) => d.shares[b]["Linear"] - d.shares[a]["Linear"]);
   const mc = d.multi_channel.shares;
   const mchans = Object.keys(mc).filter((c) => mc[c]["Linear"] > 0.005).sort((a, b) => mc[b]["Linear"] - mc[a]["Linear"]);
+  const fl = d.first_last;
+  const handoff = fl.rows.map((c, i) => ({ c, total: fl.values[i].reduce((a, b) => a + b, 0), same: fl.values[i][fl.cols.indexOf(c)] }))
+    .filter((x) => x.total >= 100).map((x) => ({ k: x.c, v: 1 - x.same / x.total })).sort((a, b) => b.v - a.v);
+  const chRate = [...d.channels].filter((c) => c.sessions >= 1000).sort((a, b) => b.rate - a.rate);
   return (
     <>
       <Stats items={[
@@ -197,11 +209,70 @@ function GA360({ data }: { data: Record<string, unknown> }) {
           </div>
         </ChartCard>
       </div>
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <ChartCard title="Which channels hand the customer on?" subtitle="Share of converting journeys that ended in a different channel from the one they started in">
+          <Bars horizontal height={260} data={handoff} x="k" y="v" format={pctFmt(0)} highlight={(_, i) => i < 3} />
+        </ChartCard>
+        <ChartCard title="How often a visit ends in a purchase" subtitle="Share of sessions with a transaction, by channel (channels with 1,000+ sessions)">
+          <Bars horizontal height={260} data={chRate.map((c) => ({ k: c.channel, v: c.rate }))} x="k" y="v" format={pctFmt(2)} highlight={(_, i) => i === 0} />
+          <Note>Social brings the second-largest stream of visits ({n(chRate.find((c) => c.channel === "Social")?.sessions ?? 0)}) but almost none of them buy.</Note>
+        </ChartCard>
+      </div>
+      <Finding label="Finding · where last click moves credit">
+        Journeys that begin with {handoff.slice(0, 3).map((x) => x.k).join(", ")} are the ones most often finished by another channel, which is where last click takes credit away from the channel that started the journey. A referral almost never hands over ({p(handoff[handoff.length - 1].v, 0)}).
+      </Finding>
       <h3 className="mb-3 mt-8 font-sans text-[0.95rem] font-semibold text-ink">Credit share by channel, all {n(d.conversions)} converting journeys</h3>
       <Table head={["Channel", ...models]} numeric={models.map((_, i) => i + 1)} rows={chans.map((c) => [c, ...models.map((m) => p(d.shares[c][m]))])} />
       <Note>
         Journeys follow a visitor across sessions (cookie-based ID) up to the first purchase. Caveats: Google Analytics labels a returning direct visit with the visitor's previous campaign ({n(d.referral_no_source.true_direct_sessions)} of {n(d.referral_no_source.sessions)} Referral sessions are flagged as direct visits), so Direct rarely appears late in a journey; and {p(d.referral_no_source.converting_share, 0)} of converting Referral sessions record no referring site.
       </Note>
+    </>
+  );
+}
+
+function AssistantAccuracy({ r }: { r: R }) {
+  const [show, setShow] = useState(false);
+  const e = r.assistant_eval;
+  if (!e)
+    return (
+      <div className="card p-8">
+        <Badge kind="pending">Test pending</Badge>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">A fixed set of questions with known answers is being run against both answer paths of the assistant. Results will appear here.</p>
+      </div>
+    );
+  const g = e.generative, b = e.retrieval;
+  return (
+    <>
+      <p className="mb-4 max-w-3xl text-sm leading-relaxed text-muted">We wrote {e.n} questions before running the test: {g.answerable} whose answers are in the fact sheet, and {g.unanswerable} that the data cannot answer, such as TV return on investment, next month's sales or influencer performance. Each was asked once to the generative model and once to the built-in retrieval fallback, and every number in every reply was looked up in the fact sheet.</p>
+      <Stats items={[
+        { label: "Generative · answerable correct", value: `${g.answerable_correct}/${g.answerable}`, accent: true },
+        { label: "Generative · declined when it should", value: `${g.unanswerable_declined}/${g.unanswerable}` },
+        { label: "Built-in · answerable correct", value: `${b.answerable_correct}/${b.answerable}` },
+        { label: "Built-in · declined when it should", value: `${b.unanswerable_declined}/${b.unanswerable}` },
+      ]} />
+      <Finding label="Finding · two answer paths that cover each other">
+        The generative model answered {g.answerable_correct} of {g.answerable} questions correctly and refused {g.unanswerable_declined} of {g.unanswerable} that the data could not answer; {g.replies_with_unsupported_numbers ? `${g.replies_with_unsupported_numbers} of its replies contained` : "none of its replies contained"} a number missing from the fact sheet. The retrieval fallback can only quote computed statements, so it never invents a figure, but it recognised only {b.unanswerable_declined} of {b.unanswerable} unanswerable questions and otherwise returned the closest related facts.
+      </Finding>
+      <Table head={["Question", "Type", "Generative", "Built-in"]} rows={e.rows.map((x) => [
+        x.question, x.answerable ? "Answerable" : "Outside the data",
+        <Badge kind={x.generative ? "good" : "bad"}>{x.generative ? "Correct" : "Wrong"}</Badge>,
+        <Badge kind={x.retrieval ? "good" : "bad"}>{x.retrieval ? "Correct" : "Wrong"}</Badge>,
+      ])} />
+      <button className="mt-4 text-sm font-medium text-accent underline" onClick={() => setShow(!show)}>{show ? "Hide" : "Show"} the generative model's replies</button>
+      {show && (
+        <div className="mt-3 space-y-3">
+          {e.rows.map((x) => (
+            <div key={x.question} className="card p-4 text-sm">
+              <p className="font-semibold text-ink">{x.question}</p>
+              <p className="mt-1.5 whitespace-pre-wrap leading-relaxed text-text">{x.reply}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {e.review && e.review.length > 0 && (
+        <Note>Checked by hand: {e.review.map((x) => `"${x.question}" ${x.note.charAt(0).toLowerCase()}${x.note.slice(1)}`).join(" ")} Hand-scored, the totals stay the same.</Note>
+      )}
+      <Note>Tested on {e.date} with the free Gemini tier ({e.models_used.join(", ")}). One run of a fixed question set written by the team; free models change over time.</Note>
     </>
   );
 }

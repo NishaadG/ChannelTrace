@@ -61,6 +61,14 @@ UNANSWERABLE = [
     "Do mobile users convert better than desktop users?",
     "What is the cost per click of the Criteo campaigns?",
 ]
+# Notes from reading every generative reply of the 2026-10-23 run by hand; the automatic scores are kept as they are.
+REVIEW = {
+    "What are the strongest early signals of a purchase?":
+        "Scored wrong only because the reply says 'time spent on product pages', not the exact phrase checked; the content "
+        "is right, though it calls the medians averages.",
+    "What was the Markov chain model's error under carry-over?":
+        "Scored right and gives the correct 7.5 pp, but first claims, wrongly, that the facts do not contain the figure.",
+}
 DECLINE = re.compile(r"(do(es)? not|don't|doesn't|cannot|can't|not (cover|include|contain|available|provide|have|say|show|mention|specif)|no (data|information|figure)|isn't (available|covered|included)|aren't|not possible|couldn't match|unable)", re.I)
 NUM = re.compile(r"\d[\d,]*\.?\d*")
 
@@ -147,7 +155,8 @@ def main():
 
     out = {"api": API, "date": max(v["date"] for v in cache.values()), "n": len(rows),
            "models_used": sorted({r["generative"]["model"] for r in rows}),
-           "generative": summary("generative"), "retrieval": summary("retrieval"), "rows": rows}
+           "generative": summary("generative"), "retrieval": summary("retrieval"), "rows": rows,
+           "review": [{"question": q, "note": n} for q, n in REVIEW.items()]}
     (ROOT / "data" / "processed" / "assistant_eval.json").write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
     print(json.dumps({k: out[k] for k in ("models_used", "generative", "retrieval")}, indent=1))
 

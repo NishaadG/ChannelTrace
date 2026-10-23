@@ -7,6 +7,7 @@ const LINKS = [
   { to: "/research", label: "Research" },
   { to: "/analyse", label: "Analyse your data" },
   { to: "/assistant", label: "Assistant" },
+  { to: "/method", label: "How it works" },
   { to: "/paper", label: "Paper" },
 ];
 

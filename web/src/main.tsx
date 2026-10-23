@@ -10,6 +10,7 @@ const Research = lazy(() => import("./pages/Research"));
 const Analyse = lazy(() => import("./pages/Analyse"));
 const Assistant = lazy(() => import("./pages/Assistant"));
 const Paper = lazy(() => import("./pages/Paper"));
+const Method = lazy(() => import("./pages/Method"));
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="research" element={<Research />} />
               <Route path="analyse" element={<Analyse />} />
               <Route path="assistant" element={<Assistant />} />
+              <Route path="method" element={<Method />} />
               <Route path="paper" element={<Paper />} />
               <Route path="*" element={<Home />} />
             </Route>

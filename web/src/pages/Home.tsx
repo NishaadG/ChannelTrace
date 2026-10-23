@@ -53,7 +53,7 @@ export default function Home() {
           ["RQ2", "How do converting and non-converting sessions differ?", "UCI Online Shoppers", <Badge kind="good">Answered</Badge>],
           ["RQ3", "Does a channel's importance change under different attribution models?", "Criteo, simulation, GA360", <Badge kind="good">Answered</Badge>],
           ["RQ4", "Which visitor and session traits are associated with conversion?", "UCI Online Shoppers", <Badge kind="good">Answered</Badge>],
-          ["RQ5", "Can the methods give small businesses correct, usable insight from their own data?", "Facebook Ads data, user study", <Badge kind="pending">Tool built · study planned</Badge>],
+          ["RQ5", "Can the methods give small businesses correct, usable insight from their own data?", "Facebook Ads data, assistant test", <Badge kind={r?.assistant_eval ? "good" : "pending"}>{r?.assistant_eval ? "Answered" : "Tool built · test pending"}</Badge>],
         ].map(([c, ...rest]) => [<span className="font-semibold text-accent">{c}</span>, ...rest])} />
 
         <SectionTitle code="Evidence" title="Data sources" />
@@ -62,6 +62,7 @@ export default function Home() {
           ["Criteo Attribution Modeling for Bidding", "16.5M impressions, 675 campaigns", "Last-click gap, recency of credit (RQ3)"],
           ["Google Analytics 360 sample (Merchandise Store)", "12 months of sessions", "Multi-session channel journeys (RQ1, RQ3)"],
           ["Facebook Ad Campaign (Kaggle)", "1,143 ads", "Validating the upload tool on real data (RQ5)"],
+          ["Assistant test set (ours)", r?.assistant_eval ? `${r.assistant_eval.n} questions` : "Fixed questions", "Accuracy of the assistant's answers (RQ5)"],
         ]} />
       </Container>
     </>

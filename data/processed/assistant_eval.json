@@ -1,0 +1,732 @@
+{
+ "api": "https://channeltrace.vercel.app/api/chat",
+ "date": "2026-10-23",
+ "n": 34,
+ "models_used": [
+  "gemini-3.5-flash-lite",
+  "gemini-flash-lite-latest"
+ ],
+ "generative": {
+  "answerable_correct": 25,
+  "answerable": 26,
+  "unanswerable_declined": 8,
+  "unanswerable": 8,
+  "overall": 0.9705882352941176,
+  "replies_with_unsupported_numbers": 0
+ },
+ "retrieval": {
+  "answerable_correct": 18,
+  "answerable": 26,
+  "unanswerable_declined": 7,
+  "unanswerable": 8,
+  "overall": 0.7352941176470589,
+  "replies_with_unsupported_numbers": 0
+ },
+ "rows": [
+  {
+   "question": "What is the overall conversion rate in the UCI store data?",
+   "answerable": true,
+   "expected": [
+    [
+     "15.6"
+    ]
+   ],
+   "generative": {
+    "reply": "The overall conversion rate in the UCI online store data is 15.6% across 12,205 sessions. \n\nPlease note that these figures show associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Dataset.** UCI Online Shoppers Purchasing Intention (Sakar & Kastro, 2018): one year of sessions on an online store. 12,205 sessions after removing duplicates; overall conversion rate 15.6%.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Do new or returning visitors convert better?",
+   "answerable": true,
+   "expected": [
+    [
+     "24.9"
+    ],
+    [
+     "14.1"
+    ]
+   ],
+   "generative": {
+    "reply": "New visitors convert better than returning visitors, with a conversion rate of 24.9% compared to 14.1%. However, returning visitors make up 85% of total sessions in the dataset. \n\nAs a suggestion, you could re-engage returning visitors with remarketing or personalised offers. Please remember that this data shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Visitor type.** New visitors convert at 24.9%, returning visitors at 14.1% (chi-square p=4.2e-29). Returning visitors are 85% of sessions.\n\n**Suggested action · research.** Re-engage returning visitors, who are most of the traffic but convert least, for example with remarketing or personalised offers",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Which month had the highest conversion rate?",
+   "answerable": true,
+   "expected": [
+    [
+     "nov"
+    ],
+    [
+     "25.5"
+    ]
+   ],
+   "generative": {
+    "reply": "November had the highest conversion rate at 25.5% (2,982 sessions). \n\n*Suggestion:* Consider concentrating your campaign budget in the run-up to November. \n\nPlease note that this data shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Dataset.** UCI Online Shoppers Purchasing Intention (Sakar & Kastro, 2018): one year of sessions on an online store. 12,205 sessions after removing duplicates; overall conversion rate 15.6%.\n\n**Top drivers without pagevalues.** Time on product pages (s), Exit rate, Month: Nov, Product pages viewed, Account/admin pages viewed.",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Which month converted worst?",
+   "answerable": true,
+   "expected": [
+    [
+     "feb"
+    ],
+    [
+     "1.7"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the ChannelTrace data, February converted the worst at 1.7% out of 181 sessions, compared to the overall conversion rate of 15.6%. \n\n*Suggestion:* Consider these findings as associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Validation simulation.** First touch was worst in both, so no single attribution model is best everywhere.",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Do weekend visitors convert more than weekday visitors?",
+   "answerable": true,
+   "expected": [
+    [
+     "17.5"
+    ],
+    [
+     "15.1"
+    ]
+   ],
+   "generative": {
+    "reply": "Yes, weekend visitors convert at 17.5%, compared to 15.1% on weekdays. \n\nAs a suggestion, you might use this pattern when planning your weekly ad spend and staffing. \n\nPlease note that this data shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Visitor type.** New visitors convert at 24.9%, returning visitors at 14.1% (chi-square p=4.2e-29). Returning visitors are 85% of sessions.\n\n**Weekend.** Weekend sessions convert at 17.5% vs weekdays 15.1%.\n\n**Ga360 channel journeys.** 714,167 visitors, 903,653 sessions, 10,022 converting journeys (1.4% of journeys) followed across sessions up to the first purchase. 52% of converting journeys took more than one session (mean 2.28) but only 12% used more than one channel. Most common multi-channel paths: Direct > Referral (134)",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "How many product pages do buyers view compared with non-buyers?",
+   "answerable": true,
+   "expected": [
+    [
+     "29"
+    ],
+    [
+     "16"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the UCI Online Shoppers dataset (12,205 sessions; overall conversion rate 15.6%), buyers view a median of 29 product pages, compared to 16 for non-buyers. This difference is statistically significant (Mann-Whitney U, p<0.05). \n\nPlease note that this data shows associations, not proof of cause. As a suggestion, you might focus on sending paid traffic straight to product pages and working on reducing exits there, since time on product pages is a strong early signal of a purchase.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Suggested action · research.** Send paid traffic straight to product pages and work on reducing exits there, since time on product pages is the strongest early signal of a purchase.\n\n**Top drivers without pagevalues.** Time on product pages (s), Exit rate, Month: Nov, Product pages viewed, Account/admin pages viewed.\n\n**Converted vs not.** Product pages 29 vs 16; time on product pages 18.5 vs 8.8 minutes; mean bounce rate 0.005 vs 0.023; mean exit rate 0.020 vs 0.046.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "How well can a purchase be predicted without PageValues?",
+   "answerable": true,
+   "expected": [
+    [
+     "0.775",
+     "0.742"
+    ]
+   ],
+   "generative": {
+    "reply": "Without PageValues, a purchase can be predicted with a held-out ROC-AUC of 0.742 using logistic regression and 0.775 using random forest. \n\nThis provides the honest view of early-session signals, since PageValues partly leaks the outcome by being computed from pages seen before a transaction. \n\nPlease note that these figures show associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Predictive models.** With PageValues, logistic regression 0.906, random forest 0.932. Without PageValues, logistic 0.742, random forest 0.775. PageValues partly leaks the outcome (it is computed from pages seen before a transaction), so the 'without' model is the honest view of early-session signals.\n\n**Top drivers without pagevalues.** Time on product pages (s), Exit rate, Month: Nov, Product pages viewed, Account/admin pages viewed.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Why is the model without PageValues treated as the honest one?",
+   "answerable": true,
+   "expected": [
+    [
+     "leak",
+     "computed from pages",
+     "before a transaction"
+    ]
+   ],
+   "generative": {
+    "reply": "The model without PageValues is treated as the honest one because PageValues partly leaks the outcome. It is computed directly from the pages a visitor sees before a transaction. \n\nWithout PageValues, the model gives an honest view of early-session signals. \n\nPlease note that this data shows associations, not proof of cause.",
+    "model": "gemini-3.5-flash-lite",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Predictive models.** With PageValues, logistic regression 0.906, random forest 0.932. Without PageValues, logistic 0.742, random forest 0.775. PageValues partly leaks the outcome (it is computed from pages seen before a transaction), so the 'without' model is the honest view of early-session signals.\n\n**Validation simulation.** First touch was worst in both, so no single attribution model is best everywhere.\n\n**Top drivers without pagevalues.** Time on product pages (s), Exit rate, Month: Nov, Product pages viewed, Account/admin pages viewed.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What are the strongest early signals of a purchase?",
+   "answerable": true,
+   "expected": [
+    [
+     "time on product pages"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the data, the strongest early signals of a purchase are:\n\n* Time spent on product pages (converting sessions averaged 18.5 minutes vs 8.8 minutes for non-converting sessions).\n* Exit rate (converting sessions had a mean exit rate of 0.020 vs 0.046 for non-converting sessions).\n* November (which had the highest conversion rate at 25.5%).\n* Number of product pages viewed (converting sessions viewed a median of 29 pages vs 16 for non-converting sessions).\n* Account or admin pages viewed.\n\n**Suggestion:** Send paid traffic straight to product pages and work on reducing exits there. \n\n*Note: This data shows associations, not proof of cause.*",
+    "model": "gemini-flash-lite-latest",
+    "correct": false,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Suggested action · research.** Send paid traffic straight to product pages and work on reducing exits there, since time on product pages is the strongest early signal of a purchase.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What share of Criteo conversions was credited to Criteo under last click?",
+   "answerable": true,
+   "expected": [
+    [
+     "54.2",
+     "54%"
+    ]
+   ],
+   "generative": {
+    "reply": "Under the advertiser's last-click rule, only 54.2% of conversions that followed a Criteo click were credited to Criteo. The rest went to other channels. \n\nCredit depends on recency: it is 87% when the conversion happens within an hour of the click, drops to 36% after 1 to 3 days, and falls to 26% after 7 to 31 days. The number of clicks barely changes this credit. \n\nPlease note that this data shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Criteo last-click gap.** Only 54.2% of conversions that followed a Criteo click were credited to Criteo under the advertiser's last-click rule; the rest went to other channels. Credit depends on recency: 87% when the conversion came within an hour of the click, 36% after 1-3 days and 26% after 7-31 days, while the number of clicks barely changes it.\n\n**Criteo display ads.** 16,468,027 impressions, 6,142,256 users, 675 campaigns, 435,810 conversions over 30 days. 99.3% of conversions involve a single campaign, so the data cannot compare channels or campaigns within a journey. Converting journeys average 1.85 clicks; 68% have one click.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "How does the time since the last click affect Criteo's credit?",
+   "answerable": true,
+   "expected": [
+    [
+     "87"
+    ],
+    [
+     "26"
+    ]
+   ],
+   "generative": {
+    "reply": "In Criteo display ads, the credit received depends on recency. Criteo received 87% of the credit when a conversion happened within an hour of the click. This dropped to 36% after 1-3 days and 26% after 7-31 days. Meanwhile, the number of clicks barely changes it. \n\nPlease remember that this data shows associations, not proof of cause. \n\nIf you want to understand how different touchpoints influence conversions in your own store, the facts do not cover specific ad copy or targeting data; you would need multi-touch attribution reports or customer journey tracking data to answer that.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Criteo last-click gap.** Only 54.2% of conversions that followed a Criteo click were credited to Criteo under the advertiser's last-click rule; the rest went to other channels. Credit depends on recency: 87% when the conversion came within an hour of the click, 36% after 1-3 days and 26% after 7-31 days, while the number of clicks barely changes it.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Does the number of clicks change whether Criteo gets the credit?",
+   "answerable": true,
+   "expected": [
+    [
+     "barely",
+     "little",
+     "hardly",
+     "not much",
+     "slight",
+     "minimal"
+    ]
+   ],
+   "generative": {
+    "reply": "No, the number of clicks barely changes whether Criteo gets the credit. Credit depends on recency: Criteo received 87% of credit when the conversion came within an hour of the click, 36% after 1 to 3 days, and 26% after 7 to 31 days. \n\nPlease note that these figures show associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Criteo last-click gap.** Only 54.2% of conversions that followed a Criteo click were credited to Criteo under the advertiser's last-click rule; the rest went to other channels. Credit depends on recency: 87% when the conversion came within an hour of the click, 36% after 1-3 days and 26% after 7-31 days, while the number of clicks barely changes it.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "How many impressions are in the Criteo dataset?",
+   "answerable": true,
+   "expected": [
+    [
+     "16,468,027",
+     "16.5 million",
+     "16.47 million"
+    ]
+   ],
+   "generative": {
+    "reply": "The Criteo dataset has 16,468,027 impressions. \n\n*Note: These figures show associations, not proof of cause.*",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Criteo display ads.** 16,468,027 impressions, 6,142,256 users, 675 campaigns, 435,810 conversions over 30 days. 99.3% of conversions involve a single campaign, so the data cannot compare channels or campaigns within a journey. Converting journeys average 1.85 clicks; 68% have one click.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Why can't the Criteo data compare channels within a journey?",
+   "answerable": true,
+   "expected": [
+    [
+     "99.3",
+     "single campaign"
+    ]
+   ],
+   "generative": {
+    "reply": "The Criteo data cannot compare channels or campaigns within a journey because 99.3% of conversions involve a single campaign. \n\nPlease note that this data shows associations, not proof of cause. \n\n*(Suggestion: To compare channels properly, you would need multi-touch attribution data that tracks all marketing touchpoints a user interacts with before converting.)*",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Criteo display ads.** 16,468,027 impressions, 6,142,256 users, 675 campaigns, 435,810 conversions over 30 days. 99.3% of conversions involve a single campaign, so the data cannot compare channels or campaigns within a journey. Converting journeys average 1.85 clicks; 68% have one click.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Which attribution model was most accurate when ads act immediately?",
+   "answerable": true,
+   "expected": [
+    [
+     "last touch"
+    ],
+    [
+     "4.2"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the validation simulation data, Last touch was the most accurate model when ads had an immediate effect, with a mean absolute error in credit share of 4.2 percentage points (and a rank correlation of 0.66). \n\nPlease remember that these data show associations, not proof of cause. \n\n*(Note: The facts do not cover attribution models other than those in the simulation.)*",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Validation simulation.** When ads act immediately, mean absolute error in credit share was First touch 10.5 pp (rank corr 0.17)",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Which attribution model was most accurate with carry-over effects?",
+   "answerable": true,
+   "expected": [
+    [
+     "time decay"
+    ],
+    [
+     "5.7"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the validation simulation data, when ads act with carry-over (awareness first), the **Time decay** model performed best among the standard models, with a mean absolute error of 5.7 percentage points and a rank correlation of 0.50. \n\nPlease note that these findings show statistical associations, not proof of cause. \n\n*Suggestion:* If your marketing relies on awareness campaigns with carry-over effects, consider testing Time decay attribution, keeping in mind that no single attribution model is best everywhere.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Validation simulation.** First touch was worst in both, so no single attribution model is best everywhere.",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Which attribution model was worst in the simulation?",
+   "answerable": true,
+   "expected": [
+    [
+     "first touch"
+    ]
+   ],
+   "generative": {
+    "reply": "In the simulation, First touch was the worst model in both tested scenarios, with a mean absolute error of 10.5 percentage points for immediate ad effects and 10.1 percentage points for carry-over effects. \n\n*Suggestion:* Keep in mind that these numbers show associations, not proof of cause. \n\nIf you need details on specific channel performance not covered here, data tracking multi-touch paths and conversion values for each channel would be needed.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Validation simulation.** First touch was worst in both, so no single attribution model is best everywhere.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What was the Markov chain model's error under carry-over?",
+   "answerable": true,
+   "expected": [
+    [
+     "7.5"
+    ]
+   ],
+   "generative": {
+    "reply": "The provided facts do not contain the error percentage for the Markov chain model under carry-over conditions. They only give the mean absolute error for all models, which was 7.5 percentage points for the Markov chain under carry-over. \n\nTo answer what the specific error was under different conditions or parameters, additional simulation metrics or error breakdowns per channel would be needed. \n\nPlease note that these data show associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Validation simulation.** Markov chain 6.4 pp (rank corr 0.61)",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "How many converting journeys are in the GA360 data?",
+   "answerable": true,
+   "expected": [
+    [
+     "10,022"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the GA360 data, there are 10,022 converting journeys (which is 1.4% of journeys) followed across sessions up to the first purchase. \n\nPlease note that this data shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Ga360 channel journeys.** 714,167 visitors, 903,653 sessions, 10,022 converting journeys (1.4% of journeys) followed across sessions up to the first purchase. 52% of converting journeys took more than one session (mean 2.28) but only 12% used more than one channel. Most common multi-channel paths: Direct > Referral (134)\n\n**Criteo display ads.** 16,468,027 impressions, 6,142,256 users, 675 campaigns, 435,810 conversions over 30 days. 99.3% of conversions involve a single campaign, so the data cannot compare channels or campaigns within a journey. Converting journeys average 1.85 clicks; 68% have one click.\n\n**Ga360 attribution, all converting journeys.** Models broadly agree. Last touch: Referral 45%, Organic Search 31%, Direct 17%, Paid Search 4%, Display 1%. Markov: Referral 43%, Organic Search 32%, Direct 18%, Paid Search 4%, Display 1%, Social 1%.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What share of GA360 converting journeys used more than one channel?",
+   "answerable": true,
+   "expected": [
+    [
+     "12%",
+     "12 %",
+     "12 per"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the Google Analytics 360 data, 12% of converting journeys used more than one channel (out of 10,022 converting journeys). \n\nPlease remember that these data show associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Ga360 channel journeys.** 714,167 visitors, 903,653 sessions, 10,022 converting journeys (1.4% of journeys) followed across sessions up to the first purchase. 52% of converting journeys took more than one session (mean 2.28) but only 12% used more than one channel. Most common multi-channel paths: Direct > Referral (134)\n\n**Ga360 attribution, all converting journeys.** Models broadly agree. Last touch: Referral 45%, Organic Search 31%, Direct 17%, Paid Search 4%, Display 1%. Markov: Referral 43%, Organic Search 32%, Direct 18%, Paid Search 4%, Display 1%, Social 1%.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "How many sessions does a converting GA360 journey take on average?",
+   "answerable": true,
+   "expected": [
+    [
+     "2.28"
+    ]
+   ],
+   "generative": {
+    "reply": "A converting Google Analytics 360 journey takes an average of 2.28 sessions. \n\nPlease note that this data shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Ga360 caveats.** Google Analytics labels a returning direct visit with the previous campaign source (40,356 of 104,838 Referral sessions are flagged as direct), so Direct rarely appears late in a journey; 97% of converting Referral sessions record no referring site.\n\n**Ga360 channel journeys.** 714,167 visitors, 903,653 sessions, 10,022 converting journeys (1.4% of journeys) followed across sessions up to the first purchase. 52% of converting journeys took more than one session (mean 2.28) but only 12% used more than one channel. Most common multi-channel paths: Direct > Referral (134)",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "In GA360 multi-channel journeys, how much credit does Referral get under last touch?",
+   "answerable": true,
+   "expected": [
+    [
+     "60"
+    ]
+   ],
+   "generative": {
+    "reply": "Under last touch in GA360 multi-channel journeys, Referral gets 60% of the credit. \n\nRemember, these figures show associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Ga360 attribution, the 1,189 multi-channel journeys.** Last touch: Referral 60%, Organic Search 26%, Paid Search 7%, Display 3%, Social 2%, Direct 1%\n\n**Validation simulation.** Last touch 4.2 pp (rank corr 0.66)\n\n**Ga360 attribution, all converting journeys.** Models broadly agree. Last touch: Referral 45%, Organic Search 31%, Direct 17%, Paid Search 4%, Display 1%. Markov: Referral 43%, Organic Search 32%, Direct 18%, Paid Search 4%, Display 1%, Social 1%.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Which channel most often starts a multi-channel journey in GA360?",
+   "answerable": true,
+   "expected": [
+    [
+     "direct"
+    ],
+    [
+     "42"
+    ]
+   ],
+   "generative": {
+    "reply": "In the Google Analytics 360 multi-channel journeys, Direct most often starts the journey at 42%, followed by Organic Search at 30%, Referral at 13%, Paid Search at 9%, Display at 4%, and Social at 1%. \n\nPlease remember that these findings show associations, not proof of cause. Also, Google Analytics labels returning direct visits with the previous campaign source, and Direct rarely appears late in a journey.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Ga360 channel journeys.** Organic Search > Referral (94)\n\n**Ga360 attribution, the 1,189 multi-channel journeys.** Linear: Referral 38%, Organic Search 28%, Direct 19%, Paid Search 8%, Display 5%, Social 2%. Direct starts journeys, Referral ends them.",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What is the most common multi-channel path in GA360?",
+   "answerable": true,
+   "expected": [
+    [
+     "direct > referral",
+     "direct to referral",
+     "direct → referral",
+     "direct, then referral",
+     "direct followed by referral"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the data, the most common multi-channel paths in GA360 converting journeys are:\n\n* Direct > Referral: 134 paths\n* Organic Search > Referral: 94 paths\n* Direct > Referral > Referral: 54 paths\n* Paid Search > Organic Search: 39 paths\n\nPlease note that these figures show associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Ga360 channel journeys.** 714,167 visitors, 903,653 sessions, 10,022 converting journeys (1.4% of journeys) followed across sessions up to the first purchase. 52% of converting journeys took more than one session (mean 2.28) but only 12% used more than one channel. Most common multi-channel paths: Direct > Referral (134)\n\n**Ga360 attribution, the 1,189 multi-channel journeys.** First touch: Direct 42%, Organic Search 30%, Referral 13%, Paid Search 9%, Display 4%, Social 1%",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Can I trust Referral's large share of the credit in GA360?",
+   "answerable": true,
+   "expected": [
+    [
+     "97",
+     "no referring site"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the GA360 data, you should view Referral's large share with caution because of how Google Analytics tracks visits. \n\nGoogle flags returning direct visits with the previous campaign source (for example, 40,356 of 104,838 Referral sessions are flagged as direct). Also, 97% of converting Referral sessions record no referring site. Because of this, Direct rarely appears late in a journey, which boosts Referral's numbers at the end. \n\nRemember, these figures show associations, not proof of cause. \n\nTo get a clearer picture, data on user behavior changes when referral tracking rules are adjusted would help answer this question.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Ga360 attribution, the 1,189 multi-channel journeys.** First touch: Direct 42%, Organic Search 30%, Referral 13%, Paid Search 9%, Display 4%, Social 1%\n\n**Validation simulation.** When ads act immediately, mean absolute error in credit share was First touch 10.5 pp (rank corr 0.17)\n\n**Ga360 channel journeys.** Direct > Referral > Referral (54)",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Did the Criteo ads cause the conversions?",
+   "answerable": true,
+   "expected": [
+    [
+     "caus",
+     "association"
+    ]
+   ],
+   "generative": {
+    "reply": "Based on the facts, we cannot prove the Criteo ads caused the conversions. The data shows associations, not proof of cause. \n\nThe Criteo display ad data covers 16,468,027 impressions, 6,142,256 users, and 435,810 conversions over 30 days. However, 99.3% of these conversions involve a single campaign, so the dataset cannot compare channels or campaigns within a journey. Furthermore, only 54.2% of conversions that followed a Criteo click were actually credited to Criteo under the advertiser's last-click rule, while the rest went to other channels. \n\nIf you want to know if ads caused conversions, we suggest running controlled experiments, such as lift studies with holdout groups.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Criteo display ads.** 16,468,027 impressions, 6,142,256 users, 675 campaigns, 435,810 conversions over 30 days. 99.3% of conversions involve a single campaign, so the data cannot compare channels or campaigns within a journey. Converting journeys average 1.85 clicks; 68% have one click.\n\n**Criteo last-click gap.** Only 54.2% of conversions that followed a Criteo click were credited to Criteo under the advertiser's last-click rule; the rest went to other channels. Credit depends on recency: 87% when the conversion came within an hour of the click, 36% after 1-3 days and 26% after 7-31 days, while the number of clicks barely changes it.",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What was the return on investment of TV advertising for this store?",
+   "answerable": false,
+   "expected": null,
+   "generative": {
+    "reply": "The provided facts do not contain data on TV advertising. \n\nTo answer this question, you would need data tracking TV ad spend, the number of sessions or sales generated specifically by TV ads, and the resulting revenue. \n\nPlease note that the available data only shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "I couldn't match that to the current results. Try asking about conversion rates, visitor types, timing, campaigns, wasted spend, audiences, attribution, display ads or limitations.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "How many conversions will the store get next month?",
+   "answerable": false,
+   "expected": null,
+   "generative": {
+    "reply": "The facts do not contain future conversion predictions for next month. \n\nTo answer this, you would need historical monthly conversion counts, current traffic forecasts, and recent seasonal trends. \n\nPlease note that the data only shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "I couldn't match that to the current results. Try asking about conversion rates, visitor types, timing, campaigns, wasted spend, audiences, attribution, display ads or limitations.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What is the conversion rate of email campaigns in the GA360 data?",
+   "answerable": false,
+   "expected": null,
+   "generative": {
+    "reply": "The facts do not cover the conversion rate of email campaigns. \n\nTo answer that question, you would need email campaign tracking data, such as the total number of email sends, clicks, and resulting sessions and conversions linked to those campaigns.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Dataset.** UCI Online Shoppers Purchasing Intention (Sakar & Kastro, 2018): one year of sessions on an online store. 12,205 sessions after removing duplicates; overall conversion rate 15.6%.\n\n**Criteo display ads.** 16,468,027 impressions, 6,142,256 users, 675 campaigns, 435,810 conversions over 30 days. 99.3% of conversions involve a single campaign, so the data cannot compare channels or campaigns within a journey. Converting journeys average 1.85 clicks; 68% have one click.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Which Instagram influencer drove the most sales?",
+   "answerable": false,
+   "expected": null,
+   "generative": {
+    "reply": "The facts do not cover Instagram influencers or specific social media channels beyond general labels in the GA360 dataset (where Social accounts for 1% to 2% of multi-channel journeys). \n\nTo answer this question, you would need influencer-specific tracking data, such as unique promo codes, UTM-tagged links, or affiliate platform reports. \n\nPlease note: The data shows associations, not proof of cause.",
+    "model": "gemini-3.5-flash-lite",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "I couldn't match that to the current results. Try asking about conversion rates, visitor types, timing, campaigns, wasted spend, audiences, attribution, display ads or limitations.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What was the average order value in the Google Merchandise Store?",
+   "answerable": false,
+   "expected": null,
+   "generative": {
+    "reply": "Based on the provided facts, the average order value in the Google Merchandise Store is not mentioned. \n\nTo answer this question, you would need transactional data showing total revenue or order values paired with the 10,022 converting journeys from the GA360 dataset. \n\nPlease remember that the data shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Ga360 channel journeys.** Organic Search > Referral (94)",
+    "correct": false,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "How did TikTok ads perform in the Criteo data?",
+   "answerable": false,
+   "expected": null,
+   "generative": {
+    "reply": "The provided facts do not mention TikTok ads. \n\nTo answer this question, you would need ad performance data specifically tracking TikTok campaigns, including impressions, clicks, conversions, and user journeys. \n\nPlease note: The data only shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Criteo display ads.** 16,468,027 impressions, 6,142,256 users, 675 campaigns, 435,810 conversions over 30 days. 99.3% of conversions involve a single campaign, so the data cannot compare channels or campaigns within a journey. Converting journeys average 1.85 clicks; 68% have one click.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "Do mobile users convert better than desktop users?",
+   "answerable": false,
+   "expected": null,
+   "generative": {
+    "reply": "The provided facts do not contain data on mobile versus desktop users. \n\nTo answer this question, you would need session data that includes device type (such as mobile, desktop, or tablet) alongside conversion rates for each category. \n\nPlease note that the data shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "I couldn't match that to the current results. Try asking about conversion rates, visitor types, timing, campaigns, wasted spend, audiences, attribution, display ads or limitations.",
+    "correct": true,
+    "unsupported": []
+   }
+  },
+  {
+   "question": "What is the cost per click of the Criteo campaigns?",
+   "answerable": false,
+   "expected": null,
+   "generative": {
+    "reply": "The facts do not cover the cost per click of the Criteo campaigns. \n\nTo answer this question, you would need advertising financial data such as total ad spend and total clicks for each campaign. \n\nPlease remember that the available data only shows associations, not proof of cause.",
+    "model": "gemini-flash-lite-latest",
+    "correct": true,
+    "unsupported": []
+   },
+   "retrieval": {
+    "reply": "**Criteo last-click gap.** Only 54.2% of conversions that followed a Criteo click were credited to Criteo under the advertiser's last-click rule; the rest went to other channels. Credit depends on recency: 87% when the conversion came within an hour of the click, 36% after 1-3 days and 26% after 7-31 days, while the number of clicks barely changes it.\n\n**Criteo display ads.** 16,468,027 impressions, 6,142,256 users, 675 campaigns, 435,810 conversions over 30 days. 99.3% of conversions involve a single campaign, so the data cannot compare channels or campaigns within a journey. Converting journeys average 1.85 clicks; 68% have one click.",
+    "correct": true,
+    "unsupported": []
+   }
+  }
+ ],
+ "review": [
+  {
+   "question": "What are the strongest early signals of a purchase?",
+   "note": "Scored wrong only because the reply says 'time spent on product pages', not the exact phrase checked; the content is right, though it calls the medians averages."
+  },
+  {
+   "question": "What was the Markov chain model's error under carry-over?",
+   "note": "Scored right and gives the correct 7.5 pp, but first claims, wrongly, that the facts do not contain the figure."
+  }
+ ]
+}

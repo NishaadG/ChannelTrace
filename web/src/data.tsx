@@ -21,7 +21,15 @@ export interface Research {
   simulation: Record<"immediate" | "carryover", { summary: { model: string; mae_pp: number; mae_sd: number; max_err_pp: number; spearman: number }[] }>;
   synthetic_bootstrap: Record<string, Record<string, [number, number, number]>>;
   ga360?: Record<string, unknown>;
+  assistant_eval?: AssistantEval;
   facts: string;
+}
+
+interface EvalSummary { answerable_correct: number; answerable: number; unanswerable_declined: number; unanswerable: number; overall: number; replies_with_unsupported_numbers: number }
+export interface AssistantEval {
+  date: string; n: number; models_used: string[]; generative: EvalSummary; retrieval: EvalSummary;
+  rows: { question: string; answerable: boolean; reply: string; generative: boolean; retrieval: boolean }[];
+  review?: { question: string; note: string }[];
 }
 
 interface Ctx {

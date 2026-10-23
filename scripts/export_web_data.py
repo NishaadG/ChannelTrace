@@ -67,6 +67,17 @@ if ga.exists():
         f"flagged as direct), so Direct rarely appears late in a journey; {g['referral_no_source']['converting_share']:.0%} of "
         f"converting Referral sessions record no referring site.",
     ])
+ev = PROC / "assistant_eval.json"
+if ev.exists():
+    e = json.loads(ev.read_text(encoding="utf-8"))
+    out["assistant_eval"] = {
+        "date": e["date"], "n": e["n"], "models_used": e["models_used"], "generative": e["generative"], "retrieval": e["retrieval"],
+        "rows": [{"question": r["question"], "answerable": r["answerable"], "reply": r["generative"]["reply"],
+                  "generative": r["generative"]["correct"], "retrieval": r["retrieval"]["correct"]} for r in e["rows"]],
+        "review": e.get("review", []),
+    }
+
+
 def clean(o):  # browsers reject NaN/Infinity in JSON
     if isinstance(o, float):
         return o if math.isfinite(o) else None
