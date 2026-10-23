@@ -69,7 +69,6 @@ REFS = {
     "shapley53": "L. S. Shapley, \"A value for n-person games,\" in *Contributions to the Theory of Games II*, H. W. Kuhn and A. W. Tucker, Eds. Princeton, NJ, USA: Princeton Univ. Press, 1953, pp. 307-317.",
     "zhao18": "K. Zhao, S. H. Mahboobi, and S. R. Bagheri, \"Shapley value methods for attribution modeling in online advertising,\" arXiv:1804.05327, 2018.",
     "singal22": "R. Singal, O. Besbes, A. Désir, V. Goyal, and G. Iyengar, \"Shapley meets uniform: An axiomatic framework for attribution in online advertising,\" *Management Science*, vol. 68, no. 10, pp. 7457-7479, 2022.",
-    "lundberg17": "S. M. Lundberg and S.-I. Lee, \"A unified approach to interpreting model predictions,\" in *Advances in Neural Information Processing Systems 30*, 2017, pp. 4765-4774.",
     "li18": "N. Li, S. K. Arava, C. Dong, Z. Yan, and A. Pani, \"Deep neural net with attention for multi-channel multi-touch attribution,\" arXiv:1809.02230, 2018.",
     "ren18": "K. Ren, Y. Fang, W. Zhang, S. Liu, J. Li, Y. Zhang, Y. Yu, and J. Wang, \"Learning multi-touch conversion attribution with dual-attention mechanisms for online advertising,\" in *Proc. 27th ACM Int. Conf. Information and Knowledge Management (CIKM)*, 2018, pp. 1433-1442.",
     "du19": "R. Du, Y. Zhong, H. S. Nair, B. Cui, and R. Shou, \"Causally driven incremental multi touch attribution using a recurrent neural network,\" arXiv:1902.00215, 2019.",
@@ -119,7 +118,7 @@ def c(*keys):
 
 # ------------------------------------------------------------------ figures
 hours = cr["attributed_by_hours_since_last_click"]
-fig, ax = plt.subplots(figsize=(3.5, 2.3))
+fig, ax = plt.subplots(figsize=(3.5, 2.0))
 keys = list(hours)
 vals = [hours[k]["share"] for k in keys]
 ax.bar(keys, vals, color=[BLUE] + [GREY] * (len(keys) - 2) + [RED], width=0.62)
@@ -134,7 +133,7 @@ imm = [r["mae_pp"] for r in sim["immediate"]["summary"]]
 car = [r["mae_pp"] for r in sim["carryover"]["summary"]]
 imm_sd = [r["mae_sd"] for r in sim["immediate"]["summary"]]
 car_sd = [r["mae_sd"] for r in sim["carryover"]["summary"]]
-fig, ax = plt.subplots(figsize=(3.5, 2.3))
+fig, ax = plt.subplots(figsize=(3.5, 2.0))
 x = range(len(models))
 ax.bar([i - 0.2 for i in x], imm, 0.38, yerr=imm_sd, capsize=2, color=BLUE, label="Immediate effects", error_kw={"lw": 0.8})
 ax.bar([i + 0.2 for i in x], car, 0.38, yerr=car_sd, capsize=2, color=GOLD, label="Carry-over effects", error_kw={"lw": 0.8})
@@ -163,7 +162,7 @@ fig.tight_layout(); fig.savefig(FIG / "bootstrap.png", dpi=300); plt.close(fig)
 
 mc = ga["multi_channel"]["shares"]
 gch = sorted([ch for ch in mc if mc[ch]["Linear"] > 0.005], key=lambda ch: mc[ch]["Linear"])
-fig, ax = plt.subplots(figsize=(3.5, 2.4))
+fig, ax = plt.subplots(figsize=(3.5, 2.1))
 for j, (mdl, col) in enumerate([("First touch", GOLD), ("Linear", GREY), ("Last touch", BLUE)]):
     ax.barh([i + (j - 1) * 0.26 for i in range(len(gch))], [mc[ch][mdl] for ch in gch], 0.25, color=col, label=mdl)
 ax.set_yticks(range(len(gch))); ax.set_yticklabels(gch)
@@ -441,9 +440,6 @@ P("The paper makes five contributions. First, using 16.5 million real display im
   "depends on how the advertising works, so models should be compared rather than picked once. Fourth, we describe "
   "which session behaviours go with buying. Fifth, we release ChannelTrace, a free tool that does all of this on any "
   f"business's export, with {'a tested' if ev else 'a grounded'} assistant that explains the output.", before=2)
-P("Section II reviews earlier work, Sections III and IV cover the data and methods, Section V describes the tool and "
-  "Section VI the results. Section VII discusses what the results mean and where they could be wrong, Section VIII "
-  "lists limitations and next steps, and Section IX concludes.")
 
 # ------------------------------------------------------------------ II related work
 H("2", "Related Work")
@@ -469,8 +465,7 @@ P(f"The Shapley value {c('shapley53')} comes from cooperative game theory: each 
   f"contribution across every possible team. Dalessandro et al. {c('dalessandro12')} linked it to a causal view of "
   f"attribution, and Zhao et al. {c('zhao18')} gave simpler versions for advertising data. Singal et al. "
   f"{c('singal22')} wrote down the properties a fair attribution rule should have, showed that the common rules break "
-  "them, and proposed an adjusted Shapley value. The same idea is behind SHAP, the popular way of explaining "
-  f"machine-learning predictions {c('lundberg17')}.")
+  "them, and proposed an adjusted Shapley value.")
 H("2.4", "Deep Learning Attribution")
 P(f"Newer models learn credit from touchpoint sequences with neural networks: attention with user controls "
   f"{c('li18')}, a dual-attention recurrent network that separates the effect of views and clicks {c('ren18')}, a "
@@ -478,19 +473,17 @@ P(f"Newer models learn credit from touchpoint sequences with neural networks: at
   f"the fact that people are not shown ads at random {c('kumar20')}. Several are tested on the Criteo data "
   f"{c('diemert17')} that we also use. Their success is judged by how well they predict conversions, and a model can "
   "predict well while still giving credit to the wrong channel.")
-H("2.5", "Experiments and Incrementality")
+H("2.5", "Experiments and Clickstream Prediction")
 P(f"Experiments measure what attribution tries to estimate. Blake et al. {c('blake15')} switched off eBay's brand "
   f"search ads and found that most of the sales they seemed to drive happened anyway. Johnson et al. {c('johnson17')} "
   f"proposed \"ghost ads\" to make such tests cheaper, and Gordon et al. {c('gordon19')} compared large Facebook "
   "experiments with the observational methods advertisers normally use and found that the latter often missed. Lewis "
-  f"and Rao {c('lewis15')} explain why even large experiments give noisy answers. When an experiment is not possible, a "
-  "simulation where the true effect is set in advance is the next best way to check a model.")
-H("2.6", "Clickstream Conversion Prediction")
-P(f"Moe and Fader {c('moe04')} showed that the chance of buying changes from one store visit to the next. Montgomery "
+  f"and Rao {c('lewis15')} explain why even large experiments give noisy answers. On the conversion side, Moe and Fader "
+  f"{c('moe04')} showed that the chance of buying changes from one store visit to the next. Montgomery "
   f"et al. {c('montgomery04')} predicted purchase from the order in which pages were browsed, and Bucklin and Sismeiro "
   f"{c('bucklin09')} surveyed clickstream research in marketing. Sakar et al. {c('sakar19')} predicted purchase intent "
   "from session features and published the UCI Online Shoppers data we analyse.")
-H("2.7", "Research Gap")
+H("2.6", "Research Gap")
 T("Representative Attribution Studies Compared With This Work",
   ["Study", "Data", "Method", "Known truth"],
   [[f"Shao and Li {c('shao11')}", "Advertiser campaign logs", "Bagged logistic, probabilistic", "No"],
@@ -519,10 +512,8 @@ T("The Datasets and What Each Is Used For",
    ["Simulated journeys", "6 random worlds x 2 scenarios x 3,000 users with known channel effects", "RQ3 (model accuracy)"],
    *([["Assistant test set", f"{ev['n']} questions with known answers", "RQ5 (assistant accuracy)"]] if ev else [])],
   widths=[1.0, 1.65, 0.85])
-P("*UCI Online Shoppers.* One year of sessions from a single online shop. For each session the data gives how many "
-  "account, information and product pages were opened and for how long, the bounce and exit rates, a page-value score "
-  "from Google Analytics, the month, whether the visitor was new, whether it was a weekend, a traffic-source code and "
-  "whether the session ended in a sale. 125 rows were exact copies of others and were dropped.")
+P("*UCI Online Shoppers* covers one year of sessions in one shop: page counts and time by page type, bounce and exit "
+  "rates, a page-value score, month, visitor type, weekend and whether the session ended in a sale.")
 P(f"*Criteo Attribution.* Thirty days of display impressions, each with a user, campaign, time and click flag. For "
   f"users who bought, it also gives the purchase time and whether the advertiser's last-click rule gave Criteo the "
   f"credit. We grouped each user's impressions into a journey ending at the purchase. Our first plan was to compare "
@@ -537,9 +528,6 @@ P(f"*Google Analytics 360.* Google publishes a year of anonymised sessions from 
   "one with a purchase; for visitors who never bought it runs to their last session. We queried it through the free "
   "BigQuery sandbox. Our computer could not hold every journey in memory, so buyers' journeys were downloaded one by one "
   "and the rest were counted by channel path inside BigQuery, which is all the Markov model needs.")
-P("*Facebook Ad Campaign.* A public export of 1,143 ads with spend, impressions, clicks, conversions and the age and "
-  "gender targeted. We used it as a realistic upload to test the tool. The *simulated journeys* and the *assistant test "
-  "set* are described in Section IV.")
 
 # ------------------------------------------------------------------ IV methods
 H("4", "Methods")
@@ -573,16 +561,7 @@ P(r"Let $K$ be the set of channels and let $v(S)$, the value of a group $S\subse
 E(r"\phi(k)=\sum_{S\subseteq K\setminus\{k\}}\frac{|S|!\,(|K|-|S|-1)!}{|K|!}\left[v(S\cup\{k\})-v(S)\right]")
 P(r"The shares add up to the whole, $\sum_k\phi(k)=v(K)=C$, so this model also hands out exactly the observed "
   r"conversions. The exact sum grows exponentially with $|K|$; our implementation allows up to 12 channels, more than "
-  r"any dataset here has. Table III lists the seven models side by side.")
-T("Attribution Models Compared", ["Model", "Credit rule", "Uses non-buyers", "Implicit assumption"],
-  [["First touch", "All to first touch", "No", "Discovery drives sales"],
-   ["Last touch", "All to last touch", "No", "Closing drives sales"],
-   ["Linear", "1/n to each touch", "No", "All touches equal"],
-   ["Time decay", "Halves every 7 days", "No", "Recent touches matter more"],
-   ["Position based", "40/20/40", "No", "Opening and closing matter"],
-   ["Markov chain", "Removal effect (4)-(5)", "Yes", "Next step depends on current channel"],
-   ["Shapley value", "Marginal contribution (6)", "No", "Channels cooperate as a coalition"]],
-  widths=[0.75, 0.95, 0.55, 1.25])
+  r"any dataset here has.")
 H("4.4", "Known-Answer Validation")
 P("Real data never tells us how much credit a channel really deserves, so we built worlds where we set it ourselves. "
   r"In each world the seven channels get a lift $\lambda_k$ drawn at random from $[0.01,0.25]$, and the first channel "
@@ -628,7 +607,7 @@ if ev:
 
 # ------------------------------------------------------------------ V system
 H("5", "The ChannelTrace System")
-F(FIG / "architecture.png", "ChannelTrace architecture. Everything inside the dashed box runs in the user's browser; only the aggregated fact sheet reaches the assistant.")
+F(FIG / "architecture.png", width=3.0, caption="ChannelTrace architecture. Everything inside the dashed box runs in the user's browser; only the aggregated fact sheet reaches the assistant.")
 P("Our first prototype was a Streamlit dashboard in Python. We rebuilt it as a TypeScript and React web app hosted "
   "free on Vercel (Fig. 1) so that all analysis happens in the browser and an uploaded file never leaves the user's "
   "computer. The ad module recognises exports from Google Ads, Meta Ads Manager and "
@@ -664,11 +643,9 @@ T("What Predicts Criteo Keeping the Credit (Logistic Regression, n = %s)" % f"{r
   widths=[1.4, 0.6, 0.95, 0.55], numeric=(1, 2, 3))
 P(f"With the number of clicks held fixed, each unit of log(1 + hours) multiplies the odds of Criteo getting credit by "
   f"{rt['logit']['log_hours']['or']:.2f}. Each extra click multiplies them by just {rt['logit']['clicks']['or']:.2f} "
-  f"(pseudo R-squared {rt['pseudo_r2']:.2f}; Table IV). Table V shows the same thing without a model: the credited "
-  "share barely moves between one click and six.")
-T("Last-Click Credit to Criteo by Number of Criteo Clicks", ["Clicks in journey", "Conversions", "Credited to Criteo"],
-  [[k if k != "6" else "6 or more", f"{by_t[k]['n']:,}", pct(by_t[k]["share"])] for k in by_t],
-  widths=[1.1, 1.0, 1.1], numeric=(1, 2))
+  f"(pseudo R-squared {rt['pseudo_r2']:.2f}; Table III). Without any model the picture is the same: Criteo kept the "
+  f"credit for {pct(by_t['1']['share'], 0)} of one-click journeys and {pct(by_t['6']['share'], 0)} of those with six "
+  "or more clicks.")
 P("So under last click, whether a channel gets paid for a sale depends on timing far more than on effort. Click a "
   "display ad and buy within the hour, and the ad nearly always gets the credit. Wait a week, search for the product "
   "or open an email in between, and it usually does not.")
@@ -683,11 +660,7 @@ P(f"The GA360 sample has {ga['visitors']:,} visitors and {ga['sessions']:,} sess
   f"{pct(ga['multi_channel_share'], 0)} of converting journeys used more than one channel. The most common paths were a "
   f"single {ga['top_paths'][0][0]} visit ({ga['top_paths'][0][1]:,}), a single {ga['top_paths'][1][0]} visit "
   f"({ga['top_paths'][1][1]:,}) and {ga['top_paths'][3][0]} ({ga['top_paths'][3][1]:,}).")
-T("Sessions and Converting Sessions by Channel (GA360)", ["Channel", "Sessions", "Converting", "Rate"],
-  [[ch["channel"], f"{ch['sessions']:,}", f"{ch['converting']:,}", pct(ch["rate"], 2)]
-   for ch in sorted(ga["channels"], key=lambda r: -r["rate"]) if ch["sessions"] >= 1000],
-  widths=[1.1, 0.8, 0.8, 0.7], numeric=(1, 2, 3))
-P(f"How often a visit ends in a sale varies a lot by channel (Table VI). Referral visits converted at "
+P(f"How often a visit ends in a sale varies a lot by channel. Referral visits converted at "
   f"{pct(chan['Referral']['rate'], 1)}. Social brought the second-largest stream of visits, "
   f"{chan['Social']['sessions']:,}, but converted at only {pct(chan['Social']['rate'], 2)}. Organic Search brought the "
   f"most visits and converted at {pct(chan['Organic Search']['rate'], 1)}.")
@@ -696,7 +669,7 @@ T("GA360 Credit Share by Channel and Model, All Buying Journeys", ["Channel", "F
    for ch in sorted(sh, key=lambda ch: -sh[ch]["Linear"]) if sh[ch]["Linear"] > 0.0005],
   widths=[0.92, 0.48, 0.48, 0.48, 0.56, 0.58], numeric=(1, 2, 3, 4, 5))
 swing = max(sh, key=lambda ch: max(sh[ch].values()) - min(sh[ch].values()))
-P(f"Since so few journeys mix channels, the seven models give similar answers for the store as a whole (Table VII). "
+P(f"Since so few journeys mix channels, the seven models give similar answers for the store as a whole (Table IV). "
   f"The biggest spread is for {swing}, from {pct(min(sh[swing].values()))} to {pct(max(sh[swing].values()))}. The "
   f"disagreement sits in the {ga['multi_channel']['journeys']:,} journeys that did mix channels (Fig. 3). For those, "
   f"first touch gives Direct {pct(mcs['Direct']['First touch'], 0)} of the credit and last touch gives it "
@@ -729,7 +702,7 @@ P(f"With ads that work immediately, the smallest error belonged to {nm(best_i['m
   f"just ahead of time decay ({si['Time decay']['mae_pp']:.1f} pp). Once the effect carried over to later visits, "
   f"the error of last touch climbed to {sc['Last touch']['mae_pp']:.1f} pp while its rank correlation slid from "
   f"{si['Last touch']['spearman']:.2f} to {sc['Last touch']['spearman']:.2f}, and time decay and linear tied for the "
-  f"lowest error, {sc['Time decay']['mae_pp']:.1f} pp each (Fig. 4, Table VIII). On ranking the "
+  f"lowest error, {sc['Time decay']['mae_pp']:.1f} pp each (Fig. 4, Table V). On ranking the "
   f"channels in the right order, {nm(max(si.values(), key=lambda r: r['spearman'])['model'])} did best with immediate "
   f"effects ({max(r['spearman'] for r in si.values()):.2f}) and "
   f"{nm(max(sc.values(), key=lambda r: r['spearman'])['model'])} with carry-over "
@@ -741,9 +714,8 @@ P("The reason is simple. When an ad works on the spot, the touch that causes the
   "touch is close to the truth. When the effect builds up, the important touches come early and the sale can happen "
   "later through a weak channel. Any rule that piles the credit onto one end of the journey then gets it wrong, and "
   "rules that spread it do better.")
-F(FIG / "bootstrap.png", "Credit under last touch and under Markov for 4,000 synthetic journeys with built-in channel roles; whiskers are 95% bootstrap intervals.")
 P("In the separate synthetic set where Social and Display open journeys and Email and Paid Search close them, the "
-  "data-driven models picked up those roles (Fig. 5). Under last touch Display received "
+  "data-driven models picked up those roles. Under last touch Display received "
   f"{pct(boot['Last touch']['Display'][0], 0)}, while Markov gave it {pct(boot['Markov chain']['Display'][0], 0)}; "
   f"for Email the figures were {pct(boot['Last touch']['Email'][0], 0)} and {pct(boot['Markov chain']['Email'][0], 0)}. "
   "The bootstrap intervals are about one percentage point either side, far smaller than these gaps.")
@@ -753,18 +725,9 @@ P(f"{pct(uci['conversion_rate'])} of UCI sessions ended in a purchase. New visit
   f"{pct(v.loc['New_Visitor', 'conversion_rate'])} of sessions and returning visitors in "
   f"{pct(v.loc['Returning_Visitor', 'conversion_rate'])}, even though returning visitors made up {pct(ret_share, 0)} of "
   f"the traffic (chi-square p < 0.001). The best month was {peak_m['Month']} ({pct(peak_m['conversion_rate'])}) and the "
-  f"worst {low_m['Month']} ({pct(low_m['conversion_rate'])}; Fig. 6). Weekend sessions converted slightly more often than "
+  f"worst {low_m['Month']} ({pct(low_m['conversion_rate'])}). Weekend sessions converted slightly more often than "
   f"weekday ones, {pct(wk.loc[True, 'conversion_rate'])} against {pct(wk.loc[False, 'conversion_rate'])} "
   f"(chi-square p = {p_weekend:.3f}).")
-F(FIG / "month.png", "Share of UCI sessions ending in a purchase, by month. The data has no January or April.")
-rows = []
-for b in ["Product pages viewed", "Time on product pages (s)", "Account/admin pages viewed", "Bounce rate", "Exit rate", "Page value"]:
-    f = (lambda x: f"{x / 60:.1f} min") if "(s)" in b else ((lambda x: f"{x:.3f}") if "rate" in b else (lambda x: f"{x:.1f}"))
-    pv = g.loc[b, "p-value"]
-    rows.append([b.replace(" (s)", ""), f(g.loc[b, "Mean (converted)"]), f(g.loc[b, "Mean (not converted)"]),
-                 "< 1e-300" if pv == 0 else f"{pv:.1e}"])
-T("How Buyers and Non-Buyers Browsed (Session Means)", ["Measure", "Buyers", "Non-buyers", "p"],
-  rows, widths=[1.45, 0.65, 0.7, 0.65], numeric=(1, 2, 3))
 T("Predicting a Purchase: ROC-AUC on the 25% Test Split", ["Model", "With PageValues", "Without PageValues"],
   [["Logistic regression", f"{mw['logit_auc']:.3f}", f"{mo['logit_auc']:.3f}"],
    ["Random forest", f"{mw['rf_auc']:.3f}", f"{mo['rf_auc']:.3f}"],
@@ -772,9 +735,12 @@ T("Predicting a Purchase: ROC-AUC on the 25% Test Split", ["Model", "With PageVa
 imp = mo["importance"].head(5)
 P(f"All ten behaviour measures differed between buyers and non-buyers. A buyer typically opened "
   f"{g.loc['Product pages viewed', 'Median (converted)']:.0f} product pages, a non-buyer "
-  f"{g.loc['Product pages viewed', 'Median (not converted)']:.0f}, and buyers bounced and left far less often "
-  f"(Table IX). Including PageValues lifted the random forest to an AUC of {mw['rf_auc']:.3f}; leaving it out brought it "
-  f"down to {mo['rf_auc']:.3f}, and that is the fair measure of what browsing alone tells a shop (Table X). Without "
+  f"{g.loc['Product pages viewed', 'Median (not converted)']:.0f}, spent "
+  f"{g.loc['Time on product pages (s)', 'Mean (converted)'] / 60:.0f} minutes on them on average against "
+  f"{g.loc['Time on product pages (s)', 'Mean (not converted)'] / 60:.0f}, and had a mean exit rate of "
+  f"{g.loc['Exit rate', 'Mean (converted)']:.3f} against {g.loc['Exit rate', 'Mean (not converted)']:.3f} (Mann-Whitney "
+  f"p < 0.001 for each). Including PageValues lifted the random forest to an AUC of {mw['rf_auc']:.3f}; leaving it out brought it "
+  f"down to {mo['rf_auc']:.3f}, and that is the fair measure of what browsing alone tells a shop (Table VI). Without "
   f"PageValues, the most useful signals by permutation importance (drop in AUC) were "
   + "; ".join(f"{r.feature.replace(' (s)', '').lower().replace('month: nov', 'a November visit')} ({r.importance:.3f})" for r in imp.itertuples())
   + ". How long someone stays on product pages says more than how many they open.")
@@ -798,21 +764,19 @@ if ev:
     miss = [r["question"] for r in ev["rows"] if r["answerable"] and not r["generative"]["correct"]]
     quote = lambda q: "“" + q + "”"
     P(f"The generative path got {eg['answerable_correct']} of the {eg['answerable']} answerable questions right and "
-      f"declined {eg['unanswerable_declined']} of the {eg['unanswerable']} it could not answer (Table XI). "
+      f"declined {eg['unanswerable_declined']} of the {eg['unanswerable']} it could not answer (Table VII). "
       + (f"{eg['replies_with_unsupported_numbers']} of its {ev['n']} replies contained a number that is not in the fact "
          "sheet. " if eg["replies_with_unsupported_numbers"] else f"None of its {ev['n']} replies contained a number that "
          "is not in the fact sheet. ")
       + (f"The automatic check marked {', '.join(quote(q) for q in miss)} as wrong. " if miss else "")
-      + ("Reading every reply ourselves, we would not change the total: the reply to the signals question was right "
-         "in substance but used a different wording from the one the check looked for (and called medians averages), "
-         "while the reply on the Markov model's carry-over error, marked right, gave the correct 7.5 pp after first "
-         "saying, wrongly, that the facts did not contain it. " if ev.get("review") else "")
+      + ("Reading every reply ourselves did not change the total: that reply was right but worded differently from "
+         "the phrase checked, and one reply marked right gave the correct figure only after wrongly saying the facts "
+         "lacked it. " if ev.get("review") else "")
       + f"The built-in retrieval model got {er['answerable_correct']} of {er['answerable']} right. It can only quote "
       "computed statements, so it never makes up a figure, but it recognised only "
       f"{er['unanswerable_declined']} of the {er['unanswerable']} questions outside the data; for the rest it returned "
-      "the nearest related facts, which a reader could take for an answer. The two paths therefore cover each other's "
-      "weak spot: the generative model is better at saying what the data cannot show, and the fallback guarantees that "
-      f"every number it shows was computed. The test ran on {ev['date']} on the free Gemini tier "
+      "the nearest related facts. The two paths cover each other's weak spot: the generative model knows what the data "
+      f"cannot show, and the fallback only ever shows computed numbers. The test ran on {ev['date']} on the free Gemini tier "
       f"({', '.join(ev['models_used'])}).")
 
 # ------------------------------------------------------------------ VII discussion
@@ -828,24 +792,18 @@ P("The simulation shows why swapping last click for one data-driven model is not
   "builds up; linear, time decay and the Shapley value held up better in both. A business rarely knows which kind of "
   "advertising it is running, so it is safer to run several models and treat any channel whose credit jumps around "
   "between them as uncertain. ChannelTrace is designed around exactly that comparison.")
-P("The GA360 store shows that the comparison does not always change the answer. Most of its buyers came back "
-  "through the channel that first brought them, and for them the model barely matters. It matters a lot for the "
-  "minority who switch: typically people who first arrive by typing the address or searching, then complete the "
-  "purchase after following a referral link. Any "
-  "business can check this for itself: if few converting journeys mix channels, last click is roughly good enough; "
+P("The GA360 store shows that the comparison does not always change the answer: most buyers returned through "
+  "the channel that first brought them, and the models only split over the minority who switched. Any business can "
+  "check this for itself: if few converting journeys mix channels, last click is roughly good enough; "
   "if many do, compare the models before moving money.")
 P("The session data points to three things a shop could try. Returning visitors make up the bulk of traffic yet "
   "buy least, so they are worth winning back. Budget is best raised in the weeks leading up to the seasonal peak. And "
   "paid traffic should land directly on product pages, where time spent is the clearest early sign of intent. These are ideas to test, not proven effects. Where "
   f"the budget allows, a holdout test {c('johnson17', 'gordon19')} is how to confirm them.")
-H("7.2", "Implications for Research")
-P("Attribution models are usually ranked by how well they predict conversion. In our simulation a model could "
-  "predict reasonably and still hand credit to the wrong channels, because predicting a sale and dividing credit for "
-  "it are different tasks. Simulations with a known answer are simplified, but they test the credit directly and are "
-  "cheap to extend, and we think they belong next to experimental benchmarks. Public journey data with named channels "
-  "is still hard to find. GA360 is one of the few sources, and its relabelling of direct visits shows how much a "
-  "platform's own definitions can shape the result.")
-H("7.3", "Threats to Validity")
+P("For research, the simulation is a reminder that predicting a sale and dividing credit for it are different tasks: "
+  "a model can do the first well and the second badly. Known-answer simulations test the credit directly and are cheap "
+  "to extend, so we think they belong next to experimental benchmarks.")
+H("7.2", "Threats to Validity")
 P("*Construct validity.* Credit is not the same as causal effect. Every model here, including the data-driven ones, "
   "shares out sales that happened; none of them says what would have happened without a channel. That is why we "
   "judge the models in a simulation whose true shares are causal by design. *Internal validity.* The Criteo credit "
@@ -853,14 +811,9 @@ P("*Construct validity.* Credit is not the same as causal effect. Every model he
   "result describes how credit was given, not why customers bought. GA360 journeys rely on a cookie-based visitor ID "
   "and on Google's channel rules, including the relabelling of direct visits. *External validity.* Each dataset comes "
   "from a single store, network or advertiser, mostly in mature markets. Indian small businesses may behave "
-  "differently, and the tool lets them check on their own data. *Statistical conclusion validity.* With hundreds of "
-  "thousands of rows almost every difference is significant, so we report sizes (credit shares, odds ratios, AUC, "
-  "error in percentage points) next to every p-value.")
-H("7.4", "Ethics and Privacy")
-P("Every dataset is public and anonymised, and we collected no personal data. ChannelTrace processes uploads in the "
-  "browser and sends only the summary fact sheet, never raw rows, to the language model. The assistant is told to "
-  "mark recommendations as suggestions and to say that the data shows associations rather than causes, so that "
-  "people do not trust its advice more than the data allows.")
+  "differently, and the tool lets them check on their own data. *Statistical conclusion validity.* With so many "
+  "rows almost any difference is significant, so we report effect sizes next to p-values. *Ethics.* All data is public and anonymised; the tool keeps "
+  "uploads in the browser and the assistant sees only the summary fact sheet.")
 
 # ------------------------------------------------------------------ VIII limitations
 H("8", "Limitations and Future Work")

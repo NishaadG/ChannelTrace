@@ -4,7 +4,7 @@ import { Badge, Container, Hero, SectionTitle } from "../components/ui";
 
 const TITLE = "Who Gets Credit for the Sale? Recency Bias in Last-Click Attribution and the Case for Comparing Attribution Models";
 const PAPERS = [
-  { file: "/paper/ChannelTrace_Paper_Extended.pdf", label: "Full paper", note: "IEEE format · 10 pages · 46 references", primary: true },
+  { file: "/paper/ChannelTrace_Paper_Extended.pdf", label: "Full paper", note: "IEEE format · 8 pages · 45 references", primary: true },
   { file: "/paper/ChannelTrace_Draft_Paper.pdf", label: "Short draft", note: "IEEE format · 5 pages · first version", primary: false },
 ];
 const SECTIONS = [
